@@ -45,7 +45,6 @@
             min-height: 100vh;
         }
 
-        /* ===== HEADER ===== */
         .header {
             display: flex;
             justify-content: center;
@@ -213,7 +212,6 @@
             border-radius: 2px;
         }
 
-        /* ===== کارت‌ها - بدون blur در حالت عادی و هاور ===== */
         .chart-box {
             background: #141414;
             border-radius: 16px;
@@ -309,7 +307,6 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
         }
 
-        /* ===== دکمه اسپویلر ===== */
         .spoiler-btn {
             background: transparent;
             border: 1px solid #ffffff;
@@ -661,7 +658,6 @@
                             <line x1="243" y1="26" x2="243" y2="38" stroke="#fff" stroke-width="1" />
                             <line x1="243" y1="52" x2="243" y2="56" stroke="#fff" stroke-width="1" />
 
-                            <!-- خط ترندلاین نارنجی #ff9b00 -->
                             <line x1="33" y1="158" x2="243" y2="56" stroke="#ff9b00" stroke-width="2" opacity="0.7" />
                         </svg>
                     </div>
@@ -834,7 +830,6 @@
                             <line x1="243" y1="141" x2="243" y2="152" stroke="#fff" stroke-width="1" />
                             <line x1="243" y1="166" x2="243" y2="170" stroke="#fff" stroke-width="1" />
 
-                            <!-- خط ترندلاین نارنجی #ff9b00 -->
                             <line x1="33" y1="22" x2="243" y2="141" stroke="#ff9b00" stroke-width="2" opacity="0.7" />
                         </svg>
                     </div>
@@ -1007,7 +1002,6 @@
                             <line x1="243" y1="78" x2="243" y2="88" stroke="#fff" stroke-width="1" />
                             <line x1="243" y1="100" x2="243" y2="104" stroke="#fff" stroke-width="1" />
 
-                            <!-- خطوط حمایت و مقاومت با رنگ نارنجی -->
                             <line x1="28" y1="62" x2="260" y2="62" stroke="#ff9b00" stroke-width="1.5" opacity="0.25" stroke-dasharray="4,5" />
                             <line x1="28" y1="106" x2="260" y2="106" stroke="#ff9b00" stroke-width="1.5" opacity="0.15" stroke-dasharray="4,5" />
                         </svg>
@@ -1057,7 +1051,7 @@
             h.redo = [];
         }
 
-        // ===== ابزار ترند لاین =====
+        // ===== ابزار ترند لاین (پشتیبانی از ماوس و تاچ) =====
         document.querySelectorAll('.trend-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const targetId = this.dataset.target;
@@ -1069,6 +1063,8 @@
                     svg.style.cursor = 'default';
                     svg.dataset.drawing = 'false';
                     svg.dataset.firstPoint = '';
+                    svg.dataset.startX = '';
+                    svg.dataset.startY = '';
                     const tempLine = svg.querySelector('.temp-line');
                     if (tempLine) tempLine.remove();
                     return;
@@ -1079,6 +1075,8 @@
                     s.style.cursor = 'default';
                     s.dataset.drawing = 'false';
                     s.dataset.firstPoint = '';
+                    s.dataset.startX = '';
+                    s.dataset.startY = '';
                     const tl = s.querySelector('.temp-line');
                     if (tl) tl.remove();
                 });
@@ -1174,27 +1172,50 @@
                     svg.style.cursor = 'default';
                     svg.dataset.drawing = 'false';
                     svg.dataset.firstPoint = '';
+                    svg.dataset.startX = '';
+                    svg.dataset.startY = '';
                 }
                 const tempLine = svg.querySelector('.temp-line');
                 if (tempLine) tempLine.remove();
             });
         });
 
-        // ===== رویدادهای ماوس و تاچ =====
+        // ===== رویدادهای ماوس و تاچ با پشتیبانی کامل از گوشی =====
         document.querySelectorAll('.svg-wrap svg').forEach(svg => {
 
-            svg.addEventListener('mousedown', function(e) {
-                if (this.dataset.drawing !== 'true') return;
-                const rect = this.getBoundingClientRect();
-                const scaleX = this.viewBox.baseVal.width / rect.width;
-                const scaleY = this.viewBox.baseVal.height / rect.height;
-                const x = (e.clientX - rect.left) * scaleX;
-                const y = (e.clientY - rect.top) * scaleY;
+            // ===== تابع کمکی برای گرفتن مختصات =====
+            function getCoords(e) {
+                const rect = svg.getBoundingClientRect();
+                const scaleX = svg.viewBox.baseVal.width / rect.width;
+                const scaleY = svg.viewBox.baseVal.height / rect.height;
+                let clientX, clientY;
 
-                if (!this.dataset.firstPoint) {
-                    this.dataset.firstPoint = 'true';
-                    this.dataset.startX = x;
-                    this.dataset.startY = y;
+                if (e.touches) {
+                    // رویداد لمسی
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                    e.preventDefault();
+                } else {
+                    // رویداد ماوس
+                    clientX = e.clientX;
+                    clientY = e.clientY;
+                }
+
+                const x = (clientX - rect.left) * scaleX;
+                const y = (clientY - rect.top) * scaleY;
+                return { x, y };
+            }
+
+            // ===== شروع ترسیم (ماوس و تاچ) =====
+            function handleStart(e) {
+                if (svg.dataset.drawing !== 'true') return;
+                const { x, y } = getCoords(e);
+
+                if (!svg.dataset.firstPoint) {
+                    // نقطه اول
+                    svg.dataset.firstPoint = 'true';
+                    svg.dataset.startX = x;
+                    svg.dataset.startY = y;
 
                     const ns = 'http://www.w3.org/2000/svg';
                     const tempLine = document.createElementNS(ns, 'line');
@@ -1207,13 +1228,14 @@
                     tempLine.setAttribute('stroke-dasharray', '6,4');
                     tempLine.setAttribute('opacity', '0.9');
                     tempLine.classList.add('temp-line');
-                    this.appendChild(tempLine);
+                    svg.appendChild(tempLine);
                     return;
                 }
 
-                const startXVal = parseFloat(this.dataset.startX);
-                const startYVal = parseFloat(this.dataset.startY);
-                const tl = this.querySelector('.temp-line');
+                // نقطه دوم - رسم خط دائمی
+                const startXVal = parseFloat(svg.dataset.startX);
+                const startYVal = parseFloat(svg.dataset.startY);
+                const tl = svg.querySelector('.temp-line');
                 if (tl) tl.remove();
 
                 const ns = 'http://www.w3.org/2000/svg';
@@ -1225,105 +1247,43 @@
                 finalLine.setAttribute('stroke', '#ff9b00');
                 finalLine.setAttribute('stroke-width', '1.5');
                 finalLine.setAttribute('opacity', '0.9');
-                this.appendChild(finalLine);
+                svg.appendChild(finalLine);
 
-                const targetId = this.id;
+                const targetId = svg.id;
                 saveLine(targetId, finalLine);
 
-                this.dataset.firstPoint = '';
-                this.dataset.startX = '';
-                this.dataset.startY = '';
-            });
+                svg.dataset.firstPoint = '';
+                svg.dataset.startX = '';
+                svg.dataset.startY = '';
+            }
 
-            svg.addEventListener('mousemove', function(e) {
-                if (this.dataset.drawing !== 'true') return;
-                if (!this.dataset.firstPoint) return;
-                const rect = this.getBoundingClientRect();
-                const scaleX = this.viewBox.baseVal.width / rect.width;
-                const scaleY = this.viewBox.baseVal.height / rect.height;
-                const x = (e.clientX - rect.left) * scaleX;
-                const y = (e.clientY - rect.top) * scaleY;
+            // ===== حرکت ماوس/انگشت =====
+            function handleMove(e) {
+                if (svg.dataset.drawing !== 'true') return;
+                if (!svg.dataset.firstPoint) return;
 
-                const tl = this.querySelector('.temp-line');
+                const { x, y } = getCoords(e);
+                const tl = svg.querySelector('.temp-line');
                 if (tl) {
                     tl.setAttribute('x2', x);
                     tl.setAttribute('y2', y);
                 }
-            });
+            }
 
-            svg.addEventListener('touchstart', function(e) {
-                if (this.dataset.drawing !== 'true') return;
-                e.preventDefault();
-                const touch = e.touches[0];
-                const rect = this.getBoundingClientRect();
-                const scaleX = this.viewBox.baseVal.width / rect.width;
-                const scaleY = this.viewBox.baseVal.height / rect.height;
-                const x = (touch.clientX - rect.left) * scaleX;
-                const y = (touch.clientY - rect.top) * scaleY;
+            // ===== رویدادهای ماوس =====
+            svg.addEventListener('mousedown', handleStart);
+            svg.addEventListener('mousemove', handleMove);
 
-                if (!this.dataset.firstPoint) {
-                    this.dataset.firstPoint = 'true';
-                    this.dataset.startX = x;
-                    this.dataset.startY = y;
+            // ===== رویدادهای لمسی (گوشی) =====
+            svg.addEventListener('touchstart', handleStart, { passive: false });
+            svg.addEventListener('touchmove', handleMove, { passive: false });
 
-                    const ns = 'http://www.w3.org/2000/svg';
-                    const tempLine = document.createElementNS(ns, 'line');
-                    tempLine.setAttribute('x1', x);
-                    tempLine.setAttribute('y1', y);
-                    tempLine.setAttribute('x2', x);
-                    tempLine.setAttribute('y2', y);
-                    tempLine.setAttribute('stroke', '#ff9b00');
-                    tempLine.setAttribute('stroke-width', '1.5');
-                    tempLine.setAttribute('stroke-dasharray', '6,4');
-                    tempLine.setAttribute('opacity', '0.9');
-                    tempLine.classList.add('temp-line');
-                    this.appendChild(tempLine);
-                    return;
-                }
-
-                const startXVal = parseFloat(this.dataset.startX);
-                const startYVal = parseFloat(this.dataset.startY);
-                const tl = this.querySelector('.temp-line');
-                if (tl) tl.remove();
-
-                const ns = 'http://www.w3.org/2000/svg';
-                const finalLine = document.createElementNS(ns, 'line');
-                finalLine.setAttribute('x1', startXVal);
-                finalLine.setAttribute('y1', startYVal);
-                finalLine.setAttribute('x2', x);
-                finalLine.setAttribute('y2', y);
-                finalLine.setAttribute('stroke', '#ff9b00');
-                finalLine.setAttribute('stroke-width', '1.5');
-                finalLine.setAttribute('opacity', '0.9');
-                this.appendChild(finalLine);
-
-                const targetId = this.id;
-                saveLine(targetId, finalLine);
-
-                this.dataset.firstPoint = '';
-                this.dataset.startX = '';
-                this.dataset.startY = '';
-            }, { passive: false });
-
-            svg.addEventListener('touchmove', function(e) {
-                if (this.dataset.drawing !== 'true') return;
-                if (!this.dataset.firstPoint) return;
-                e.preventDefault();
-                const touch = e.touches[0];
-                const rect = this.getBoundingClientRect();
-                const scaleX = this.viewBox.baseVal.width / rect.width;
-                const scaleY = this.viewBox.baseVal.height / rect.height;
-                const x = (touch.clientX - rect.left) * scaleX;
-                const y = (touch.clientY - rect.top) * scaleY;
-
-                const tl = this.querySelector('.temp-line');
-                if (tl) {
-                    tl.setAttribute('x2', x);
-                    tl.setAttribute('y2', y);
-                }
-            }, { passive: false });
-
-            svg.addEventListener('touchend', function(e) {});
+            // ===== پایان لمس =====
+            svg.addEventListener('touchend', function(e) {
+                // اگر نقطه اول ثبت شده بود و کاربر انگشتش رو برداشت بدون اینکه نقطه دوم رو بزنه
+                // خط موقت رو نگه میداریم تا با لمس بعدی کامل بشه
+                // ولی اگر نقطه اول ثبت نشده بود، کاری نمیکنیم
+            }, { passive: true });
         });
     </script>
 
