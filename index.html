@@ -6,7 +6,7 @@
     <title>Amitis - تمرین تشخیص روند</title>
     <style>
         /* ================================================================
-           Amirkazem Coding - v31
+           Amirkazem Coding - v32
            طراحی و توسعه: Amirkazem
            ================================================================ */
 
@@ -50,7 +50,7 @@
             min-height: 100vh;
         }
 
-        /* ===== HEADER - طراحی اختصاصی Amirkazem ===== */
+        /* ===== HEADER ===== */
         .header {
             display: flex;
             justify-content: center;
@@ -218,7 +218,6 @@
             border-radius: 2px;
         }
 
-        /* ===== استایل کارت‌ها ===== */
         .chart-box {
             background: #141414;
             border-radius: 16px;
@@ -314,7 +313,6 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
         }
 
-        /* ===== دکمه اسپویلر ===== */
         .spoiler-btn {
             background: transparent;
             border: 1px solid #ffffff;
@@ -399,7 +397,6 @@
             color: #888;
         }
 
-        /* ===== فوتر اختصاصی ===== */
         .global-footer {
             margin-top: 30px;
             padding-top: 14px;
@@ -1039,15 +1036,15 @@
             <span><span class="dot white"></span> کندل صعودی</span>
             <span><span class="dot red"></span> کندل نزولی (#890913)</span>
             <span class="brand-name">⚡ Amirkazem Coding</span>
-            <span class="version">v31</span>
+            <span class="version">v32</span>
         </div>
 
     </div>
 
     <script>
         // ================================================================
-        // Amirkazem Coding - v31
-        // کلیه حقوق محفوظ است
+        // Amirkazem Coding - v32
+        // ترندلاین به سبک TradingView
         // ================================================================
 
         // ===== تابع اسپویلر =====
@@ -1080,43 +1077,254 @@
             h.redo = [];
         }
 
-        // ===== ابزار ترند لاین (پشتیبانی از ماوس و تاچ) =====
+        // ===== ابزار ترند لاین به سبک TradingView =====
         document.querySelectorAll('.trend-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const targetId = this.dataset.target;
                 const svg = document.getElementById(targetId);
                 if (!svg) return;
 
+                // اگر قبلاً فعال بود، غیرفعال کن
                 if (this.classList.contains('active')) {
                     this.classList.remove('active');
                     svg.style.cursor = 'default';
                     svg.dataset.drawing = 'false';
-                    svg.dataset.firstPoint = '';
+                    svg.dataset.firstPoint = 'false';
                     svg.dataset.startX = '';
                     svg.dataset.startY = '';
                     const tempLine = svg.querySelector('.temp-line');
                     if (tempLine) tempLine.remove();
+                    const crosshair = svg.querySelector('.trend-crosshair');
+                    if (crosshair) crosshair.remove();
                     return;
                 }
 
+                // غیرفعال کردن بقیه
                 document.querySelectorAll('.trend-btn').forEach(b => b.classList.remove('active'));
                 document.querySelectorAll('svg').forEach(s => {
                     s.style.cursor = 'default';
                     s.dataset.drawing = 'false';
-                    s.dataset.firstPoint = '';
+                    s.dataset.firstPoint = 'false';
                     s.dataset.startX = '';
                     s.dataset.startY = '';
                     const tl = s.querySelector('.temp-line');
                     if (tl) tl.remove();
+                    const ch = s.querySelector('.trend-crosshair');
+                    if (ch) ch.remove();
                 });
 
+                // فعال کردن این دکمه
                 this.classList.add('active');
                 svg.style.cursor = 'crosshair';
                 svg.dataset.drawing = 'true';
-                svg.dataset.firstPoint = '';
+                svg.dataset.firstPoint = 'false';
                 svg.dataset.startX = '';
                 svg.dataset.startY = '';
+
+                // ایجاد کراس‌هیر (نشانگر متقاطع)
+                const ns = 'http://www.w3.org/2000/svg';
+                const crosshair = document.createElementNS(ns, 'g');
+                crosshair.classList.add('trend-crosshair');
+                crosshair.style.display = 'none';
+
+                // خط عمودی کراس‌هیر
+                const vLine = document.createElementNS(ns, 'line');
+                vLine.setAttribute('x1', '0');
+                vLine.setAttribute('y1', '0');
+                vLine.setAttribute('x2', '0');
+                vLine.setAttribute('y2', '200');
+                vLine.setAttribute('stroke', 'rgba(255,255,255,0.15)');
+                vLine.setAttribute('stroke-width', '0.5');
+                vLine.setAttribute('stroke-dasharray', '3,3');
+
+                // خط افقی کراس‌هیر
+                const hLine = document.createElementNS(ns, 'line');
+                hLine.setAttribute('x1', '0');
+                hLine.setAttribute('y1', '0');
+                hLine.setAttribute('x2', '400');
+                hLine.setAttribute('y2', '0');
+                hLine.setAttribute('stroke', 'rgba(255,255,255,0.15)');
+                hLine.setAttribute('stroke-width', '0.5');
+                hLine.setAttribute('stroke-dasharray', '3,3');
+
+                // دایره وسط کراس‌هیر
+                const circle = document.createElementNS(ns, 'circle');
+                circle.setAttribute('cx', '0');
+                circle.setAttribute('cy', '0');
+                circle.setAttribute('r', '4');
+                circle.setAttribute('fill', 'none');
+                circle.setAttribute('stroke', 'rgba(255,255,255,0.3)');
+                circle.setAttribute('stroke-width', '1');
+
+                crosshair.appendChild(vLine);
+                crosshair.appendChild(hLine);
+                crosshair.appendChild(circle);
+                svg.appendChild(crosshair);
             });
+        });
+
+        // ===== رویدادهای ماوس و تاچ برای ترندلاین =====
+        document.querySelectorAll('.svg-wrap svg').forEach(svg => {
+
+            let isFirstPoint = false;
+            let startX = 0,
+                startY = 0;
+            let tempLine = null;
+            let isDrawing = false;
+
+            function getCoords(e) {
+                const rect = svg.getBoundingClientRect();
+                const scaleX = svg.viewBox.baseVal.width / rect.width;
+                const scaleY = svg.viewBox.baseVal.height / rect.height;
+                let clientX, clientY;
+
+                if (e.touches) {
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                    e.preventDefault();
+                } else {
+                    clientX = e.clientX;
+                    clientY = e.clientY;
+                }
+
+                const x = Math.max(0, Math.min(svg.viewBox.baseVal.width, (clientX - rect.left) * scaleX));
+                const y = Math.max(0, Math.min(svg.viewBox.baseVal.height, (clientY - rect.top) * scaleY));
+                return { x, y };
+            }
+
+            function updateCrosshair(x, y) {
+                const crosshair = svg.querySelector('.trend-crosshair');
+                if (!crosshair) return;
+                crosshair.style.display = 'block';
+                const vLine = crosshair.children[0];
+                const hLine = crosshair.children[1];
+                const circle = crosshair.children[2];
+                vLine.setAttribute('x1', x);
+                vLine.setAttribute('x2', x);
+                hLine.setAttribute('y1', y);
+                hLine.setAttribute('y2', y);
+                circle.setAttribute('cx', x);
+                circle.setAttribute('cy', y);
+            }
+
+            function createTempLine(x1, y1, x2, y2) {
+                const ns = 'http://www.w3.org/2000/svg';
+                if (tempLine) {
+                    tempLine.setAttribute('x1', x1);
+                    tempLine.setAttribute('y1', y1);
+                    tempLine.setAttribute('x2', x2);
+                    tempLine.setAttribute('y2', y2);
+                    return;
+                }
+                tempLine = document.createElementNS(ns, 'line');
+                tempLine.setAttribute('x1', x1);
+                tempLine.setAttribute('y1', y1);
+                tempLine.setAttribute('x2', x2);
+                tempLine.setAttribute('y2', y2);
+                tempLine.setAttribute('stroke', '#ff9b00');
+                tempLine.setAttribute('stroke-width', '1.5');
+                tempLine.setAttribute('stroke-dasharray', '6,4');
+                tempLine.setAttribute('opacity', '0.7');
+                tempLine.classList.add('temp-line');
+                svg.appendChild(tempLine);
+            }
+
+            function handleStart(e) {
+                if (svg.dataset.drawing !== 'true') return;
+                const { x, y } = getCoords(e);
+
+                // اگر نقطه اول ثبت نشده، ثبت کن
+                if (!isFirstPoint) {
+                    isFirstPoint = true;
+                    startX = x;
+                    startY = y;
+                    isDrawing = true;
+                    svg.dataset.firstPoint = 'true';
+                    svg.dataset.startX = x;
+                    svg.dataset.startY = y;
+
+                    // کراس‌هیر رو نشون بده
+                    updateCrosshair(x, y);
+
+                    // خط موقت رو ایجاد کن (از نقطه اول تا کراس‌هیر)
+                    createTempLine(startX, startY, x, y);
+                    return;
+                }
+
+                // نقطه دوم - رسم خط دائمی
+                if (isFirstPoint) {
+                    // حذف خط موقت
+                    if (tempLine) {
+                        tempLine.remove();
+                        tempLine = null;
+                    }
+
+                    // حذف کراس‌هیر
+                    const crosshair = svg.querySelector('.trend-crosshair');
+                    if (crosshair) {
+                        crosshair.style.display = 'none';
+                    }
+
+                    // ایجاد خط دائمی
+                    const ns = 'http://www.w3.org/2000/svg';
+                    const finalLine = document.createElementNS(ns, 'line');
+                    finalLine.setAttribute('x1', startX);
+                    finalLine.setAttribute('y1', startY);
+                    finalLine.setAttribute('x2', x);
+                    finalLine.setAttribute('y2', y);
+                    finalLine.setAttribute('stroke', '#ff9b00');
+                    finalLine.setAttribute('stroke-width', '1.5');
+                    finalLine.setAttribute('opacity', '0.9');
+                    svg.appendChild(finalLine);
+
+                    const targetId = svg.id;
+                    saveLine(targetId, finalLine);
+
+                    // ریست کردن
+                    isFirstPoint = false;
+                    isDrawing = false;
+                    svg.dataset.firstPoint = 'false';
+                    svg.dataset.startX = '';
+                    svg.dataset.startY = '';
+                    startX = 0;
+                    startY = 0;
+                }
+            }
+
+            function handleMove(e) {
+                if (svg.dataset.drawing !== 'true') return;
+                const { x, y } = getCoords(e);
+
+                // کراس‌هیر رو به‌روز کن
+                updateCrosshair(x, y);
+
+                // اگر نقطه اول ثبت شده، خط موقت رو به‌روز کن
+                if (isFirstPoint) {
+                    createTempLine(startX, startY, x, y);
+                }
+            }
+
+            // ===== رویدادهای ماوس =====
+            svg.addEventListener('mousedown', handleStart);
+            svg.addEventListener('mousemove', handleMove);
+
+            // ===== رویدادهای لمسی (گوشی) =====
+            svg.addEventListener('touchstart', handleStart, { passive: false });
+            svg.addEventListener('touchmove', handleMove, { passive: false });
+
+            // ===== خروج ماوس =====
+            svg.addEventListener('mouseleave', function(e) {
+                // کراس‌هیر رو مخفی کن وقتی ماوس بیرون میره
+                const crosshair = svg.querySelector('.trend-crosshair');
+                if (crosshair && !isFirstPoint) {
+                    crosshair.style.display = 'none';
+                }
+            });
+
+            // ===== پایان لمس =====
+            svg.addEventListener('touchend', function(e) {
+                // اگر نقطه اول ثبت شده بود و کاربر انگشتش رو برداشت، خط موقت رو نگه دار
+            }, { passive: true });
         });
 
         // ===== دکمه بازگشت یک مرحله (Undo) =====
@@ -1200,111 +1408,15 @@
                     trendBtn.classList.remove('active');
                     svg.style.cursor = 'default';
                     svg.dataset.drawing = 'false';
-                    svg.dataset.firstPoint = '';
+                    svg.dataset.firstPoint = 'false';
                     svg.dataset.startX = '';
                     svg.dataset.startY = '';
                 }
                 const tempLine = svg.querySelector('.temp-line');
                 if (tempLine) tempLine.remove();
+                const crosshair = svg.querySelector('.trend-crosshair');
+                if (crosshair) crosshair.style.display = 'none';
             });
-        });
-
-        // ===== رویدادهای ماوس و تاچ با پشتیبانی کامل از گوشی =====
-        document.querySelectorAll('.svg-wrap svg').forEach(svg => {
-
-            // ===== تابع کمکی برای گرفتن مختصات =====
-            function getCoords(e) {
-                const rect = svg.getBoundingClientRect();
-                const scaleX = svg.viewBox.baseVal.width / rect.width;
-                const scaleY = svg.viewBox.baseVal.height / rect.height;
-                let clientX, clientY;
-
-                if (e.touches) {
-                    clientX = e.touches[0].clientX;
-                    clientY = e.touches[0].clientY;
-                    e.preventDefault();
-                } else {
-                    clientX = e.clientX;
-                    clientY = e.clientY;
-                }
-
-                const x = (clientX - rect.left) * scaleX;
-                const y = (clientY - rect.top) * scaleY;
-                return { x, y };
-            }
-
-            // ===== شروع ترسیم (ماوس و تاچ) =====
-            function handleStart(e) {
-                if (svg.dataset.drawing !== 'true') return;
-                const { x, y } = getCoords(e);
-
-                if (!svg.dataset.firstPoint) {
-                    svg.dataset.firstPoint = 'true';
-                    svg.dataset.startX = x;
-                    svg.dataset.startY = y;
-
-                    const ns = 'http://www.w3.org/2000/svg';
-                    const tempLine = document.createElementNS(ns, 'line');
-                    tempLine.setAttribute('x1', x);
-                    tempLine.setAttribute('y1', y);
-                    tempLine.setAttribute('x2', x);
-                    tempLine.setAttribute('y2', y);
-                    tempLine.setAttribute('stroke', '#ff9b00');
-                    tempLine.setAttribute('stroke-width', '1.5');
-                    tempLine.setAttribute('stroke-dasharray', '6,4');
-                    tempLine.setAttribute('opacity', '0.9');
-                    tempLine.classList.add('temp-line');
-                    svg.appendChild(tempLine);
-                    return;
-                }
-
-                const startXVal = parseFloat(svg.dataset.startX);
-                const startYVal = parseFloat(svg.dataset.startY);
-                const tl = svg.querySelector('.temp-line');
-                if (tl) tl.remove();
-
-                const ns = 'http://www.w3.org/2000/svg';
-                const finalLine = document.createElementNS(ns, 'line');
-                finalLine.setAttribute('x1', startXVal);
-                finalLine.setAttribute('y1', startYVal);
-                finalLine.setAttribute('x2', x);
-                finalLine.setAttribute('y2', y);
-                finalLine.setAttribute('stroke', '#ff9b00');
-                finalLine.setAttribute('stroke-width', '1.5');
-                finalLine.setAttribute('opacity', '0.9');
-                svg.appendChild(finalLine);
-
-                const targetId = svg.id;
-                saveLine(targetId, finalLine);
-
-                svg.dataset.firstPoint = '';
-                svg.dataset.startX = '';
-                svg.dataset.startY = '';
-            }
-
-            // ===== حرکت ماوس/انگشت =====
-            function handleMove(e) {
-                if (svg.dataset.drawing !== 'true') return;
-                if (!svg.dataset.firstPoint) return;
-
-                const { x, y } = getCoords(e);
-                const tl = svg.querySelector('.temp-line');
-                if (tl) {
-                    tl.setAttribute('x2', x);
-                    tl.setAttribute('y2', y);
-                }
-            }
-
-            // ===== رویدادهای ماوس =====
-            svg.addEventListener('mousedown', handleStart);
-            svg.addEventListener('mousemove', handleMove);
-
-            // ===== رویدادهای لمسی (گوشی) =====
-            svg.addEventListener('touchstart', handleStart, { passive: false });
-            svg.addEventListener('touchmove', handleMove, { passive: false });
-
-            // ===== پایان لمس =====
-            svg.addEventListener('touchend', function(e) {}, { passive: true });
         });
     </script>
 
