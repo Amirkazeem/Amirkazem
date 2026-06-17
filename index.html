@@ -6,7 +6,7 @@
     <title>Amitis - تمرین تشخیص روند</title>
     <style>
         /* ================================================================
-           Amirkazem Coding - v32
+           Amirkazem Coding - v33
            طراحی و توسعه: Amirkazem
            ================================================================ */
 
@@ -50,7 +50,6 @@
             min-height: 100vh;
         }
 
-        /* ===== HEADER ===== */
         .header {
             display: flex;
             justify-content: center;
@@ -1036,15 +1035,15 @@
             <span><span class="dot white"></span> کندل صعودی</span>
             <span><span class="dot red"></span> کندل نزولی (#890913)</span>
             <span class="brand-name">⚡ Amirkazem Coding</span>
-            <span class="version">v32</span>
+            <span class="version">v33</span>
         </div>
 
     </div>
 
     <script>
         // ================================================================
-        // Amirkazem Coding - v32
-        // ترندلاین به سبک TradingView
+        // Amirkazem Coding - v33
+        // ترندلاین به سبک TradingView (کراس‌هیر + 3 تپ)
         // ================================================================
 
         // ===== تابع اسپویلر =====
@@ -1077,7 +1076,7 @@
             h.redo = [];
         }
 
-        // ===== ابزار ترند لاین به سبک TradingView =====
+        // ===== ابزار ترند لاین به سبک TradingView (کراس‌هیر + 3 تپ) =====
         document.querySelectorAll('.trend-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const targetId = this.dataset.target;
@@ -1089,13 +1088,13 @@
                     this.classList.remove('active');
                     svg.style.cursor = 'default';
                     svg.dataset.drawing = 'false';
-                    svg.dataset.firstPoint = 'false';
-                    svg.dataset.startX = '';
-                    svg.dataset.startY = '';
+                    svg.dataset.step = '0'; // 0=خاموش, 1=کراس‌هیر فعال, 2=نقطه اول ثبت, 3=نقطه دوم ثبت
                     const tempLine = svg.querySelector('.temp-line');
                     if (tempLine) tempLine.remove();
                     const crosshair = svg.querySelector('.trend-crosshair');
                     if (crosshair) crosshair.remove();
+                    const startPoint = svg.querySelector('.start-point');
+                    if (startPoint) startPoint.remove();
                     return;
                 }
 
@@ -1104,30 +1103,31 @@
                 document.querySelectorAll('svg').forEach(s => {
                     s.style.cursor = 'default';
                     s.dataset.drawing = 'false';
-                    s.dataset.firstPoint = 'false';
-                    s.dataset.startX = '';
-                    s.dataset.startY = '';
+                    s.dataset.step = '0';
                     const tl = s.querySelector('.temp-line');
                     if (tl) tl.remove();
                     const ch = s.querySelector('.trend-crosshair');
                     if (ch) ch.remove();
+                    const sp = s.querySelector('.start-point');
+                    if (sp) sp.remove();
                 });
 
                 // فعال کردن این دکمه
                 this.classList.add('active');
                 svg.style.cursor = 'crosshair';
                 svg.dataset.drawing = 'true';
-                svg.dataset.firstPoint = 'false';
+                svg.dataset.step = '0'; // مرحله 0: منتظر تپ اول برای نمایش کراس‌هیر
                 svg.dataset.startX = '';
                 svg.dataset.startY = '';
+                svg.dataset.endX = '';
+                svg.dataset.endY = '';
 
-                // ایجاد کراس‌هیر (نشانگر متقاطع)
+                // ایجاد کراس‌هیر (در ابتدا مخفی)
                 const ns = 'http://www.w3.org/2000/svg';
                 const crosshair = document.createElementNS(ns, 'g');
                 crosshair.classList.add('trend-crosshair');
                 crosshair.style.display = 'none';
 
-                // خط عمودی کراس‌هیر
                 const vLine = document.createElementNS(ns, 'line');
                 vLine.setAttribute('x1', '0');
                 vLine.setAttribute('y1', '0');
@@ -1137,7 +1137,6 @@
                 vLine.setAttribute('stroke-width', '0.5');
                 vLine.setAttribute('stroke-dasharray', '3,3');
 
-                // خط افقی کراس‌هیر
                 const hLine = document.createElementNS(ns, 'line');
                 hLine.setAttribute('x1', '0');
                 hLine.setAttribute('y1', '0');
@@ -1147,18 +1146,24 @@
                 hLine.setAttribute('stroke-width', '0.5');
                 hLine.setAttribute('stroke-dasharray', '3,3');
 
-                // دایره وسط کراس‌هیر
                 const circle = document.createElementNS(ns, 'circle');
                 circle.setAttribute('cx', '0');
                 circle.setAttribute('cy', '0');
-                circle.setAttribute('r', '4');
+                circle.setAttribute('r', '5');
                 circle.setAttribute('fill', 'none');
                 circle.setAttribute('stroke', 'rgba(255,255,255,0.3)');
-                circle.setAttribute('stroke-width', '1');
+                circle.setAttribute('stroke-width', '1.2');
+
+                const dot = document.createElementNS(ns, 'circle');
+                dot.setAttribute('cx', '0');
+                dot.setAttribute('cy', '0');
+                dot.setAttribute('r', '1.5');
+                dot.setAttribute('fill', 'rgba(255,255,255,0.2)');
 
                 crosshair.appendChild(vLine);
                 crosshair.appendChild(hLine);
                 crosshair.appendChild(circle);
+                crosshair.appendChild(dot);
                 svg.appendChild(crosshair);
             });
         });
@@ -1166,11 +1171,9 @@
         // ===== رویدادهای ماوس و تاچ برای ترندلاین =====
         document.querySelectorAll('.svg-wrap svg').forEach(svg => {
 
-            let isFirstPoint = false;
-            let startX = 0,
-                startY = 0;
+            let crosshairVisible = false;
             let tempLine = null;
-            let isDrawing = false;
+            let startPointCircle = null;
 
             function getCoords(e) {
                 const rect = svg.getBoundingClientRect();
@@ -1196,15 +1199,27 @@
                 const crosshair = svg.querySelector('.trend-crosshair');
                 if (!crosshair) return;
                 crosshair.style.display = 'block';
+                crosshairVisible = true;
                 const vLine = crosshair.children[0];
                 const hLine = crosshair.children[1];
                 const circle = crosshair.children[2];
+                const dot = crosshair.children[3];
                 vLine.setAttribute('x1', x);
                 vLine.setAttribute('x2', x);
                 hLine.setAttribute('y1', y);
                 hLine.setAttribute('y2', y);
                 circle.setAttribute('cx', x);
                 circle.setAttribute('cy', y);
+                dot.setAttribute('cx', x);
+                dot.setAttribute('cy', y);
+            }
+
+            function hideCrosshair() {
+                const crosshair = svg.querySelector('.trend-crosshair');
+                if (crosshair) {
+                    crosshair.style.display = 'none';
+                    crosshairVisible = false;
+                }
             }
 
             function createTempLine(x1, y1, x2, y2) {
@@ -1229,41 +1244,86 @@
                 svg.appendChild(tempLine);
             }
 
-            function handleStart(e) {
+            function removeTempLine() {
+                if (tempLine) {
+                    tempLine.remove();
+                    tempLine = null;
+                }
+            }
+
+            function createStartPoint(x, y) {
+                const ns = 'http://www.w3.org/2000/svg';
+                if (startPointCircle) {
+                    startPointCircle.remove();
+                    startPointCircle = null;
+                }
+                startPointCircle = document.createElementNS(ns, 'circle');
+                startPointCircle.setAttribute('cx', x);
+                startPointCircle.setAttribute('cy', y);
+                startPointCircle.setAttribute('r', '5');
+                startPointCircle.setAttribute('fill', 'none');
+                startPointCircle.setAttribute('stroke', '#ff9b00');
+                startPointCircle.setAttribute('stroke-width', '2');
+                startPointCircle.classList.add('start-point');
+                svg.appendChild(startPointCircle);
+            }
+
+            function removeStartPoint() {
+                if (startPointCircle) {
+                    startPointCircle.remove();
+                    startPointCircle = null;
+                }
+            }
+
+            function handleTap(e) {
                 if (svg.dataset.drawing !== 'true') return;
                 const { x, y } = getCoords(e);
+                const step = parseInt(svg.dataset.step) || 0;
 
-                // اگر نقطه اول ثبت نشده، ثبت کن
-                if (!isFirstPoint) {
-                    isFirstPoint = true;
-                    startX = x;
-                    startY = y;
-                    isDrawing = true;
-                    svg.dataset.firstPoint = 'true';
-                    svg.dataset.startX = x;
-                    svg.dataset.startY = y;
-
-                    // کراس‌هیر رو نشون بده
+                if (step === 0) {
+                    // ===== تپ اول: کراس‌هیر ظاهر بشه =====
                     updateCrosshair(x, y);
-
-                    // خط موقت رو ایجاد کن (از نقطه اول تا کراس‌هیر)
-                    createTempLine(startX, startY, x, y);
+                    svg.dataset.step = '1';
+                    svg.dataset.tempX = x;
+                    svg.dataset.tempY = y;
                     return;
                 }
 
-                // نقطه دوم - رسم خط دائمی
-                if (isFirstPoint) {
+                if (step === 1) {
+                    // ===== تپ دوم: نقطه اول ثبت بشه =====
+                    const startX = parseFloat(svg.dataset.tempX) || x;
+                    const startY = parseFloat(svg.dataset.tempY) || y;
+                    svg.dataset.startX = startX;
+                    svg.dataset.startY = startY;
+                    svg.dataset.step = '2';
+
+                    // نقطه اول رو به صورت دایره نشون بده
+                    createStartPoint(startX, startY);
+
+                    // کراس‌هیر رو مخفی کن
+                    hideCrosshair();
+
+                    // خط موقت از نقطه اول به محل فعلی
+                    createTempLine(startX, startY, x, y);
+
+                    // کراس‌هیر رو دوباره نشون بده برای نقطه دوم
+                    updateCrosshair(x, y);
+                    return;
+                }
+
+                if (step === 2) {
+                    // ===== تپ سوم: نقطه دوم ثبت بشه و خط دائمی رسم بشه =====
+                    const startX = parseFloat(svg.dataset.startX);
+                    const startY = parseFloat(svg.dataset.startY);
+
                     // حذف خط موقت
-                    if (tempLine) {
-                        tempLine.remove();
-                        tempLine = null;
-                    }
+                    removeTempLine();
 
                     // حذف کراس‌هیر
-                    const crosshair = svg.querySelector('.trend-crosshair');
-                    if (crosshair) {
-                        crosshair.style.display = 'none';
-                    }
+                    hideCrosshair();
+
+                    // حذف نقطه شروع
+                    removeStartPoint();
 
                     // ایجاد خط دائمی
                     const ns = 'http://www.w3.org/2000/svg';
@@ -1280,51 +1340,88 @@
                     const targetId = svg.id;
                     saveLine(targetId, finalLine);
 
-                    // ریست کردن
-                    isFirstPoint = false;
-                    isDrawing = false;
-                    svg.dataset.firstPoint = 'false';
+                    // ریست کردن به مرحله 0 (منتظر تپ جدید برای خط بعدی)
+                    svg.dataset.step = '0';
                     svg.dataset.startX = '';
                     svg.dataset.startY = '';
-                    startX = 0;
-                    startY = 0;
+                    svg.dataset.tempX = '';
+                    svg.dataset.tempY = '';
                 }
             }
 
             function handleMove(e) {
                 if (svg.dataset.drawing !== 'true') return;
                 const { x, y } = getCoords(e);
+                const step = parseInt(svg.dataset.step) || 0;
 
-                // کراس‌هیر رو به‌روز کن
-                updateCrosshair(x, y);
+                // اگر در مرحله 0 هستیم، فقط کراس‌هیر رو حرکت بده (اگر نمایش داده شده)
+                if (step === 0) {
+                    if (crosshairVisible) {
+                        updateCrosshair(x, y);
+                    }
+                    return;
+                }
 
-                // اگر نقطه اول ثبت شده، خط موقت رو به‌روز کن
-                if (isFirstPoint) {
-                    createTempLine(startX, startY, x, y);
+                // اگر در مرحله 1 هستیم، کراس‌هیر رو حرکت بده
+                if (step === 1) {
+                    updateCrosshair(x, y);
+                    svg.dataset.tempX = x;
+                    svg.dataset.tempY = y;
+                    return;
+                }
+
+                // اگر در مرحله 2 هستیم، خط موقت و کراس‌هیر رو به‌روز کن
+                if (step === 2) {
+                    const startX = parseFloat(svg.dataset.startX);
+                    const startY = parseFloat(svg.dataset.startY);
+                    if (startX && startY) {
+                        createTempLine(startX, startY, x, y);
+                        updateCrosshair(x, y);
+                    }
                 }
             }
 
             // ===== رویدادهای ماوس =====
-            svg.addEventListener('mousedown', handleStart);
+            svg.addEventListener('mousedown', handleTap);
             svg.addEventListener('mousemove', handleMove);
 
             // ===== رویدادهای لمسی (گوشی) =====
-            svg.addEventListener('touchstart', handleStart, { passive: false });
+            svg.addEventListener('touchstart', handleTap, { passive: false });
             svg.addEventListener('touchmove', handleMove, { passive: false });
 
             // ===== خروج ماوس =====
             svg.addEventListener('mouseleave', function(e) {
-                // کراس‌هیر رو مخفی کن وقتی ماوس بیرون میره
-                const crosshair = svg.querySelector('.trend-crosshair');
-                if (crosshair && !isFirstPoint) {
-                    crosshair.style.display = 'none';
+                if (!svg.dataset.drawing) return;
+                const step = parseInt(svg.dataset.step) || 0;
+                // فقط در مرحله 0 کراس‌هیر رو مخفی کن
+                if (step === 0) {
+                    hideCrosshair();
+                }
+            });
+
+            // ===== ورود ماوس =====
+            svg.addEventListener('mouseenter', function(e) {
+                if (!svg.dataset.drawing) return;
+                const step = parseInt(svg.dataset.step) || 0;
+                if (step === 0 && crosshairVisible) {
+                    // اگر کراس‌هیر قبلاً نمایش داده شده بود، دوباره نشون بده
+                    const crosshair = svg.querySelector('.trend-crosshair');
+                    if (crosshair) {
+                        const rect = svg.getBoundingClientRect();
+                        const scaleX = svg.viewBox.baseVal.width / rect.width;
+                        const scaleY = svg.viewBox.baseVal.height / rect.height;
+                        const x = ((e.clientX || 0) - rect.left) * scaleX;
+                        const y = ((e.clientY || 0) - rect.top) * scaleY;
+                        updateCrosshair(
+                            Math.max(0, Math.min(svg.viewBox.baseVal.width, x)),
+                            Math.max(0, Math.min(svg.viewBox.baseVal.height, y))
+                        );
+                    }
                 }
             });
 
             // ===== پایان لمس =====
-            svg.addEventListener('touchend', function(e) {
-                // اگر نقطه اول ثبت شده بود و کاربر انگشتش رو برداشت، خط موقت رو نگه دار
-            }, { passive: true });
+            svg.addEventListener('touchend', function(e) {}, { passive: true });
         });
 
         // ===== دکمه بازگشت یک مرحله (Undo) =====
@@ -1359,6 +1456,18 @@
                     const clone = found.cloneNode(true);
                     h.redo.push(clone);
                     found.remove();
+                }
+
+                // ریست کردن وضعیت ترسیم در صورت نیاز
+                if (svg.dataset.drawing === 'true') {
+                    svg.dataset.step = '0';
+                    svg.dataset.startX = '';
+                    svg.dataset.startY = '';
+                    svg.dataset.tempX = '';
+                    svg.dataset.tempY = '';
+                    removeTempLine();
+                    removeStartPoint();
+                    hideCrosshair();
                 }
             });
         });
@@ -1403,19 +1512,24 @@
                 userLines.forEach(line => line.remove());
                 h.redo = [];
 
+                // ریست کردن وضعیت ترسیم
+                if (svg.dataset.drawing === 'true') {
+                    svg.dataset.step = '0';
+                    svg.dataset.startX = '';
+                    svg.dataset.startY = '';
+                    svg.dataset.tempX = '';
+                    svg.dataset.tempY = '';
+                    removeTempLine();
+                    removeStartPoint();
+                    hideCrosshair();
+                }
+
                 const trendBtn = document.querySelector(`.trend-btn[data-target="${targetId}"]`);
                 if (trendBtn) {
                     trendBtn.classList.remove('active');
                     svg.style.cursor = 'default';
                     svg.dataset.drawing = 'false';
-                    svg.dataset.firstPoint = 'false';
-                    svg.dataset.startX = '';
-                    svg.dataset.startY = '';
                 }
-                const tempLine = svg.querySelector('.temp-line');
-                if (tempLine) tempLine.remove();
-                const crosshair = svg.querySelector('.trend-crosshair');
-                if (crosshair) crosshair.style.display = 'none';
             });
         });
     </script>
