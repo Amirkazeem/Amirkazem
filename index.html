@@ -273,11 +273,17 @@
             border-color: #2a2a2a;
         }
 
+        /* حذف footer-text از همه جای صفحه */
+        .footer-text {
+            display: none !important;
+        }
+
         .toolbar {
             display: flex;
             gap: 6px;
             margin-bottom: 6px;
             flex-wrap: wrap;
+            align-items: center;
         }
         .toolbar button {
             background: #1a1a1a;
@@ -305,6 +311,173 @@
             border-color: #ffffff;
             color: #ffffff;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .toolbar .new-exercise-btn {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            color: #666;
+            padding: 3px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            position: relative;
+            z-index: 2;
+        }
+        .toolbar .new-exercise-btn:hover {
+            background: #2a2a2a;
+            border-color: #444;
+            color: #aaa;
+        }
+
+        /* ===== شمارنده تمرین - نازک و سفید ===== */
+        .exercise-counter-inline {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: transparent;
+            border: none;
+            padding: 2px 4px 2px 2px;
+            font-size: 11px;
+            color: #666;
+            font-family: inherit;
+            user-select: none;
+            white-space: nowrap;
+        }
+        .exercise-counter-inline .counter-label {
+            color: #888;
+            font-weight: 300;
+            font-size: 10px;
+            letter-spacing: 0.3px;
+        }
+        .exercise-counter-inline .counter-number {
+            color: #ffffff;
+            font-weight: 400;
+            font-size: 13px;
+            min-width: 18px;
+            text-align: center;
+            background: transparent;
+            padding: 0 2px;
+            opacity: 0.8;
+        }
+
+        /* ===== تعداد کل تمرین های حل شده - عدد نئون سفید ===== */
+        .record-item-inline {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 6px;
+            padding: 3px 10px 3px 8px;
+            font-size: 11px;
+            color: #666;
+            font-family: inherit;
+            user-select: none;
+            white-space: nowrap;
+        }
+        .record-item-inline .record-label {
+            color: #888;
+            font-weight: 300;
+            font-size: 10px;
+            letter-spacing: 0.2px;
+        }
+        /* عدد نئون سفید */
+        .record-item-inline .record-value-white {
+            font-weight: 700;
+            font-size: 14px;
+            min-width: 20px;
+            text-align: center;
+            padding: 0 2px;
+            color: #ffffff;
+            text-shadow: 0 0 8px #ffffff, 0 0 20px #aaaaaa, 0 0 40px #888888;
+            animation: whitePulse 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes whitePulse {
+            0% {
+                text-shadow: 0 0 4px #ffffff, 0 0 10px #aaaaaa, 0 0 20px #888888;
+                opacity: 0.85;
+            }
+            100% {
+                text-shadow: 0 0 12px #ffffff, 0 0 30px #cccccc, 0 0 60px #aaaaaa, 0 0 80px #888888;
+                opacity: 1;
+            }
+        }
+
+        /* ===== NEW RECORD نئونی طلایی ===== */
+        .new-record-badge-inline {
+            display: none;
+            font-size: 11px;
+            font-weight: 700;
+            color: #ffdd00;
+            text-shadow: 0 0 8px #ffdd00, 0 0 20px #ffaa00, 0 0 40px #ff8800, 0 0 80px #ff6600;
+            animation: neonPulseGold 0.7s ease-in-out infinite alternate;
+            letter-spacing: 1px;
+            padding: 2px 10px;
+            border-radius: 6px;
+            background: rgba(255, 215, 0, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.12);
+        }
+        .new-record-badge-inline.show {
+            display: inline-block;
+        }
+
+        @keyframes neonPulseGold {
+            0% {
+                text-shadow: 0 0 4px #ffdd00, 0 0 10px #ffaa00, 0 0 20px #ff8800, 0 0 40px #ff6600;
+                opacity: 0.8;
+                transform: scale(0.98);
+            }
+            100% {
+                text-shadow: 0 0 12px #ffdd00, 0 0 30px #ffaa00, 0 0 60px #ff8800, 0 0 100px #ff6600, 0 0 140px #ff4400;
+                opacity: 1;
+                transform: scale(1.02);
+            }
+        }
+
+        .toolbar-divider {
+            color: #2a2a2a;
+            font-size: 14px;
+            font-weight: 100;
+            padding: 0 2px;
+            user-select: none;
+        }
+
+        @media (max-width: 480px) {
+            .record-item-inline {
+                padding: 2px 6px 2px 5px;
+                font-size: 9px;
+            }
+            .record-item-inline .record-value-white {
+                font-size: 12px;
+                min-width: 14px;
+            }
+            .record-item-inline .record-label {
+                font-size: 8px;
+            }
+            .new-record-badge-inline {
+                font-size: 9px;
+                padding: 1px 6px;
+            }
+            .exercise-counter-inline {
+                font-size: 9px;
+            }
+            .exercise-counter-inline .counter-number {
+                font-size: 11px;
+                min-width: 14px;
+            }
+            .exercise-counter-inline .counter-label {
+                font-size: 8px;
+            }
+            .toolbar-divider {
+                font-size: 10px;
+            }
         }
 
         .spoiler-btn {
@@ -377,18 +550,9 @@
             pointer-events: all;
         }
 
-        .footer-text {
-            margin-top: 5px;
-            font-size: 11px;
-            color: #333;
-            text-align: center;
-        }
-        .footer-text strong {
-            color: #666;
-            font-weight: 400;
-        }
-        .answer-box .footer-text strong {
-            color: #888;
+        /* حذف زیرنویس جواب */
+        .answer-box .footer-text {
+            display: none !important;
         }
 
         .global-footer {
@@ -601,7 +765,6 @@
                         <line x1="243" y1="52" x2="243" y2="56" stroke="#fff" stroke-width="1" />
                     </svg>
                 </div>
-                <div class="footer-text">روند را تشخیص دهید</div>
             </div>
 
             <div class="chart-box answer-box">
@@ -677,7 +840,6 @@
                             <line x1="33" y1="158" x2="243" y2="56" stroke="#ff9b00" stroke-width="2" opacity="0.7" />
                         </svg>
                     </div>
-                    <div class="footer-text"><strong>پاسخ:</strong> کف‌های بالاتر → روند صعودی</div>
                 </div>
             </div>
         </div>
@@ -769,7 +931,6 @@
                         <line x1="243" y1="166" x2="243" y2="170" stroke="#fff" stroke-width="1" />
                     </svg>
                 </div>
-                <div class="footer-text">روند را تشخیص دهید</div>
             </div>
 
             <div class="chart-box answer-box">
@@ -845,7 +1006,6 @@
                             <line x1="33" y1="22" x2="243" y2="141" stroke="#ff9b00" stroke-width="2" opacity="0.7" />
                         </svg>
                     </div>
-                    <div class="footer-text"><strong>پاسخ:</strong> سقف‌های پایین‌تر → روند نزولی</div>
                 </div>
             </div>
         </div>
@@ -858,305 +1018,79 @@
         </div>
 
         <!-- ============================================================ -->
-        <!-- تمرین ۳: رنج (با کندل‌های شبیه تصویر) -->
+        <!-- تمرین ۳: رنج (با رکورد) -->
         <!-- ============================================================ -->
-        <div class="item">
+        <div class="item" id="exercise3-container">
 
-            <div class="chart-box">
+            <div class="chart-box" id="chartBox3">
                 <div class="label">
                     <span class="title"><span class="num">●</span> سوال ۳</span>
-                    <span class="badge">رنج</span>
+                    <span class="badge" id="badge3" style="display:none;">رنج</span>
                 </div>
                 <div class="toolbar">
                     <button class="trend-btn" data-target="s3">✏️ ترند لاین</button>
                     <button class="clear-btn" data-target="s3">🗑 پاک کردن</button>
                     <button class="redo-btn" data-target="s3">→</button>
                     <button class="undo-btn" data-target="s3">←</button>
+                    <button class="new-exercise-btn" onclick="generateNewExercise3(true)">تمرین جدید</button>
+
+                    <!-- شمارنده تمرین -->
+                    <span class="exercise-counter-inline">
+                        <span class="counter-label">تمرین شماره :</span>
+                        <span class="counter-number" id="exerciseCounter3">1</span>
+                    </span>
+
+                    <span class="toolbar-divider">|</span>
+
+                    <!-- تعداد کل تمرین های حل شده -->
+                    <span class="record-item-inline">
+                        <span class="record-label">تعداد کل تمرین های حل شده :</span>
+                        <span class="record-value-white" id="bestRecordDisplay">0</span>
+                    </span>
+
+                    <!-- NEW RECORD نئونی -->
+                    <span class="new-record-badge-inline" id="newRecordBadge">✦ NEW RECORD ✦</span>
                 </div>
+
                 <div class="svg-wrap">
                     <svg id="s3" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
                         <rect width="400" height="200" fill="#0a0a0a" rx="8" />
-                        
-                        <!-- خطوط افقی با برچسب‌های قیمت -->
-                        <line x1="28" y1="20" x2="380" y2="20" stroke="#151515" stroke-width="0.4" />
-                        <line x1="28" y1="50" x2="380" y2="50" stroke="#151515" stroke-width="0.4" />
-                        <line x1="28" y1="80" x2="380" y2="80" stroke="#151515" stroke-width="0.4" />
-                        <line x1="28" y1="110" x2="380" y2="110" stroke="#151515" stroke-width="0.4" />
-                        <line x1="28" y1="140" x2="380" y2="140" stroke="#151515" stroke-width="0.4" />
-                        <line x1="28" y1="170" x2="380" y2="170" stroke="#151515" stroke-width="0.4" />
-
-                        <text x="370" y="24" fill="#222" font-size="8" text-anchor="end">7.100</text>
-                        <text x="370" y="54" fill="#222" font-size="8" text-anchor="end">7.000</text>
-                        <text x="370" y="84" fill="#222" font-size="8" text-anchor="end">6.900</text>
-                        <text x="370" y="114" fill="#222" font-size="8" text-anchor="end">6.850</text>
-                        <text x="370" y="144" fill="#222" font-size="8" text-anchor="end">6.800</text>
-                        <text x="370" y="174" fill="#222" font-size="8" text-anchor="end">6.700</text>
-
-                        <!-- حمایت و مقاومت -->
-                        <line x1="30" y1="20" x2="380" y2="20" stroke="rgba(255,155,0,0.12)" stroke-width="0.8" stroke-dasharray="4,4" />
-                        <line x1="30" y1="170" x2="380" y2="170" stroke="rgba(255,155,0,0.12)" stroke-width="0.8" stroke-dasharray="4,4" />
-
-                        <!-- ===== کندل‌های دقیقاً شبیه تصویر ===== -->
-                        <!-- کندل‌های اول تا آخر با رنگ‌های متناوب و سایه‌های بلند -->
-                        
-                        <!-- کندل 1: صعودی با سایه بلند بالا -->
-                        <rect x="30" y="84" width="6" height="18" fill="#fff" rx="1" />
-                        <line x1="33" y1="58" x2="33" y2="84" stroke="#fff" stroke-width="1" />
-                        <line x1="33" y1="102" x2="33" y2="106" stroke="#fff" stroke-width="1" />
-
-                        <!-- کندل 2: نزولی -->
-                        <rect x="44" y="138" width="6" height="24" fill="#890913" rx="1" />
-                        <line x1="47" y1="122" x2="47" y2="138" stroke="#890913" stroke-width="1" />
-                        <line x1="47" y1="162" x2="47" y2="166" stroke="#890913" stroke-width="1" />
-
-                        <!-- کندل 3: صعودی -->
-                        <rect x="58" y="102" width="6" height="16" fill="#fff" rx="1" />
-                        <line x1="61" y1="90" x2="61" y2="102" stroke="#fff" stroke-width="1" />
-                        <line x1="61" y1="118" x2="61" y2="122" stroke="#fff" stroke-width="1" />
-
-                        <!-- کندل 4: نزولی با سایه بلند پایین -->
-                        <rect x="72" y="142" width="6" height="22" fill="#890913" rx="1" />
-                        <line x1="75" y1="128" x2="75" y2="142" stroke="#890913" stroke-width="1" />
-                        <line x1="75" y1="164" x2="75" y2="170" stroke="#890913" stroke-width="1" />
-
-                        <!-- کندل 5: صعودی با سایه بلند بالا -->
-                        <rect x="86" y="88" width="6" height="16" fill="#fff" rx="1" />
-                        <line x1="89" y1="62" x2="89" y2="88" stroke="#fff" stroke-width="1" />
-                        <line x1="89" y1="104" x2="89" y2="108" stroke="#fff" stroke-width="1" />
-
-                        <!-- کندل 6: نزولی -->
-                        <rect x="100" y="130" width="6" height="24" fill="#890913" rx="1" />
-                        <line x1="103" y1="116" x2="103" y2="130" stroke="#890913" stroke-width="1" />
-                        <line x1="103" y1="154" x2="103" y2="158" stroke="#890913" stroke-width="1" />
-
-                        <!-- کندل 7: صعودی -->
-                        <rect x="114" y="96" width="6" height="16" fill="#fff" rx="1" />
-                        <line x1="117" y1="84" x2="117" y2="96" stroke="#fff" stroke-width="1" />
-                        <line x1="117" y1="112" x2="117" y2="116" stroke="#fff" stroke-width="1" />
-
-                        <!-- کندل 8: نزولی با سایه بلند پایین -->
-                        <rect x="128" y="146" width="6" height="20" fill="#890913" rx="1" />
-                        <line x1="131" y1="132" x2="131" y2="146" stroke="#890913" stroke-width="1" />
-                        <line x1="131" y1="166" x2="131" y2="170" stroke="#890913" stroke-width="1" />
-
-                        <!-- کندل 9: صعودی با سایه بلند بالا -->
-                        <rect x="142" y="80" width="6" height="18" fill="#fff" rx="1" />
-                        <line x1="145" y1="54" x2="145" y2="80" stroke="#fff" stroke-width="1" />
-                        <line x1="145" y1="98" x2="145" y2="102" stroke="#fff" stroke-width="1" />
-
-                        <!-- کندل 10: نزولی -->
-                        <rect x="156" y="134" width="6" height="22" fill="#890913" rx="1" />
-                        <line x1="159" y1="120" x2="159" y2="134" stroke="#890913" stroke-width="1" />
-                        <line x1="159" y1="156" x2="159" y2="160" stroke="#890913" stroke-width="1" />
-
-                        <!-- کندل 11: صعودی -->
-                        <rect x="170" y="98" width="6" height="16" fill="#fff" rx="1" />
-                        <line x1="173" y1="86" x2="173" y2="98" stroke="#fff" stroke-width="1" />
-                        <line x1="173" y1="114" x2="173" y2="118" stroke="#fff" stroke-width="1" />
-
-                        <!-- کندل 12: نزولی با سایه بلند پایین -->
-                        <rect x="184" y="140" width="6" height="24" fill="#890913" rx="1" />
-                        <line x1="187" y1="126" x2="187" y2="140" stroke="#890913" stroke-width="1" />
-                        <line x1="187" y1="164" x2="187" y2="170" stroke="#890913" stroke-width="1" />
-
-                        <!-- کندل 13: صعودی با سایه بلند بالا -->
-                        <rect x="198" y="86" width="6" height="16" fill="#fff" rx="1" />
-                        <line x1="201" y1="60" x2="201" y2="86" stroke="#fff" stroke-width="1" />
-                        <line x1="201" y1="102" x2="201" y2="106" stroke="#fff" stroke-width="1" />
-
-                        <!-- کندل 14: نزولی -->
-                        <rect x="212" y="132" width="6" height="22" fill="#890913" rx="1" />
-                        <line x1="215" y1="118" x2="215" y2="132" stroke="#890913" stroke-width="1" />
-                        <line x1="215" y1="154" x2="215" y2="158" stroke="#890913" stroke-width="1" />
-
-                        <!-- کندل 15: صعودی -->
-                        <rect x="226" y="94" width="6" height="16" fill="#fff" rx="1" />
-                        <line x1="229" y1="82" x2="229" y2="94" stroke="#fff" stroke-width="1" />
-                        <line x1="229" y1="110" x2="229" y2="114" stroke="#fff" stroke-width="1" />
-
-                        <!-- کندل 16: نزولی با سایه بلند پایین -->
-                        <rect x="240" y="144" width="6" height="22" fill="#890913" rx="1" />
-                        <line x1="243" y1="130" x2="243" y2="144" stroke="#890913" stroke-width="1" />
-                        <line x1="243" y1="166" x2="243" y2="170" stroke="#890913" stroke-width="1" />
-
-                        <!-- کندل 17: صعودی با سایه بلند بالا -->
-                        <rect x="254" y="82" width="6" height="18" fill="#fff" rx="1" />
-                        <line x1="257" y1="56" x2="257" y2="82" stroke="#fff" stroke-width="1" />
-                        <line x1="257" y1="100" x2="257" y2="104" stroke="#fff" stroke-width="1" />
-
-                        <!-- کندل 18: نزولی -->
-                        <rect x="268" y="136" width="6" height="22" fill="#890913" rx="1" />
-                        <line x1="271" y1="122" x2="271" y2="136" stroke="#890913" stroke-width="1" />
-                        <line x1="271" y1="158" x2="271" y2="162" stroke="#890913" stroke-width="1" />
-
-                        <!-- کندل 19: صعودی -->
-                        <rect x="282" y="100" width="6" height="16" fill="#fff" rx="1" />
-                        <line x1="285" y1="88" x2="285" y2="100" stroke="#fff" stroke-width="1" />
-                        <line x1="285" y1="116" x2="285" y2="120" stroke="#fff" stroke-width="1" />
-
-                        <!-- کندل 20: نزولی با سایه بلند پایین -->
-                        <rect x="296" y="142" width="6" height="24" fill="#890913" rx="1" />
-                        <line x1="299" y1="128" x2="299" y2="142" stroke="#890913" stroke-width="1" />
-                        <line x1="299" y1="166" x2="299" y2="170" stroke="#890913" stroke-width="1" />
-
-                        <!-- کندل 21: صعودی با سایه بلند بالا -->
-                        <rect x="310" y="84" width="6" height="16" fill="#fff" rx="1" />
-                        <line x1="313" y1="58" x2="313" y2="84" stroke="#fff" stroke-width="1" />
-                        <line x1="313" y1="100" x2="313" y2="104" stroke="#fff" stroke-width="1" />
-
-                        <!-- کندل 22: نزولی -->
-                        <rect x="324" y="130" width="6" height="22" fill="#890913" rx="1" />
-                        <line x1="327" y1="116" x2="327" y2="130" stroke="#890913" stroke-width="1" />
-                        <line x1="327" y1="152" x2="327" y2="156" stroke="#890913" stroke-width="1" />
-
-                        <!-- کندل 23: صعودی -->
-                        <rect x="338" y="92" width="6" height="16" fill="#fff" rx="1" />
-                        <line x1="341" y1="80" x2="341" y2="92" stroke="#fff" stroke-width="1" />
-                        <line x1="341" y1="108" x2="341" y2="112" stroke="#fff" stroke-width="1" />
-
-                        <!-- کندل 24: نزولی با سایه بلند پایین -->
-                        <rect x="352" y="138" width="6" height="22" fill="#890913" rx="1" />
-                        <line x1="355" y1="124" x2="355" y2="138" stroke="#890913" stroke-width="1" />
-                        <line x1="355" y1="160" x2="355" y2="166" stroke="#890913" stroke-width="1" />
-
+                        <line x1="28" y1="168" x2="380" y2="168" stroke="#151515" stroke-width="0.4" />
+                        <line x1="28" y1="134" x2="380" y2="134" stroke="#151515" stroke-width="0.4" />
+                        <line x1="28" y1="100" x2="380" y2="100" stroke="#151515" stroke-width="0.4" />
+                        <line x1="28" y1="66" x2="380" y2="66" stroke="#151515" stroke-width="0.4" />
+                        <line x1="28" y1="32" x2="380" y2="32" stroke="#151515" stroke-width="0.4" />
+                        <text x="370" y="172" fill="#222" font-size="8" text-anchor="end">0</text>
+                        <text x="370" y="138" fill="#222" font-size="8" text-anchor="end">20</text>
+                        <text x="370" y="104" fill="#222" font-size="8" text-anchor="end">40</text>
+                        <text x="370" y="70" fill="#222" font-size="8" text-anchor="end">60</text>
+                        <text x="370" y="36" fill="#222" font-size="8" text-anchor="end">80</text>
                     </svg>
                 </div>
-                <div class="footer-text">روند را تشخیص دهید</div>
             </div>
 
-            <!-- ===== جواب با اسپویلر ===== -->
-            <div class="chart-box answer-box">
+            <div class="chart-box answer-box" id="answerBox3">
                 <div class="label">
                     <span class="title"><span class="num">●</span> جواب ۳</span>
-                    <span class="badge green" style="display:none;">روند رنج</span>
+                    <span class="badge green" id="answerBadge3" style="display:none;">روند رنج</span>
                 </div>
-
-                <button class="spoiler-btn" onclick="toggleSpoiler(this)">نمایش جواب</button>
-
-                <div class="spoiler-content">
+                <button class="spoiler-btn" id="spoilerBtn3" onclick="toggleSpoiler(this)">نمایش جواب</button>
+                <div class="spoiler-content" id="spoilerContent3">
                     <div class="svg-wrap">
-                        <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                        <svg id="answerSvg3" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
                             <rect width="400" height="200" fill="#0a0a0a" rx="8" />
-                            
-                            <line x1="28" y1="20" x2="380" y2="20" stroke="#151515" stroke-width="0.4" />
-                            <line x1="28" y1="50" x2="380" y2="50" stroke="#151515" stroke-width="0.4" />
-                            <line x1="28" y1="80" x2="380" y2="80" stroke="#151515" stroke-width="0.4" />
-                            <line x1="28" y1="110" x2="380" y2="110" stroke="#151515" stroke-width="0.4" />
-                            <line x1="28" y1="140" x2="380" y2="140" stroke="#151515" stroke-width="0.4" />
-                            <line x1="28" y1="170" x2="380" y2="170" stroke="#151515" stroke-width="0.4" />
-
-                            <text x="370" y="24" fill="#222" font-size="8" text-anchor="end">7.100</text>
-                            <text x="370" y="54" fill="#222" font-size="8" text-anchor="end">7.000</text>
-                            <text x="370" y="84" fill="#222" font-size="8" text-anchor="end">6.900</text>
-                            <text x="370" y="114" fill="#222" font-size="8" text-anchor="end">6.850</text>
-                            <text x="370" y="144" fill="#222" font-size="8" text-anchor="end">6.800</text>
-                            <text x="370" y="174" fill="#222" font-size="8" text-anchor="end">6.700</text>
-
-                            <line x1="30" y1="20" x2="380" y2="20" stroke="rgba(255,155,0,0.12)" stroke-width="0.8" stroke-dasharray="4,4" />
-                            <line x1="30" y1="170" x2="380" y2="170" stroke="rgba(255,155,0,0.12)" stroke-width="0.8" stroke-dasharray="4,4" />
-
-                            <rect x="30" y="84" width="6" height="18" fill="#fff" rx="1" />
-                            <line x1="33" y1="58" x2="33" y2="84" stroke="#fff" stroke-width="1" />
-                            <line x1="33" y1="102" x2="33" y2="106" stroke="#fff" stroke-width="1" />
-
-                            <rect x="44" y="138" width="6" height="24" fill="#890913" rx="1" />
-                            <line x1="47" y1="122" x2="47" y2="138" stroke="#890913" stroke-width="1" />
-                            <line x1="47" y1="162" x2="47" y2="166" stroke="#890913" stroke-width="1" />
-
-                            <rect x="58" y="102" width="6" height="16" fill="#fff" rx="1" />
-                            <line x1="61" y1="90" x2="61" y2="102" stroke="#fff" stroke-width="1" />
-                            <line x1="61" y1="118" x2="61" y2="122" stroke="#fff" stroke-width="1" />
-
-                            <rect x="72" y="142" width="6" height="22" fill="#890913" rx="1" />
-                            <line x1="75" y1="128" x2="75" y2="142" stroke="#890913" stroke-width="1" />
-                            <line x1="75" y1="164" x2="75" y2="170" stroke="#890913" stroke-width="1" />
-
-                            <rect x="86" y="88" width="6" height="16" fill="#fff" rx="1" />
-                            <line x1="89" y1="62" x2="89" y2="88" stroke="#fff" stroke-width="1" />
-                            <line x1="89" y1="104" x2="89" y2="108" stroke="#fff" stroke-width="1" />
-
-                            <rect x="100" y="130" width="6" height="24" fill="#890913" rx="1" />
-                            <line x1="103" y1="116" x2="103" y2="130" stroke="#890913" stroke-width="1" />
-                            <line x1="103" y1="154" x2="103" y2="158" stroke="#890913" stroke-width="1" />
-
-                            <rect x="114" y="96" width="6" height="16" fill="#fff" rx="1" />
-                            <line x1="117" y1="84" x2="117" y2="96" stroke="#fff" stroke-width="1" />
-                            <line x1="117" y1="112" x2="117" y2="116" stroke="#fff" stroke-width="1" />
-
-                            <rect x="128" y="146" width="6" height="20" fill="#890913" rx="1" />
-                            <line x1="131" y1="132" x2="131" y2="146" stroke="#890913" stroke-width="1" />
-                            <line x1="131" y1="166" x2="131" y2="170" stroke="#890913" stroke-width="1" />
-
-                            <rect x="142" y="80" width="6" height="18" fill="#fff" rx="1" />
-                            <line x1="145" y1="54" x2="145" y2="80" stroke="#fff" stroke-width="1" />
-                            <line x1="145" y1="98" x2="145" y2="102" stroke="#fff" stroke-width="1" />
-
-                            <rect x="156" y="134" width="6" height="22" fill="#890913" rx="1" />
-                            <line x1="159" y1="120" x2="159" y2="134" stroke="#890913" stroke-width="1" />
-                            <line x1="159" y1="156" x2="159" y2="160" stroke="#890913" stroke-width="1" />
-
-                            <rect x="170" y="98" width="6" height="16" fill="#fff" rx="1" />
-                            <line x1="173" y1="86" x2="173" y2="98" stroke="#fff" stroke-width="1" />
-                            <line x1="173" y1="114" x2="173" y2="118" stroke="#fff" stroke-width="1" />
-
-                            <rect x="184" y="140" width="6" height="24" fill="#890913" rx="1" />
-                            <line x1="187" y1="126" x2="187" y2="140" stroke="#890913" stroke-width="1" />
-                            <line x1="187" y1="164" x2="187" y2="170" stroke="#890913" stroke-width="1" />
-
-                            <rect x="198" y="86" width="6" height="16" fill="#fff" rx="1" />
-                            <line x1="201" y1="60" x2="201" y2="86" stroke="#fff" stroke-width="1" />
-                            <line x1="201" y1="102" x2="201" y2="106" stroke="#fff" stroke-width="1" />
-
-                            <rect x="212" y="132" width="6" height="22" fill="#890913" rx="1" />
-                            <line x1="215" y1="118" x2="215" y2="132" stroke="#890913" stroke-width="1" />
-                            <line x1="215" y1="154" x2="215" y2="158" stroke="#890913" stroke-width="1" />
-
-                            <rect x="226" y="94" width="6" height="16" fill="#fff" rx="1" />
-                            <line x1="229" y1="82" x2="229" y2="94" stroke="#fff" stroke-width="1" />
-                            <line x1="229" y1="110" x2="229" y2="114" stroke="#fff" stroke-width="1" />
-
-                            <rect x="240" y="144" width="6" height="22" fill="#890913" rx="1" />
-                            <line x1="243" y1="130" x2="243" y2="144" stroke="#890913" stroke-width="1" />
-                            <line x1="243" y1="166" x2="243" y2="170" stroke="#890913" stroke-width="1" />
-
-                            <rect x="254" y="82" width="6" height="18" fill="#fff" rx="1" />
-                            <line x1="257" y1="56" x2="257" y2="82" stroke="#fff" stroke-width="1" />
-                            <line x1="257" y1="100" x2="257" y2="104" stroke="#fff" stroke-width="1" />
-
-                            <rect x="268" y="136" width="6" height="22" fill="#890913" rx="1" />
-                            <line x1="271" y1="122" x2="271" y2="136" stroke="#890913" stroke-width="1" />
-                            <line x1="271" y1="158" x2="271" y2="162" stroke="#890913" stroke-width="1" />
-
-                            <rect x="282" y="100" width="6" height="16" fill="#fff" rx="1" />
-                            <line x1="285" y1="88" x2="285" y2="100" stroke="#fff" stroke-width="1" />
-                            <line x1="285" y1="116" x2="285" y2="120" stroke="#fff" stroke-width="1" />
-
-                            <rect x="296" y="142" width="6" height="24" fill="#890913" rx="1" />
-                            <line x1="299" y1="128" x2="299" y2="142" stroke="#890913" stroke-width="1" />
-                            <line x1="299" y1="166" x2="299" y2="170" stroke="#890913" stroke-width="1" />
-
-                            <rect x="310" y="84" width="6" height="16" fill="#fff" rx="1" />
-                            <line x1="313" y1="58" x2="313" y2="84" stroke="#fff" stroke-width="1" />
-                            <line x1="313" y1="100" x2="313" y2="104" stroke="#fff" stroke-width="1" />
-
-                            <rect x="324" y="130" width="6" height="22" fill="#890913" rx="1" />
-                            <line x1="327" y1="116" x2="327" y2="130" stroke="#890913" stroke-width="1" />
-                            <line x1="327" y1="152" x2="327" y2="156" stroke="#890913" stroke-width="1" />
-
-                            <rect x="338" y="92" width="6" height="16" fill="#fff" rx="1" />
-                            <line x1="341" y1="80" x2="341" y2="92" stroke="#fff" stroke-width="1" />
-                            <line x1="341" y1="108" x2="341" y2="112" stroke="#fff" stroke-width="1" />
-
-                            <rect x="352" y="138" width="6" height="22" fill="#890913" rx="1" />
-                            <line x1="355" y1="124" x2="355" y2="138" stroke="#890913" stroke-width="1" />
-                            <line x1="355" y1="160" x2="355" y2="166" stroke="#890913" stroke-width="1" />
-
-                            <!-- خطوط حمایت و مقاومت با رنگ نارنجی -->
-                            <line x1="28" y1="20" x2="380" y2="20" stroke="#ff9b00" stroke-width="1.5" opacity="0.3" stroke-dasharray="4,5" />
-                            <line x1="28" y1="170" x2="380" y2="170" stroke="#ff9b00" stroke-width="1.5" opacity="0.3" stroke-dasharray="4,5" />
+                            <line x1="28" y1="168" x2="380" y2="168" stroke="#151515" stroke-width="0.4" />
+                            <line x1="28" y1="134" x2="380" y2="134" stroke="#151515" stroke-width="0.4" />
+                            <line x1="28" y1="100" x2="380" y2="100" stroke="#151515" stroke-width="0.4" />
+                            <line x1="28" y1="66" x2="380" y2="66" stroke="#151515" stroke-width="0.4" />
+                            <line x1="28" y1="32" x2="380" y2="32" stroke="#151515" stroke-width="0.4" />
+                            <text x="370" y="172" fill="#222" font-size="8" text-anchor="end">0</text>
+                            <text x="370" y="138" fill="#222" font-size="8" text-anchor="end">20</text>
+                            <text x="370" y="104" fill="#222" font-size="8" text-anchor="end">40</text>
+                            <text x="370" y="70" fill="#222" font-size="8" text-anchor="end">60</text>
+                            <text x="370" y="36" fill="#222" font-size="8" text-anchor="end">80</text>
                         </svg>
                     </div>
-                    <div class="footer-text"><strong>پاسخ:</strong> نوسان بین حمایت (6.700) و مقاومت (7.100) → روند رنج</div>
                 </div>
             </div>
 
@@ -1170,14 +1104,435 @@
                 Powered by <span class="highlight">Amirkazem</span> Coding
             </span>
             <span class="dot-sep">•</span>
-            <span class="version">v52</span>
+            <span class="version">v62</span>
         </div>
 
     </div>
 
     <script>
         // ================================================================
-        // Amirkazem Coding - v52
+        // Amirkazem Coding - v62 (Fixed)
+        // ================================================================
+
+        // ================================================================
+        // سیستم رکورد - localStorage
+        // ================================================================
+
+        const STORAGE_KEY = 'amitis_trend_record';
+
+        function getBestRecord() {
+            const val = localStorage.getItem(STORAGE_KEY);
+            return val ? parseInt(val, 10) : 0;
+        }
+
+        function setBestRecord(value) {
+            localStorage.setItem(STORAGE_KEY, String(value));
+        }
+
+        // ================================================================
+        // شمارنده تمرین ۳ - با رفرش از ۱ شروع میشه
+        // ================================================================
+        let exercise3Counter = 1;
+        let bestRecord = getBestRecord();
+
+        function updateRecordDisplay() {
+            document.getElementById('bestRecordDisplay').textContent = bestRecord;
+
+            const badge = document.getElementById('newRecordBadge');
+            // فقط وقتی رکورد جدید ثبت میشه (وقتی عدد کنونی از رکورد بیشتر باشه)
+            if (exercise3Counter - 1 > bestRecord && exercise3Counter > 2) {
+                badge.classList.add('show');
+                bestRecord = exercise3Counter - 1;
+                setBestRecord(bestRecord);
+                document.getElementById('bestRecordDisplay').textContent = bestRecord;
+            } else {
+                badge.classList.remove('show');
+            }
+        }
+
+        function incrementExercise3Counter() {
+            exercise3Counter++;
+            document.getElementById('exerciseCounter3').textContent = exercise3Counter;
+            updateRecordDisplay();
+        }
+
+        // ================================================================
+        // GENERATOR 106 CANDLES
+        // ================================================================
+
+        const GLOBAL_MIN = 26;
+        const GLOBAL_MAX = 86;
+        const WAVE_SIZE = 7;
+
+        let CURRENT_RANGE_MIN = 29;
+        let CURRENT_RANGE_MAX = 64;
+
+        function generateRandomRange() {
+            const rangeHeight = 20 + Math.random() * 13;
+            const maxStart = GLOBAL_MAX - GLOBAL_MIN - rangeHeight;
+            const start = GLOBAL_MIN + Math.random() * maxStart;
+            CURRENT_RANGE_MIN = Math.round(start);
+            CURRENT_RANGE_MAX = Math.round(start + rangeHeight);
+            CURRENT_RANGE_MIN = Math.max(GLOBAL_MIN, Math.min(GLOBAL_MAX - rangeHeight, CURRENT_RANGE_MIN));
+            CURRENT_RANGE_MAX = CURRENT_RANGE_MIN + Math.round(rangeHeight);
+            CURRENT_RANGE_MAX = Math.min(GLOBAL_MAX, CURRENT_RANGE_MAX);
+        }
+
+        function getWickType() {
+            const r = Math.random();
+            if (r < 0.25) return 0;
+            if (r < 0.50) return 1;
+            if (r < 0.75) return 2;
+            return 3;
+        }
+
+        function generateStandardCandle(currentPrice, closePrice, minLimit, maxLimit) {
+            const open = Math.round(currentPrice * 100) / 100;
+            const close = Math.round(closePrice * 100) / 100;
+            const wickType = getWickType();
+            let high = Math.max(open, close);
+            let low = Math.min(open, close);
+            if (wickType === 1 || wickType === 3) {
+                high = Math.round((Math.max(open, close) + 1.5 + Math.random() * 2.5) * 100) / 100;
+            }
+            if (wickType === 2 || wickType === 3) {
+                low = Math.round((Math.min(open, close) - 1.5 - Math.random() * 2.5) * 100) / 100;
+            }
+            high = Math.min(maxLimit, Math.max(minLimit, high));
+            low = Math.max(minLimit, Math.min(maxLimit, low));
+            return { high, low, open, close };
+        }
+
+        function generateRandomCandle(currentPrice, allowSpike = false) {
+            let move;
+            if (allowSpike && Math.random() < 0.12) {
+                move = (Math.random() > 0.5 ? 1 : -1) * (4 + Math.random() * 4);
+            } else {
+                move = (Math.random() - 0.5) * 6;
+            }
+            let close = Math.round((currentPrice + move) * 100) / 100;
+            close = Math.max(GLOBAL_MIN + 0.5, Math.min(GLOBAL_MAX - 0.5, close));
+            return generateStandardCandle(currentPrice, close, GLOBAL_MIN, GLOBAL_MAX);
+        }
+
+        function generatePumpCandles(currentPrice, direction) {
+            const candles = [];
+            const moves = direction === 'up' ? [6, 3, 7, 4] : [-6, -3, -7, -4];
+            for (let i = 0; i < 4; i++) {
+                let targetPrice = currentPrice + moves[i];
+                targetPrice = Math.max(GLOBAL_MIN + 0.5, Math.min(GLOBAL_MAX - 0.5, targetPrice));
+                const noise = (Math.random() - 0.5) * 1.5;
+                let close = Math.round((targetPrice + noise) * 100) / 100;
+                close = Math.max(GLOBAL_MIN + 0.5, Math.min(GLOBAL_MAX - 0.5, close));
+                const candle = generateStandardCandle(currentPrice, close, GLOBAL_MIN, GLOBAL_MAX);
+                candles.push(candle);
+                currentPrice = candle.close;
+            }
+            return { candles, lastPrice: currentPrice };
+        }
+
+        let RANGE_CANDLE_INDICES = [];
+
+        function generateWaveCandles(startPrice) {
+            const candles = [];
+            let currentPrice = startPrice;
+            RANGE_CANDLE_INDICES = [];
+
+            if (currentPrice < CURRENT_RANGE_MIN) {
+                const steps = Math.min(3, Math.ceil((CURRENT_RANGE_MIN - currentPrice) / 2));
+                for (let i = 0; i < steps; i++) {
+                    const progress = (i + 1) / (steps + 1);
+                    const targetPrice = currentPrice + (CURRENT_RANGE_MIN - currentPrice) * progress + 0.5;
+                    const close = Math.min(targetPrice, CURRENT_RANGE_MIN + 0.5);
+                    const candle = generateStandardCandle(currentPrice, close, GLOBAL_MIN, GLOBAL_MAX);
+                    candles.push(candle);
+                    currentPrice = candle.close;
+                }
+            } else if (currentPrice > CURRENT_RANGE_MAX) {
+                const steps = Math.min(3, Math.ceil((currentPrice - CURRENT_RANGE_MAX) / 2));
+                for (let i = 0; i < steps; i++) {
+                    const progress = (i + 1) / (steps + 1);
+                    const targetPrice = currentPrice - (currentPrice - CURRENT_RANGE_MAX) * progress - 0.5;
+                    const close = Math.max(targetPrice, CURRENT_RANGE_MAX - 0.5);
+                    const candle = generateStandardCandle(currentPrice, close, GLOBAL_MIN, GLOBAL_MAX);
+                    candles.push(candle);
+                    currentPrice = candle.close;
+                }
+            }
+
+            if (currentPrice < CURRENT_RANGE_MIN) {
+                const candle = generateStandardCandle(currentPrice, CURRENT_RANGE_MIN + 0.5, GLOBAL_MIN, GLOBAL_MAX);
+                candles.push(candle);
+                currentPrice = candle.close;
+            } else if (currentPrice > CURRENT_RANGE_MAX) {
+                const candle = generateStandardCandle(currentPrice, CURRENT_RANGE_MAX - 0.5, GLOBAL_MIN, GLOBAL_MAX);
+                candles.push(candle);
+                currentPrice = candle.close;
+            }
+
+            const waves = [
+                { dir: 'down', start: CURRENT_RANGE_MAX, end: CURRENT_RANGE_MIN },
+                { dir: 'up', start: CURRENT_RANGE_MIN, end: CURRENT_RANGE_MAX },
+                { dir: 'down', start: CURRENT_RANGE_MAX, end: CURRENT_RANGE_MIN },
+                { dir: 'up', start: CURRENT_RANGE_MIN, end: CURRENT_RANGE_MAX },
+                { dir: 'down', start: CURRENT_RANGE_MAX, end: CURRENT_RANGE_MIN },
+                { dir: 'up', start: CURRENT_RANGE_MIN, end: CURRENT_RANGE_MAX },
+                { dir: 'down', start: CURRENT_RANGE_MAX, end: CURRENT_RANGE_MIN },
+                { dir: 'up', start: CURRENT_RANGE_MIN, end: CURRENT_RANGE_MAX }
+            ];
+
+            waves.forEach((wave) => {
+                const isDown = wave.dir === 'down';
+                const startPrice = wave.start;
+                const endPrice = wave.end;
+                const reverseCount = Math.random() < 0.5 ? 3 : 4;
+                const reversePos = [];
+                while (reversePos.length < reverseCount) {
+                    const pos = Math.floor(Math.random() * WAVE_SIZE);
+                    if (!reversePos.includes(pos)) reversePos.push(pos);
+                }
+                reversePos.sort();
+
+                for (let i = 0; i < WAVE_SIZE; i++) {
+                    const progress = (i + 1) / WAVE_SIZE;
+                    let targetPrice = startPrice + (endPrice - startPrice) * progress;
+                    const isReverse = reversePos.includes(i);
+                    let close;
+                    if (isReverse) {
+                        const offset = (Math.random() * 3 + 2) * (isDown ? 1 : -1);
+                        close = Math.round((targetPrice + offset) * 100) / 100;
+                    } else {
+                        const noise = (Math.random() - 0.5) * 1.2;
+                        close = Math.round((targetPrice + noise) * 100) / 100;
+                    }
+                    close = Math.max(CURRENT_RANGE_MIN + 0.5, Math.min(CURRENT_RANGE_MAX - 0.5, close));
+                    const candle = generateStandardCandle(currentPrice, close, CURRENT_RANGE_MIN, CURRENT_RANGE_MAX);
+                    candles.push(candle);
+                    RANGE_CANDLE_INDICES.push(candles.length - 1);
+                    currentPrice = candle.close;
+                }
+            });
+
+            return { candles, lastPrice: currentPrice };
+        }
+
+        function shuffleSections() {
+            const sections = [
+                { type: 'random', count: 18 },
+                { type: 'random', count: 28 },
+                { type: 'pump', count: 4 },
+                { type: 'range', count: 56 }
+            ];
+            for (let i = sections.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [sections[i], sections[j]] = [sections[j], sections[i]];
+            }
+            return sections;
+        }
+
+        function generateAllCandles() {
+            generateRandomRange();
+            const shuffledSections = shuffleSections();
+            const allCandles = [];
+            let currentPrice = 40;
+            const pumpDirection = Math.random() < 0.5 ? 'up' : 'down';
+            RANGE_CANDLE_INDICES = [];
+
+            shuffledSections.forEach((section) => {
+                if (section.type === 'random') {
+                    for (let i = 0; i < section.count; i++) {
+                        const candle = generateRandomCandle(currentPrice, true);
+                        allCandles.push(candle);
+                        currentPrice = candle.close;
+                    }
+                } else if (section.type === 'pump') {
+                    const pumpResult = generatePumpCandles(currentPrice, pumpDirection);
+                    allCandles.push(...pumpResult.candles);
+                    currentPrice = pumpResult.lastPrice;
+                } else if (section.type === 'range') {
+                    const waveResult = generateWaveCandles(currentPrice);
+                    const baseIndex = allCandles.length;
+                    const rangeIndices = RANGE_CANDLE_INDICES.map(idx => idx + baseIndex);
+                    RANGE_CANDLE_INDICES = rangeIndices;
+                    allCandles.push(...waveResult.candles);
+                    currentPrice = waveResult.lastPrice;
+                }
+            });
+
+            return allCandles;
+        }
+
+        function findRangeInCandles(candles) {
+            return { min: CURRENT_RANGE_MIN, max: CURRENT_RANGE_MAX };
+        }
+
+        // ================================================================
+        // RENDER FUNCTION
+        // ================================================================
+
+        function renderCandlesOnSvg(svg, candles, minPrice, maxPrice, showAnswerLine = false, rangeMin = null, rangeMax =
+            null) {
+            const ns = 'http://www.w3.org/2000/svg';
+
+            const toRemove = [];
+            for (let i = 0; i < svg.children.length; i++) {
+                const child = svg.children[i];
+                const isGrid = child.tagName === 'line' && child.getAttribute('stroke') === '#151515';
+                const isLabel = child.tagName === 'text' && !child.id;
+                const isAnswerLine = child.tagName === 'line' && child.getAttribute('stroke') === '#ff9b00' && child
+                    .getAttribute('stroke-width') === '2';
+                const isBg = child.tagName === 'rect' && child.getAttribute('fill') === '#0a0a0a';
+                if (!isGrid && !isLabel && !isBg) {
+                    toRemove.push(child);
+                }
+            }
+            toRemove.forEach(el => el.remove());
+
+            const padding = 28;
+            const chartWidth = 370;
+            const chartHeight = 170;
+            const baseY = 190;
+
+            const candleWidth = chartWidth / candles.length;
+            const bodyWidth = Math.max(3, candleWidth * 0.6);
+
+            let firstRangeIndex = -1;
+            let lastRangeIndex = -1;
+
+            if (showAnswerLine && rangeMin !== null && rangeMax !== null) {
+                if (RANGE_CANDLE_INDICES.length > 0) {
+                    firstRangeIndex = RANGE_CANDLE_INDICES[0];
+                    lastRangeIndex = RANGE_CANDLE_INDICES[RANGE_CANDLE_INDICES.length - 1];
+                }
+            }
+
+            candles.forEach((candle, index) => {
+                const x = padding + (index * candleWidth) + (candleWidth - bodyWidth) / 2;
+
+                const high = Math.min(maxPrice, Math.max(minPrice, candle.high));
+                const low = Math.min(maxPrice, Math.max(minPrice, candle.low));
+                const open = Math.min(high, Math.max(low, candle.open));
+                const close = Math.min(high, Math.max(low, candle.close));
+
+                const yHigh = baseY - ((high - minPrice) / (maxPrice - minPrice)) * chartHeight;
+                const yLow = baseY - ((low - minPrice) / (maxPrice - minPrice)) * chartHeight;
+                const yOpen = baseY - ((open - minPrice) / (maxPrice - minPrice)) * chartHeight;
+                const yClose = baseY - ((close - minPrice) / (maxPrice - minPrice)) * chartHeight;
+
+                const isUp = close >= open;
+                const color = isUp ? '#ffffff' : '#890913';
+
+                const bodyY = Math.min(yOpen, yClose);
+                const bodyH = Math.max(1.5, Math.abs(yOpen - yClose));
+
+                const rect = document.createElementNS(ns, 'rect');
+                rect.setAttribute('x', x);
+                rect.setAttribute('y', bodyY);
+                rect.setAttribute('width', bodyWidth);
+                rect.setAttribute('height', bodyH);
+                rect.setAttribute('fill', color);
+                rect.setAttribute('rx', '0');
+                rect.setAttribute('opacity', '0.95');
+                svg.appendChild(rect);
+
+                if (yHigh < bodyY) {
+                    const lineTop = document.createElementNS(ns, 'line');
+                    lineTop.setAttribute('x1', x + bodyWidth / 2);
+                    lineTop.setAttribute('y1', yHigh);
+                    lineTop.setAttribute('x2', x + bodyWidth / 2);
+                    lineTop.setAttribute('y2', bodyY);
+                    lineTop.setAttribute('stroke', color);
+                    lineTop.setAttribute('stroke-width', Math.max(0.8, bodyWidth / 6));
+                    lineTop.setAttribute('opacity', '0.8');
+                    svg.appendChild(lineTop);
+                }
+
+                if (yLow > bodyY + bodyH) {
+                    const lineBottom = document.createElementNS(ns, 'line');
+                    lineBottom.setAttribute('x1', x + bodyWidth / 2);
+                    lineBottom.setAttribute('y1', bodyY + bodyH);
+                    lineBottom.setAttribute('x2', x + bodyWidth / 2);
+                    lineBottom.setAttribute('y2', yLow);
+                    lineBottom.setAttribute('stroke', color);
+                    lineBottom.setAttribute('stroke-width', Math.max(0.8, bodyWidth / 6));
+                    lineBottom.setAttribute('opacity', '0.8');
+                    svg.appendChild(lineBottom);
+                }
+            });
+
+            if (showAnswerLine && rangeMin !== null && rangeMax !== null && firstRangeIndex !== -1 && lastRangeIndex !==
+                -1) {
+                const firstX = padding + (firstRangeIndex * candleWidth) + (candleWidth - bodyWidth) / 2 + bodyWidth / 2;
+                const lastX = padding + (lastRangeIndex * candleWidth) + (candleWidth - bodyWidth) / 2 + bodyWidth / 2;
+
+                const yTop = baseY - ((rangeMax - minPrice) / (maxPrice - minPrice)) * chartHeight;
+                const yBottom = baseY - ((rangeMin - minPrice) / (maxPrice - minPrice)) * chartHeight;
+
+                const lineTop = document.createElementNS(ns, 'line');
+                lineTop.setAttribute('x1', firstX);
+                lineTop.setAttribute('y1', yTop);
+                lineTop.setAttribute('x2', lastX);
+                lineTop.setAttribute('y2', yTop);
+                lineTop.setAttribute('stroke', '#ff9b00');
+                lineTop.setAttribute('stroke-width', '2');
+                lineTop.setAttribute('opacity', '0.7');
+                svg.appendChild(lineTop);
+
+                const lineBottom = document.createElementNS(ns, 'line');
+                lineBottom.setAttribute('x1', firstX);
+                lineBottom.setAttribute('y1', yBottom);
+                lineBottom.setAttribute('x2', lastX);
+                lineBottom.setAttribute('y2', yBottom);
+                lineBottom.setAttribute('stroke', '#ff9b00');
+                lineBottom.setAttribute('stroke-width', '2');
+                lineBottom.setAttribute('opacity', '0.7');
+                svg.appendChild(lineBottom);
+            }
+        }
+
+        // ================================================================
+        // GENERATE NEW EXERCISE 3
+        // ================================================================
+
+        let currentExercise3Candles = [];
+
+        function generateNewExercise3(incrementCounter = true) {
+            const candles = generateAllCandles();
+            currentExercise3Candles = candles;
+
+            const range = findRangeInCandles(candles);
+
+            const mainSvg = document.getElementById('s3');
+            renderCandlesOnSvg(mainSvg, candles, GLOBAL_MIN, GLOBAL_MAX, false);
+
+            const answerSvg = document.getElementById('answerSvg3');
+            renderCandlesOnSvg(answerSvg, candles, GLOBAL_MIN, GLOBAL_MAX, true, range.min, range.max);
+
+            const spoilerBtn = document.getElementById('spoilerBtn3');
+            const spoilerContent = document.getElementById('spoilerContent3');
+            if (spoilerContent.classList.contains('show')) {
+                spoilerContent.classList.remove('show');
+                spoilerBtn.textContent = 'نمایش جواب';
+                spoilerBtn.classList.remove('active');
+            }
+
+            document.getElementById('badge3').style.display = 'none';
+
+            const lines = mainSvg.querySelectorAll('line');
+            lines.forEach(line => {
+                if (line.getAttribute('stroke') === '#ff9b00' && line.getAttribute('stroke-width') === '1.5') {
+                    line.remove();
+                }
+            });
+
+            // فقط اگر incrementCounter = true باشه، شمارنده رو افزایش بده
+            if (incrementCounter) {
+                incrementExercise3Counter();
+            }
+        }
+
+        // ================================================================
+        // TOGGLE SPOILER
         // ================================================================
 
         function toggleSpoiler(btn) {
@@ -1192,6 +1547,10 @@
                 btn.classList.add('active');
             }
         }
+
+        // ================================================================
+        // TREND LINE TOOLS (خلاصه شده)
+        // ================================================================
 
         const history = {};
 
@@ -1302,11 +1661,8 @@
         });
 
         document.querySelectorAll('.svg-wrap svg').forEach(svg => {
-
             let tempLine = null;
             let startPointCircle = null;
-            let lastX = 0,
-                lastY = 0;
 
             function getCoords(e) {
                 const rect = svg.getBoundingClientRect();
@@ -1341,8 +1697,6 @@
                 circle.setAttribute('cy', y);
                 dot.setAttribute('cx', x);
                 dot.setAttribute('cy', y);
-                lastX = x;
-                lastY = y;
             }
 
             function hideCrosshair() {
@@ -1373,18 +1727,14 @@
             }
 
             function removeTempLine() {
-                if (tempLine) {
-                    tempLine.remove();
-                    tempLine = null;
-                }
+                if (tempLine) { tempLine.remove();
+                    tempLine = null; }
             }
 
             function createStartPoint(x, y) {
                 const ns = 'http://www.w3.org/2000/svg';
-                if (startPointCircle) {
-                    startPointCircle.remove();
-                    startPointCircle = null;
-                }
+                if (startPointCircle) { startPointCircle.remove();
+                    startPointCircle = null; }
                 startPointCircle = document.createElementNS(ns, 'circle');
                 startPointCircle.setAttribute('cx', x);
                 startPointCircle.setAttribute('cy', y);
@@ -1397,16 +1747,13 @@
             }
 
             function removeStartPoint() {
-                if (startPointCircle) {
-                    startPointCircle.remove();
-                    startPointCircle = null;
-                }
+                if (startPointCircle) { startPointCircle.remove();
+                    startPointCircle = null; }
             }
 
             svg.addEventListener('mousedown', function(e) {
                 if (svg.dataset.drawing !== 'true') return;
                 e.preventDefault();
-
                 const { x, y } = getCoords(e);
                 const step = parseInt(svg.dataset.step) || 0;
                 const mobile = isMobile();
@@ -1426,7 +1773,6 @@
                             removeTempLine();
                             removeStartPoint();
                             hideCrosshair();
-
                             const ns = 'http://www.w3.org/2000/svg';
                             const line = document.createElementNS(ns, 'line');
                             line.setAttribute('x1', sx);
@@ -1438,7 +1784,6 @@
                             line.setAttribute('opacity', '0.9');
                             svg.appendChild(line);
                             saveLine(svg.id, line);
-
                             svg.dataset.step = '0';
                             svg.dataset.startX = '';
                             svg.dataset.startY = '';
@@ -1465,7 +1810,6 @@
                             removeTempLine();
                             removeStartPoint();
                             hideCrosshair();
-
                             const ns = 'http://www.w3.org/2000/svg';
                             const line = document.createElementNS(ns, 'line');
                             line.setAttribute('x1', sx);
@@ -1477,7 +1821,6 @@
                             line.setAttribute('opacity', '0.9');
                             svg.appendChild(line);
                             saveLine(svg.id, line);
-
                             svg.dataset.step = '0';
                             svg.dataset.startX = '';
                             svg.dataset.startY = '';
@@ -1491,15 +1834,12 @@
                 const { x, y } = getCoords(e);
                 const step = parseInt(svg.dataset.step) || 0;
                 const mobile = isMobile();
-
                 updateCrosshair(x, y);
-
                 if (!mobile && step === 1) {
                     const sx = parseFloat(svg.dataset.startX);
                     const sy = parseFloat(svg.dataset.startY);
                     if (sx && sy) createTempLine(sx, sy, x, y);
                 }
-
                 if (mobile && step === 2) {
                     const sx = parseFloat(svg.dataset.startX);
                     const sy = parseFloat(svg.dataset.startY);
@@ -1510,7 +1850,6 @@
             svg.addEventListener('touchstart', function(e) {
                 if (svg.dataset.drawing !== 'true') return;
                 e.preventDefault();
-
                 const { x, y } = getCoords(e);
                 const step = parseInt(svg.dataset.step) || 0;
                 const mobile = isMobile();
@@ -1530,7 +1869,6 @@
                             removeTempLine();
                             removeStartPoint();
                             hideCrosshair();
-
                             const ns = 'http://www.w3.org/2000/svg';
                             const line = document.createElementNS(ns, 'line');
                             line.setAttribute('x1', sx);
@@ -1542,7 +1880,6 @@
                             line.setAttribute('opacity', '0.9');
                             svg.appendChild(line);
                             saveLine(svg.id, line);
-
                             svg.dataset.step = '0';
                             svg.dataset.startX = '';
                             svg.dataset.startY = '';
@@ -1569,7 +1906,6 @@
                             removeTempLine();
                             removeStartPoint();
                             hideCrosshair();
-
                             const ns = 'http://www.w3.org/2000/svg';
                             const line = document.createElementNS(ns, 'line');
                             line.setAttribute('x1', sx);
@@ -1581,7 +1917,6 @@
                             line.setAttribute('opacity', '0.9');
                             svg.appendChild(line);
                             saveLine(svg.id, line);
-
                             svg.dataset.step = '0';
                             svg.dataset.startX = '';
                             svg.dataset.startY = '';
@@ -1596,25 +1931,18 @@
                 const { x, y } = getCoords(e);
                 const step = parseInt(svg.dataset.step) || 0;
                 const mobile = isMobile();
-
                 updateCrosshair(x, y);
-
                 if (!mobile && step === 1) {
                     const sx = parseFloat(svg.dataset.startX);
                     const sy = parseFloat(svg.dataset.startY);
                     if (sx && sy) createTempLine(sx, sy, x, y);
                 }
-
                 if (mobile && step === 2) {
                     const sx = parseFloat(svg.dataset.startX);
                     const sy = parseFloat(svg.dataset.startY);
                     if (sx && sy) createTempLine(sx, sy, x, y);
                 }
             }, { passive: false });
-
-            svg.addEventListener('mouseleave', function() {
-                if (svg.dataset.drawing !== 'true') return;
-            });
         });
 
         document.querySelectorAll('.undo-btn').forEach(btn => {
@@ -1623,42 +1951,31 @@
                 const svg = document.getElementById(targetId);
                 if (!svg) return;
                 const h = getHistory(targetId);
-
                 if (h.undo.length === 0) return;
-
                 const lastLine = h.undo.pop();
                 const lines = svg.querySelectorAll('line');
                 let found = null;
                 for (const line of lines) {
-                    if (line === lastLine) {
-                        found = line;
-                        break;
-                    }
+                    if (line === lastLine) { found = line; break; }
                     if (line.getAttribute('x1') === lastLine.getAttribute('x1') &&
                         line.getAttribute('y1') === lastLine.getAttribute('y1') &&
                         line.getAttribute('x2') === lastLine.getAttribute('x2') &&
                         line.getAttribute('y2') === lastLine.getAttribute('y2') &&
-                        line.getAttribute('stroke') === lastLine.getAttribute('stroke')) {
-                        found = line;
-                        break;
-                    }
+                        line.getAttribute('stroke') === lastLine.getAttribute('stroke')) { found = line; break; }
                 }
-
-                if (found) {
-                    const clone = found.cloneNode(true);
+                if (found) { const clone = found.cloneNode(true);
                     h.redo.push(clone);
-                    found.remove();
-                }
-
+                    found.remove(); }
                 if (svg.dataset.drawing === 'true') {
                     svg.dataset.step = '0';
                     svg.dataset.startX = '';
                     svg.dataset.startY = '';
-                    if (tempLine) { tempLine.remove();
-                        tempLine = null; }
-                    if (startPointCircle) { startPointCircle.remove();
-                        startPointCircle = null; }
-                    hideCrosshair();
+                    const tl = svg.querySelector('.temp-line');
+                    if (tl) tl.remove();
+                    const sp = svg.querySelector('.start-point');
+                    if (sp) sp.remove();
+                    const ch = svg.querySelector('.trend-crosshair');
+                    if (ch) ch.style.display = 'none';
                 }
             });
         });
@@ -1669,9 +1986,7 @@
                 const svg = document.getElementById(targetId);
                 if (!svg) return;
                 const h = getHistory(targetId);
-
                 if (h.redo.length === 0) return;
-
                 const line = h.redo.pop();
                 svg.appendChild(line);
                 h.undo.push(line);
@@ -1684,7 +1999,6 @@
                 const svg = document.getElementById(targetId);
                 if (!svg) return;
                 const h = getHistory(targetId);
-
                 const lines = svg.querySelectorAll('line:not(.temp-line)');
                 const userLines = [];
                 lines.forEach(line => {
@@ -1693,25 +2007,20 @@
                         userLines.push(line);
                     }
                 });
-
-                userLines.forEach(line => {
-                    h.undo.push(line);
-                });
-
+                userLines.forEach(line => { h.undo.push(line); });
                 userLines.forEach(line => line.remove());
                 h.redo = [];
-
                 if (svg.dataset.drawing === 'true') {
                     svg.dataset.step = '0';
                     svg.dataset.startX = '';
                     svg.dataset.startY = '';
-                    if (tempLine) { tempLine.remove();
-                        tempLine = null; }
-                    if (startPointCircle) { startPointCircle.remove();
-                        startPointCircle = null; }
-                    hideCrosshair();
+                    const tl = svg.querySelector('.temp-line');
+                    if (tl) tl.remove();
+                    const sp = svg.querySelector('.start-point');
+                    if (sp) sp.remove();
+                    const ch = svg.querySelector('.trend-crosshair');
+                    if (ch) ch.style.display = 'none';
                 }
-
                 const trendBtn = document.querySelector(`.trend-btn[data-target="${targetId}"]`);
                 if (trendBtn) {
                     trendBtn.classList.remove('active');
@@ -1720,6 +2029,24 @@
                 }
             });
         });
+
+        // ================================================================
+        // INITIALIZATION - از ۱ شروع بشه
+        // ================================================================
+
+        window.addEventListener('load', function() {
+            // از ۱ شروع میشه
+            exercise3Counter = 1;
+            document.getElementById('exerciseCounter3').textContent = exercise3Counter;
+            bestRecord = getBestRecord();
+            document.getElementById('bestRecordDisplay').textContent = bestRecord;
+            document.getElementById('newRecordBadge').classList.remove('show');
+
+            // با false صدا بزنیم تا شمارنده افزایش پیدا نکنه (بارگذاری اولیه)
+            generateNewExercise3(false);
+        });
+
+        console.log('🕯️ Amitis v62 - شروع از ۱، حذف روند را تشخیص دهید، تعداد کل تمرین های حل شده با نئون سفید');
     </script>
 
 </body>
