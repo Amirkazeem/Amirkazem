@@ -20,11 +20,10 @@
             overflow-y: auto;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
-            transition: background 0.4s ease;
         }
-        body.light-mode {
-            background: #e0e0e0;
-        }
+
+        /* ===== فونت‌ها ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Orbitron:wght@400;700;900&display=swap');
 
         .glass-main {
             width: 100%;
@@ -37,63 +36,14 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            transition: background 0.4s ease, border-color 0.4s ease;
-        }
-        body.light-mode .glass-main {
-            background: #f0f0f0;
-            border-color: #ccc;
         }
 
-        /* ===== دکمه تم ===== */
-        .top-buttons {
-            display: flex;
-            justify-content: flex-end;
-            padding: 0 10px 12px 10px;
-            position: relative;
-            z-index: 10;
-        }
-        .theme-toggle-btn {
-            pointer-events: auto;
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            background: rgba(20, 20, 20, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            color: #fff;
-            font-size: 22px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            touch-action: manipulation;
-            user-select: none;
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-        .theme-toggle-btn:hover {
-            transform: scale(1.05);
-            border-color: #fff;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-        }
-        body.light-mode .theme-toggle-btn {
-            background: rgba(240, 240, 240, 0.85);
-            border-color: rgba(0, 0, 0, 0.15);
-            color: #222;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-        body.light-mode .theme-toggle-btn:hover {
-            border-color: #000;
-        }
-
-        /* ===== هدر ===== */
+        /* ===== هدر با Amitis ===== */
         .header {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 16px 20px;
+            padding: 20px 20px;
             margin-bottom: 55px;
             gap: 10px;
             background: rgba(255, 255, 255, 0.02);
@@ -109,19 +59,11 @@
             box-shadow: 0 8px 50px rgba(0, 0, 0, 0.4) !important;
             transform: translateY(-2px);
         }
-        body.light-mode .header {
-            background: rgba(0, 0, 0, 0.03);
-            border-color: rgba(0, 0, 0, 0.08);
-        }
-        body.light-mode .header:hover {
-            border-color: #000 !important;
-            box-shadow: 0 8px 50px rgba(0, 0, 0, 0.08) !important;
-        }
 
         .brand {
-            font-size: 24px;
+            font-size: 36px;
             font-weight: 700;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             background: linear-gradient(90deg, #000000, #890913, #000000, #890913);
             background-size: 300% 100%;
@@ -129,7 +71,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: cyberGlitch 3s ease-in-out infinite alternate;
-            font-weight: 600;
+            font-weight: 700;
         }
         @keyframes cyberGlitch {
             0% {
@@ -158,33 +100,139 @@
             align-self: flex-start;
             transition: all 0.3s ease;
         }
-        body.light-mode .level-display {
-            color: #333;
-            background: rgba(0, 0, 0, 0.03);
-            border-color: rgba(0, 0, 0, 0.08);
-        }
         .level-display .level-label {
             font-weight: 300;
             font-size: 11px;
             color: #888;
-        }
-        body.light-mode .level-display .level-label {
-            color: #666;
         }
         .level-display .level-name {
             font-weight: 700;
             font-size: 15px;
             color: #ffffff;
         }
-        body.light-mode .level-display .level-name {
-            color: #000;
-        }
         .level-display .level-progress {
             font-size: 10px;
             color: #555;
         }
-        body.light-mode .level-display .level-progress {
-            color: #888;
+
+        /* ===== تایمر - استایل سفید با بک‌گراند پاک (بدون خطوط افقی) ===== */
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            margin-top: 55px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #141414 50%, #0a0a0a 100%);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 11px;
+            color: #ffffff;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            font-family: 'Russo One', 'Orbitron', 'Courier New', sans-serif;
+            direction: ltr;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.03);
+            width: auto;
+            max-width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .timer-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 300%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            animation: shimmer 4s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 8px;
+        }
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .timer-container:hover {
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            transform: translateY(-2px) scale(1.02);
+            background: linear-gradient(135deg, #111111 0%, #1a1a1a 50%, #111111 100%) !important;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.06), inset 0 0 40px rgba(255, 255, 255, 0.01) !important;
+        }
+
+        .timer-container .timer-icon {
+            font-size: 16px;
+            margin: 0 2px;
+            color: rgba(255, 255, 255, 0.5);
+            z-index: 2;
+            position: relative;
+            font-family: 'Russo One', sans-serif;
+        }
+        .timer-container:hover .timer-icon {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .timer-container .timer-label {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            z-index: 2;
+            position: relative;
+            font-family: 'Orbitron', 'Russo One', sans-serif;
+        }
+
+        .timer-container .timer-time {
+            color: #ffffff;
+            font-weight: 900;
+            font-size: 16px;
+            font-family: 'Russo One', 'Orbitron', 'Courier New', monospace;
+            min-width: 100px;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.05);
+            z-index: 2;
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.3s ease;
+        }
+        .timer-container:hover .timer-time {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 0 50px rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .timer-container.warning {
+            border-color: rgba(255, 0, 68, 0.3) !important;
+            box-shadow: 0 0 25px rgba(255, 0, 68, 0.05) !important;
+        }
+        .timer-container.warning .timer-time {
+            color: #ff0044;
+            text-shadow: 0 0 15px rgba(255, 0, 68, 0.3), 0 0 40px rgba(255, 0, 68, 0.1);
+            border-color: rgba(255, 0, 68, 0.1);
+            background: rgba(255, 0, 68, 0.03);
+        }
+        .timer-container.warning .timer-icon {
+            color: rgba(255, 0, 68, 0.5);
+        }
+        .timer-container.warning .timer-label {
+            color: rgba(255, 0, 68, 0.3);
         }
 
         /* ===== بقیه استایل‌ها ===== */
@@ -192,6 +240,8 @@
             margin-bottom: 30px;
             padding-bottom: 20px;
             flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         .chart-box {
             background: #141414;
@@ -201,29 +251,19 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
-        body.light-mode .chart-box {
-            background: #f8f8f8;
-            border-color: #ccc;
-        }
         .chart-box:hover {
             border-color: #ffffff !important;
             transform: translateY(-8px) scale(1.005);
             background: #1e1e1e !important;
             box-shadow: 0 16px 60px rgba(0, 0, 0, 0.7) !important;
         }
-        body.light-mode .chart-box:hover {
-            border-color: #000 !important;
-            background: #fff !important;
-            box-shadow: 0 16px 60px rgba(0, 0, 0, 0.1) !important;
-        }
         .chart-box.answer-box {
-            margin-top: 100px;
+            margin-top: 30px;
             background: #161616;
             border-color: #323232;
-        }
-        body.light-mode .chart-box.answer-box {
-            background: #f0f0f0;
-            border-color: #bbb;
+            display: flex;
+            flex-direction: column;
+            padding: 10px 10px 8px;
         }
 
         .label {
@@ -237,9 +277,6 @@
             font-weight: 700;
             color: #aaa;
         }
-        body.light-mode .label .title {
-            color: #555;
-        }
         .label .badge {
             font-size: 9px;
             color: #333;
@@ -247,11 +284,6 @@
             padding: 2px 12px;
             border-radius: 30px;
             border: 1px solid #222;
-        }
-        body.light-mode .label .badge {
-            background: #e0e0e0;
-            border-color: #ccc;
-            color: #666;
         }
         .label .badge.trend-up {
             color: #000eff !important;
@@ -323,31 +355,16 @@
             touch-action: manipulation;
             user-select: none;
         }
-        body.light-mode .toolbar button {
-            background: #e8e8e8;
-            border-color: #ccc;
-            color: #555;
-        }
         .toolbar button:hover {
             background: #2a2a2a;
             border-color: #444;
             color: #aaa;
-        }
-        body.light-mode .toolbar button:hover {
-            background: #d0d0d0;
-            border-color: #999;
-            color: #222;
         }
         .toolbar button.active {
             background: #2a2a2a;
             border-color: #ffffff;
             color: #ffffff;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
-        }
-        body.light-mode .toolbar button.active {
-            background: #ccc;
-            border-color: #000;
-            color: #000;
         }
 
         .exercise-counter-inline {
@@ -366,9 +383,6 @@
             min-width: 18px;
             text-align: center;
         }
-        body.light-mode .exercise-counter-inline .counter-number {
-            color: #000;
-        }
 
         .record-item-inline {
             display: inline-flex;
@@ -384,18 +398,9 @@
             transition: all 0.3s ease;
             user-select: none;
         }
-        body.light-mode .record-item-inline {
-            background: #e8e8e8;
-            border-color: #ccc;
-            color: #555;
-        }
         .record-item-inline:hover {
             background: #252525;
             border-color: #444;
-        }
-        body.light-mode .record-item-inline:hover {
-            background: #d0d0d0;
-            border-color: #999;
         }
         .record-item-inline .record-value-white {
             font-weight: 700;
@@ -405,11 +410,6 @@
             color: #ffffff;
             text-shadow: 0 0 8px #ffffff, 0 0 20px #aaaaaa, 0 0 40px #888888;
             animation: whitePulse 1.5s ease-in-out infinite alternate;
-        }
-        body.light-mode .record-item-inline .record-value-white {
-            color: #000;
-            text-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-            animation: none;
         }
         @keyframes whitePulse {
             0% {
@@ -457,79 +457,171 @@
             padding: 0 2px;
             user-select: none;
         }
-        body.light-mode .toolbar-divider {
-            color: #ccc;
-        }
 
+        /* ================================================================ */
+        /* ===== دکمه نمایش جواب - استایل ذرات درخشان (شیشه‌ای) ===== */
+        /* ================================================================ */
         .spoiler-btn {
-            background: transparent;
-            border: 1px solid #ffffff;
-            color: #ffffff;
-            padding: 5px 16px;
-            border-radius: 6px;
-            font-size: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 14px 36px;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-family: 'Orbitron', 'Russo One', sans-serif;
             touch-action: manipulation;
             user-select: none;
-            margin-top: 4px;
-            width: 100%;
+            width: auto;
+            min-width: 180px;
             text-align: center;
-            letter-spacing: 0.5px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.02);
+            flex-shrink: 0;
         }
-        body.light-mode .spoiler-btn {
-            border-color: #333;
-            color: #333;
+
+        /* ===== ذرات درخشان ===== */
+        .spoiler-btn .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+            border-radius: 12px;
         }
+        .spoiler-btn .particles span {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: floatParticle 4s ease-in-out infinite;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+        }
+        /* موقعیت‌های مختلف ذرات */
+        .spoiler-btn .particles span:nth-child(1) { left: 8%; top: 15%; animation-delay: 0s; }
+        .spoiler-btn .particles span:nth-child(2) { left: 25%; top: 75%; animation-delay: 0.6s; }
+        .spoiler-btn .particles span:nth-child(3) { left: 55%; top: 10%; animation-delay: 1.2s; }
+        .spoiler-btn .particles span:nth-child(4) { left: 78%; top: 65%; animation-delay: 0.3s; }
+        .spoiler-btn .particles span:nth-child(5) { left: 45%; top: 88%; animation-delay: 0.9s; }
+        .spoiler-btn .particles span:nth-child(6) { left: 12%; top: 45%; animation-delay: 1.8s; }
+        .spoiler-btn .particles span:nth-child(7) { left: 68%; top: 30%; animation-delay: 2.4s; }
+        .spoiler-btn .particles span:nth-child(8) { left: 92%; top: 22%; animation-delay: 0.5s; }
+        .spoiler-btn .particles span:nth-child(9) { left: 35%; top: 50%; animation-delay: 1.5s; }
+        .spoiler-btn .particles span:nth-child(10) { left: 85%; top: 80%; animation-delay: 2.1s; }
+        .spoiler-btn .particles span:nth-child(11) { left: 50%; top: 40%; animation-delay: 0.8s; }
+        .spoiler-btn .particles span:nth-child(12) { left: 18%; top: 92%; animation-delay: 3s; }
+        .spoiler-btn .particles span:nth-child(13) { left: 72%; top: 55%; animation-delay: 1.1s; }
+        .spoiler-btn .particles span:nth-child(14) { left: 40%; top: 22%; animation-delay: 2.7s; }
+        .spoiler-btn .particles span:nth-child(15) { left: 60%; top: 78%; animation-delay: 0.2s; }
+
+        /* اندازه‌های مختلف ذرات */
+        .spoiler-btn .particles span:nth-child(3n) { width: 3px; height: 3px; background: rgba(255, 255, 255, 0.2); }
+        .spoiler-btn .particles span:nth-child(5n) { width: 1.5px; height: 1.5px; background: rgba(255, 255, 255, 0.4); }
+        .spoiler-btn .particles span:nth-child(7n) { width: 4px; height: 4px; background: rgba(255, 200, 100, 0.15); }
+
+        @keyframes floatParticle {
+            0%, 100% {
+                opacity: 0.1;
+                transform: translateY(0) scale(0.5);
+            }
+            25% {
+                opacity: 0.8;
+                transform: translateY(-12px) scale(1.3);
+            }
+            50% {
+                opacity: 0.4;
+                transform: translateY(-5px) scale(0.8);
+            }
+            75% {
+                opacity: 0.9;
+                transform: translateY(-18px) scale(1.6);
+            }
+        }
+
+        /* ===== شایمر روی دکمه ===== */
+        .spoiler-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 300%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+            animation: shimmerBtn 5s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 12px;
+        }
+        @keyframes shimmerBtn {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* ===== افکت‌های هاور ===== */
         .spoiler-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: #aaaaaa;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.05), inset 0 0 40px rgba(255, 255, 255, 0.02) !important;
+            transform: translateY(-3px) scale(1.02);
             color: #ffffff;
         }
-        body.light-mode .spoiler-btn:hover {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: #666;
-            color: #000;
+        .spoiler-btn:active {
+            transform: scale(0.97);
         }
+
+        /* ===== حالت فعال (باز بودن جواب) ===== */
         .spoiler-btn.active {
-            background: rgba(255, 255, 255, 0.03);
-            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.04) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
             color: #ffffff;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.05);
         }
-        body.light-mode .spoiler-btn.active {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: #000;
-            color: #000;
+        .spoiler-btn.active .particles span {
+            background: rgba(255, 200, 100, 0.4);
+            animation-duration: 2s;
         }
+
         .spoiler-content {
             display: none;
-            margin-top: 8px;
+            margin-top: 10px;
             animation: fadeIn 0.4s ease;
         }
         .spoiler-content.show {
             display: block;
         }
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
+        .spoiler-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+            padding-top: 6px;
+            padding-bottom: 6px;
+        }
+
         .svg-wrap {
             background: #0a0a0a;
             border-radius: 12px;
             padding: 4px;
             border: 1px solid #161616;
             overflow: hidden;
-        }
-        body.light-mode .svg-wrap {
-            background: #f0f0f0;
-            border-color: #ddd;
         }
         .svg-wrap svg {
             display: block;
@@ -538,11 +630,8 @@
             border-radius: 8px;
             background: #0a0a0a;
         }
-        body.light-mode .svg-wrap svg {
-            background: #f0f0f0;
-        }
 
-        /* ===== FOOTER - دقیقاً مثل کد شما ===== */
+        /* ===== FOOTER ===== */
         .global-footer {
             margin-top: 50px;
             padding-top: 24px;
@@ -556,10 +645,6 @@
             font-weight: 300;
             letter-spacing: 0.3px;
             width: 100%;
-        }
-        body.light-mode .global-footer {
-            border-color: #ccc;
-            color: #999;
         }
         .global-footer .footer-links {
             display: flex;
@@ -597,22 +682,12 @@
             color: #555;
             margin-top: 4px;
         }
-        body.light-mode .global-footer .footer-copy {
-            color: #888;
-        }
         .global-footer .footer-copy .brand-highlight {
             color: #ccc;
             font-weight: 600;
             text-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
             letter-spacing: 0.5px;
             font-size: 12px;
-        }
-        body.light-mode .global-footer .footer-copy .brand-highlight {
-            color: #444;
-        }
-        .global-footer .footer-copy .dot-sep {
-            color: #333;
-            font-size: 6px;
         }
         .global-footer .footer-copy .telegram-link {
             display: inline-flex;
@@ -631,11 +706,6 @@
             border-color: #333;
             background: rgba(255, 255, 255, 0.03);
         }
-        body.light-mode .global-footer .footer-copy .telegram-link:hover {
-            color: #000;
-            border-color: #aaa;
-            background: rgba(0, 0, 0, 0.05);
-        }
         .global-footer .footer-copy .telegram-link svg {
             width: 16px;
             height: 16px;
@@ -645,68 +715,47 @@
         .global-footer .footer-copy .telegram-link:hover svg {
             fill: #fff;
         }
-        body.light-mode .global-footer .footer-copy .telegram-link:hover svg {
-            fill: #000;
-        }
-
-        .global-footer .footer-powered {
-            font-size: 11px;
-            color: #555;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
-        }
-        .global-footer .footer-powered .powered-highlight {
-            color: #ccc;
-            font-weight: 600;
-            text-shadow: 0 0 12px rgba(255, 255, 255, 0.06);
-        }
-        body.light-mode .global-footer .footer-powered .powered-highlight {
-            color: #444;
-        }
 
         @media (max-width: 480px) {
             .glass-main {
                 padding: 12px 6px 20px;
             }
             .header {
-                padding: 10px 10px;
+                padding: 14px 10px;
                 margin-bottom: 30px;
                 border-radius: 14px;
             }
-            .header .brand {
-                font-size: 16px;
-                letter-spacing: 2px;
+            .brand {
+                font-size: 26px;
+                letter-spacing: 3px;
             }
             .chart-box.answer-box {
+                margin-top: 24px;
+            }
+            .timer-container {
+                max-width: 85%;
+                padding: 4px 10px;
+                gap: 4px;
                 margin-top: 40px;
             }
-            .global-footer .footer-links {
-                gap: 10px 14px;
+            .timer-container .timer-time {
+                font-size: 13px;
+                min-width: 80px;
+                letter-spacing: 1px;
+                padding: 1px 6px;
             }
-            .global-footer .footer-links a {
-                font-size: 10px;
+            .timer-container .timer-label {
+                font-size: 7px;
+                letter-spacing: 1px;
             }
-            .global-footer .footer-links a svg {
-                width: 15px;
-                height: 15px;
+            .timer-container .timer-icon {
+                font-size: 13px;
             }
-            .global-footer .footer-copy {
-                font-size: 9px;
-                gap: 4px 10px;
-                flex-direction: column;
-            }
-            .global-footer .footer-copy .brand-highlight {
-                font-size: 10px;
-            }
-            .global-footer .footer-copy .telegram-link {
-                font-size: 10px;
-            }
-            .global-footer .footer-copy .telegram-link svg {
-                width: 14px;
-                height: 14px;
-            }
-            .global-footer .footer-powered {
-                font-size: 9px;
+            .spoiler-btn {
+                min-width: 140px;
+                padding: 12px 24px;
+                font-size: 12px;
+                letter-spacing: 1.5px;
             }
         }
     </style>
@@ -715,23 +764,7 @@
 
     <div class="glass-main">
 
-        <div class="top-buttons">
-            <button class="theme-toggle-btn" id="themeToggle" aria-label="تغییر تم">
-                <svg class="icon-moon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                </svg>
-                <svg class="icon-sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-                    <circle cx="12" cy="12" r="5" />
-                    <line x1="12" y1="1" x2="12" y2="3" />
-                    <line x1="12" y1="21" x2="12" y2="23" />
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                    <line x1="1" y1="12" x2="3" y2="12" />
-                    <line x1="21" y1="12" x2="23" y2="12" />
-                </svg>
-            </button>
-        </div>
-
+        <!-- هدر با Amitis -->
         <div class="header">
             <span class="brand">Amitis</span>
         </div>
@@ -743,9 +776,10 @@
         </div>
 
         <div class="item" id="exercise-container">
+            <!-- نمودار سوال -->
             <div class="chart-box">
                 <div class="label">
-                    <span class="title">● روند رو با ترندلاین مشخص کنید :</span>
+                    <span class="title">روند رو با ترندلاین مشخص کنید :</span>
                     <span class="badge" id="questionBadge" style="display:none;">---</span>
                 </div>
                 <div class="toolbar">
@@ -786,12 +820,25 @@
                 </div>
             </div>
 
+            <!-- نمودار جواب - فاصله از سوال = 30px -->
             <div class="chart-box answer-box">
                 <div class="label">
-                    <span class="title">● پاسخ :</span>
+                    <span class="title" style="opacity:0; pointer-events:none;">-</span>
                     <span class="badge green" id="answerBadge" style="display:none;">---</span>
                 </div>
-                <button class="spoiler-btn" id="spoilerBtn" onclick="toggleSpoiler(this)">نمایش جواب</button>
+                <!-- wrapper برای وسط‌چین کردن دکمه با فاصله مساوی از بالا و پایین -->
+                <div class="spoiler-wrapper">
+                    <button class="spoiler-btn" id="spoilerBtn" onclick="toggleSpoiler(this)">
+                        <span class="particles">
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                        </span>
+                        نمایش جواب
+                    </button>
+                </div>
                 <div class="spoiler-content" id="spoilerContent">
                     <div class="svg-wrap">
                         <svg id="answerSvg" viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg">
@@ -814,28 +861,31 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ===== تایمر - فاصله از جواب = 55px ===== -->
+            <div class="timer-container" id="timerContainer">
+                <span class="timer-icon">⟁</span>
+                <span class="timer-label">باقی مانده تا ریست شدن لول</span>
+                <span class="timer-time" id="timerDisplay">02:23:59:59</span>
+                <span class="timer-icon">⟁</span>
+            </div>
         </div>
 
-        <!-- ================================================================
-             FOOTER - دقیقاً مثل کد شما
-             ================================================================ -->
+        <!-- ===== FOOTER ===== -->
         <div class="global-footer">
             <div class="footer-links">
-                <!-- GitHub -->
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.31 3.43 9.8 8.19 11.39.6.11.82-.26.82-.58 0-.29-.01-1.05-.02-2.07-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.77.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.4 1.23-3.25-.12-.3-.53-1.53.12-3.18 0 0 1-.32 3.28 1.23.95-.27 1.97-.4 2.98-.4s2.03.13 2.98.4c2.28-1.55 3.28-1.23 3.28-1.23.65 1.65.24 2.88.12 3.18.76.85 1.23 1.93 1.23 3.25 0 4.63-2.81 5.65-5.49 5.95.43.37.82 1.1.82 2.22 0 1.6-.01 2.89-.01 3.28 0 .32.22.7.83.58C20.57 22.3 24 17.81 24 12.5 24 5.87 18.63.5 12 .5z"/>
                     </svg>
                     GitHub
                 </a>
-                <!-- IPLocation -->
                 <a href="https://iplocation.net" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                     </svg>
                     IPLocation
                 </a>
-                <!-- CoinMarketCap -->
                 <a href="https://coinmarketcap.com" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
@@ -843,7 +893,6 @@
                     </svg>
                     CoinMarketCap
                 </a>
-                <!-- TradingView -->
                 <a href="https://tradingview.com" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
@@ -854,8 +903,7 @@
             </div>
 
             <div class="footer-copy">
-                <span>Copyright © 2026 <span class="brand-highlight">Amirkazem Inc.</span> All rights reserved </span>
-            
+                <span>Copyright © 2026 <span class="brand-highlight">Amirkazem Inc.</span> All rights reserved</span>
                 <a href="https://t.me/Luciledgerbot" target="_blank" rel="noopener noreferrer" class="telegram-link">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
@@ -863,28 +911,24 @@
                     LuciledgerBot
                 </a>
             </div>
-
-            <div class="footer-powered">
-                Powered by <span class="powered-highlight">Amirkazem</span> Coding
-            </div>
         </div>
 
     </div>
 
     <script>
         // ================================================================
-        // Amirkazem Coding - v86 (بدون نظر سنجی + فوتر کامل)
+        // Amirkazem Coding - v99 (دکمه نمایش جواب: ذرات درخشان)
         // ================================================================
 
         // ===== LEVEL SYSTEM =====
         const LEVELS = [
-            { name: 'Beginner', threshold: 0 },
-            { name: 'Amateur', threshold: 50 },
-            { name: 'Regular', threshold: 200 },
-            { name: 'Professional', threshold: 600 },
-            { name: 'Top Player', threshold: 1000 },
-            { name: 'Superstar', threshold: 2000 },
-            { name: 'Legend', threshold: 10000 }
+            { name: 'Beginner', threshold: 10 },
+            { name: 'Amateur', threshold: 100 },
+            { name: 'Regular', threshold: 400 },
+            { name: 'Professional', threshold: 800 },
+            { name: 'Top Player', threshold: 1500 },
+            { name: 'Superstar', threshold: 2500 },
+            { name: 'Legend', threshold: 5000 }
         ];
 
         function getLevel(totalSolved) {
@@ -904,50 +948,117 @@
             document.getElementById('levelProgress').textContent = `(${totalSolved})`;
         }
 
-        // ===== THEME =====
-        const themeToggle = document.getElementById('themeToggle');
-        let isLightMode = false;
-
-        function toggleTheme() {
-            isLightMode = !isLightMode;
-            document.body.classList.toggle('light-mode', isLightMode);
-            localStorage.setItem('amitis_theme', isLightMode ? 'light' : 'dark');
-            const moon = document.querySelector('.icon-moon');
-            const sun = document.querySelector('.icon-sun');
-            if (isLightMode) {
-                moon.style.display = 'none';
-                sun.style.display = 'block';
-            } else {
-                moon.style.display = 'block';
-                sun.style.display = 'none';
-            }
-        }
-
-        const savedTheme = localStorage.getItem('amitis_theme');
-        if (savedTheme === 'light') {
-            isLightMode = true;
-            document.body.classList.add('light-mode');
-            document.querySelector('.icon-moon').style.display = 'none';
-            document.querySelector('.icon-sun').style.display = 'block';
-        }
-
-        themeToggle.addEventListener('click', toggleTheme);
-
         // ===== STORAGE =====
-        const STORAGE_KEY = 'amitis_trend_record_single';
+        const STORAGE_KEY_EXERCISE = 'amitis_exercise_counter';
+        const STORAGE_KEY_RECORD = 'amitis_trend_record_single';
+        const STORAGE_KEY_LAST_ACTIVITY = 'amitis_last_activity';
+
+        function getExerciseCounter() {
+            const val = localStorage.getItem(STORAGE_KEY_EXERCISE);
+            return val ? parseInt(val, 10) : 1;
+        }
+
+        function setExerciseCounter(value) {
+            localStorage.setItem(STORAGE_KEY_EXERCISE, String(value));
+        }
 
         function getBestRecord() {
-            const val = localStorage.getItem(STORAGE_KEY);
+            const val = localStorage.getItem(STORAGE_KEY_RECORD);
             return val ? parseInt(val, 10) : 0;
         }
 
         function setBestRecord(value) {
-            localStorage.setItem(STORAGE_KEY, String(value));
+            localStorage.setItem(STORAGE_KEY_RECORD, String(value));
         }
 
-        let exerciseCounter = 1;
+        function getLastActivity() {
+            const val = localStorage.getItem(STORAGE_KEY_LAST_ACTIVITY);
+            return val ? parseInt(val, 10) : null;
+        }
+
+        function setLastActivity() {
+            localStorage.setItem(STORAGE_KEY_LAST_ACTIVITY, String(Date.now()));
+        }
+
+        // ===== بررسی ۴۸ ساعت =====
+        const FORTY_EIGHT_HOURS = 48 * 60 * 60 * 1000;
+
+        function checkAndResetIfExpired() {
+            const lastActivity = getLastActivity();
+            const now = Date.now();
+
+            if (!lastActivity || (now - lastActivity) > FORTY_EIGHT_HOURS) {
+                setExerciseCounter(1);
+                setBestRecord(0);
+                setLastActivity();
+                return true;
+            }
+            return false;
+        }
+
+        // ===== متغیرهای اصلی =====
+        let exerciseCounter = getExerciseCounter();
         let bestRecord = getBestRecord();
 
+        // ===== تایمر =====
+        let timerInterval = null;
+
+        function formatTime(remaining) {
+            if (remaining < 0) remaining = 0;
+
+            const days = Math.floor(remaining / (24 * 60 * 60 * 1000));
+            const hours = Math.floor((remaining % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+            const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+            const seconds = Math.floor((remaining % (60 * 1000)) / 1000);
+
+            return `${String(days).padStart(2, '0')}:${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function updateTimer() {
+            const lastActivity = getLastActivity();
+            if (!lastActivity) {
+                document.getElementById('timerDisplay').textContent = '02:23:59:59';
+                document.getElementById('timerContainer').classList.remove('warning');
+                return;
+            }
+
+            const now = Date.now();
+            const elapsed = now - lastActivity;
+            const remaining = FORTY_EIGHT_HOURS - elapsed;
+
+            if (remaining <= 0) {
+                document.getElementById('timerDisplay').textContent = '00:00:00:00';
+                document.getElementById('timerContainer').classList.add('warning');
+                // ریست خودکار
+                setExerciseCounter(1);
+                setBestRecord(0);
+                setLastActivity();
+                exerciseCounter = 1;
+                bestRecord = 0;
+                document.getElementById('exerciseCounter').textContent = exerciseCounter;
+                document.getElementById('bestRecordDisplay').textContent = bestRecord;
+                document.getElementById('newRecordBadge').classList.remove('show');
+                updateLevelDisplay(bestRecord);
+                generateNewExercise(false);
+                return;
+            }
+
+            document.getElementById('timerDisplay').textContent = formatTime(remaining);
+
+            if (remaining < 3600000) { // کمتر از 1 ساعت
+                document.getElementById('timerContainer').classList.add('warning');
+            } else {
+                document.getElementById('timerContainer').classList.remove('warning');
+            }
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            updateTimer();
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        // ===== آپدیت نمایش =====
         function updateRecordDisplay() {
             document.getElementById('bestRecordDisplay').textContent = bestRecord;
             const badge = document.getElementById('newRecordBadge');
@@ -965,20 +1076,44 @@
 
         function incrementExerciseCounter() {
             exerciseCounter++;
+            setExerciseCounter(exerciseCounter);
+            setLastActivity();
             document.getElementById('exerciseCounter').textContent = exerciseCounter;
             updateRecordDisplay();
         }
 
+        // ===== کلیک روی رکورد (۲۰ بار) =====
+        let recordClickCount = 0;
+        let recordClickTimeout = null;
+
         document.getElementById('recordClickArea').addEventListener('click', function(e) {
             e.stopPropagation();
-            if (confirm('آیا می‌خواهید شمارنده تمرین‌های حل شده را ریست کنید؟')) {
-                bestRecord = 0;
-                setBestRecord(0);
-                document.getElementById('bestRecordDisplay').textContent = '0';
-                document.getElementById('newRecordBadge').classList.remove('show');
-                exerciseCounter = 1;
-                document.getElementById('exerciseCounter').textContent = '1';
-                updateLevelDisplay(0);
+            recordClickCount++;
+
+            if (recordClickTimeout) {
+                clearTimeout(recordClickTimeout);
+            }
+
+            recordClickTimeout = setTimeout(() => {
+                recordClickCount = 0;
+            }, 3000);
+
+            if (recordClickCount >= 20) {
+                if (confirm('آیا می‌خواهید شمارنده تمرین‌های حل شده را ریست کنید؟')) {
+                    bestRecord = 0;
+                    setBestRecord(0);
+                    exerciseCounter = 1;
+                    setExerciseCounter(1);
+                    setLastActivity();
+                    document.getElementById('bestRecordDisplay').textContent = '0';
+                    document.getElementById('newRecordBadge').classList.remove('show');
+                    document.getElementById('exerciseCounter').textContent = '1';
+                    updateLevelDisplay(0);
+                    generateNewExercise(false);
+                    recordClickCount = 0;
+                } else {
+                    recordClickCount = 0;
+                }
             }
         });
 
@@ -994,7 +1129,7 @@
         let rangeMin = 0;
         let rangeMax = 0;
 
-        // ===== HELPER FUNCTIONS =====
+        // ===== توابع کمکی کندل =====
         function getWickType() {
             const r = Math.random();
             if (r < 0.25) return 0;
@@ -1606,7 +1741,7 @@
         }
 
         function toggleSpoiler(btn) {
-            const content = btn.nextElementSibling;
+            const content = document.getElementById('spoilerContent');
             const answerBadge = document.getElementById('answerBadge');
             if (content.classList.contains('show')) {
                 content.classList.remove('show');
@@ -2109,19 +2244,28 @@
         // ================================================================
 
         window.addEventListener('load', function() {
-            exerciseCounter = 1;
-            document.getElementById('exerciseCounter').textContent = exerciseCounter;
+            // بررسی ۴۸ ساعت
+            checkAndResetIfExpired();
+
+            // دریافت مقادیر از localStorage
+            exerciseCounter = getExerciseCounter();
             bestRecord = getBestRecord();
+
+            // نمایش
+            document.getElementById('exerciseCounter').textContent = exerciseCounter;
             document.getElementById('bestRecordDisplay').textContent = bestRecord;
             document.getElementById('newRecordBadge').classList.remove('show');
             updateLevelDisplay(bestRecord);
+
+            // شروع تایمر
+            startTimer();
+
+            // تولید تمرین اول
             generateNewExercise(false);
         });
 
-        console.log('⚡ Amitis v86 - بدون نظر سنجی + فوتر کامل');
-        console.log('✅ دکمه بازخورد حذف شد');
-        console.log('✅ فوتر با آیتم‌های کامل (GitHub, IPLocation, CoinMarketCap, TradingView)');
-        console.log('✅ تمام آیتم‌های فوتر مثل کد شما');
+        console.log('⚡ Amitis v99 - دکمه نمایش جواب: ذرات درخشان ✨');
+        console.log('✅ طراحی شیشه‌ای با ۱۵ ذره درخشان متحرک');
     </script>
 
 </body>
