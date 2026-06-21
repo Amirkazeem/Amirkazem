@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Amitis - تمرین تشخیص روند</title>
     <style>
-        /* ===== استایل‌های اصلی ===== */
         * {
             margin: 0;
             padding: 0;
@@ -21,8 +20,6 @@
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
-
-        /* ===== فونت‌ها ===== */
         @import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Orbitron:wght@400;700;900&display=swap');
 
         .glass-main {
@@ -37,8 +34,6 @@
             display: flex;
             flex-direction: column;
         }
-
-        /* ===== هدر با Amitis ===== */
         .header {
             display: flex;
             justify-content: center;
@@ -59,7 +54,6 @@
             box-shadow: 0 8px 50px rgba(0, 0, 0, 0.4) !important;
             transform: translateY(-2px);
         }
-
         .brand {
             font-size: 36px;
             font-weight: 700;
@@ -71,7 +65,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: cyberGlitch 7.6s ease-in-out infinite alternate;
-            /* 18% کمتر: 6.5 * 1.18 = 7.67 ~ 7.6 */
             font-weight: 700;
         }
         @keyframes cyberGlitch {
@@ -85,7 +78,6 @@
                 background-position: 0% 50%;
             }
         }
-
         .level-display {
             display: flex;
             align-items: center;
@@ -115,8 +107,6 @@
             font-size: 10px;
             color: #555;
         }
-
-        /* ===== تایمر ===== */
         .timer-container {
             display: flex;
             justify-content: center;
@@ -165,14 +155,12 @@
                 left: 100%;
             }
         }
-
         .timer-container:hover {
             border-color: rgba(255, 255, 255, 0.4) !important;
             transform: translateY(-2px) scale(1.02);
             background: linear-gradient(135deg, #111111 0%, #1a1a1a 50%, #111111 100%) !important;
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.06), inset 0 0 40px rgba(255, 255, 255, 0.01) !important;
         }
-
         .timer-container .timer-icon {
             font-size: 16px;
             margin: 0 2px;
@@ -184,7 +172,6 @@
         .timer-container:hover .timer-icon {
             color: rgba(255, 255, 255, 0.8);
         }
-
         .timer-container .timer-label {
             color: rgba(255, 255, 255, 0.4);
             font-size: 9px;
@@ -195,7 +182,6 @@
             position: relative;
             font-family: 'Orbitron', 'Russo One', sans-serif;
         }
-
         .timer-container .timer-time {
             color: #ffffff;
             font-weight: 900;
@@ -218,7 +204,6 @@
             border-color: rgba(255, 255, 255, 0.1);
             background: rgba(255, 255, 255, 0.05);
         }
-
         .timer-container.warning {
             border-color: rgba(255, 0, 68, 0.3) !important;
             box-shadow: 0 0 25px rgba(255, 0, 68, 0.05) !important;
@@ -235,8 +220,6 @@
         .timer-container.warning .timer-label {
             color: rgba(255, 0, 68, 0.3);
         }
-
-        /* ===== بقیه استایل‌ها ===== */
         .item {
             margin-bottom: 30px;
             padding-bottom: 20px;
@@ -266,7 +249,6 @@
             flex-direction: column;
             padding: 10px 10px 8px;
         }
-
         .label {
             display: flex;
             justify-content: space-between;
@@ -304,7 +286,6 @@
             background: rgba(255, 155, 0, 0.08) !important;
             animation: neonOrange 1.2s ease-in-out infinite alternate !important;
         }
-
         @keyframes neonBlue {
             0% {
                 text-shadow: 0 0 5px #000eff, 0 0 10px #000eff;
@@ -335,7 +316,6 @@
                 opacity: 1;
             }
         }
-
         .toolbar {
             display: flex;
             gap: 6px;
@@ -367,7 +347,54 @@
             color: #ffffff;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
         }
-
+        .toolbar button.fibo-btn {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            color: #666;
+            padding: 3px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            touch-action: manipulation;
+            user-select: none;
+        }
+        .toolbar button.fibo-btn:hover {
+            background: #2a2a2a;
+            border-color: #444;
+            color: #aaa;
+        }
+        .toolbar button.fibo-btn.active {
+            background: #2a2a2a;
+            border-color: #ffffff;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+        .toolbar button.range-btn {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            color: #666;
+            padding: 3px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            touch-action: manipulation;
+            user-select: none;
+        }
+        .toolbar button.range-btn:hover {
+            background: #2a2a2a;
+            border-color: #444;
+            color: #aaa;
+        }
+        .toolbar button.range-btn.active {
+            background: #2a2a2a;
+            border-color: #ffffff;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+        }
         .exercise-counter-inline {
             display: inline-flex;
             align-items: center;
@@ -384,7 +411,6 @@
             min-width: 18px;
             text-align: center;
         }
-
         .record-item-inline {
             display: inline-flex;
             align-items: center;
@@ -422,7 +448,6 @@
                 opacity: 1;
             }
         }
-
         .new-record-badge-inline {
             display: none;
             font-size: 11px;
@@ -458,10 +483,6 @@
             padding: 0 2px;
             user-select: none;
         }
-
-        /* ================================================================ */
-        /* ===== دکمه نمایش جواب - ذرات ستاره‌ای (*) درخشان ===== */
-        /* ================================================================ */
         .spoiler-btn {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(18px);
@@ -490,8 +511,6 @@
             box-shadow: 0 0 40px rgba(255, 255, 255, 0.03);
             flex-shrink: 0;
         }
-
-        /* ===== ذرات ستاره‌ای (*) - همیشه در دکمه وجود دارند ===== */
         .spoiler-btn .particles {
             position: absolute;
             top: 0;
@@ -503,18 +522,14 @@
             border-radius: 14px;
             font-family: 'Courier New', monospace;
             display: block !important;
-            /* همیشه نمایش داده شوند */
         }
-
         .spoiler-btn .particles span {
             position: absolute;
             color: rgba(255, 255, 255, 0.5);
             font-size: 8px;
             font-weight: 100;
             opacity: 0;
-            text-shadow:
-                0 0 8px rgba(255, 255, 255, 0.3),
-                0 0 20px rgba(255, 255, 255, 0.1);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.1);
             animation: floatStarParticle 28s ease-in-out infinite;
             user-select: none;
             pointer-events: none;
@@ -525,8 +540,6 @@
             -moz-osx-font-smoothing: grayscale;
             transition: none;
         }
-
-        /* ===== هر ستاره با موقعیت متفاوت ===== */
         .spoiler-btn .particles span:nth-child(1) {
             left: 8%;
             top: 20%;
@@ -627,8 +640,6 @@
             top: 8%;
             animation-delay: 2.7s;
         }
-
-        /* ===== انیمیشن ستاره‌ها - مسیر صاف و بدون زیگزاگ ===== */
         @keyframes floatStarParticle {
             0% {
                 opacity: 0;
@@ -645,10 +656,7 @@
             50% {
                 opacity: 0.7;
                 transform: translate(-5px, -20px) scale(1.3) rotate(90deg);
-                text-shadow:
-                    0 0 12px rgba(255, 255, 255, 0.5),
-                    0 0 30px rgba(255, 255, 255, 0.2),
-                    0 0 60px rgba(255, 255, 255, 0.1);
+                text-shadow: 0 0 12px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1);
             }
             70% {
                 opacity: 0.4;
@@ -663,8 +671,6 @@
                 transform: translate(0, 0) scale(0.5) rotate(360deg);
             }
         }
-
-        /* ===== شایمر روی دکمه ===== */
         .spoiler-btn::before {
             content: '';
             position: absolute;
@@ -686,8 +692,6 @@
                 left: 100%;
             }
         }
-
-        /* ===== افکت‌های هاور ===== */
         .spoiler-btn:hover {
             border-color: rgba(255, 255, 255, 0.25) !important;
             background: rgba(255, 255, 255, 0.06) !important;
@@ -698,13 +702,10 @@
         .spoiler-btn:active {
             transform: scale(0.97);
         }
-
-        /* ===== محتوای دکمه - با z-index بالاتر از ستاره‌ها ===== */
         .spoiler-btn .btn-text {
             position: relative;
             z-index: 2;
         }
-
         .spoiler-content {
             display: none;
             margin-top: 10px;
@@ -723,7 +724,6 @@
                 transform: translateY(0);
             }
         }
-
         .spoiler-wrapper {
             display: flex;
             flex-direction: column;
@@ -732,13 +732,13 @@
             padding-top: 6px;
             padding-bottom: 6px;
         }
-
         .svg-wrap {
             background: #0a0a0a;
             border-radius: 12px;
             padding: 4px;
             border: 1px solid #161616;
             overflow: hidden;
+            position: relative;
         }
         .svg-wrap svg {
             display: block;
@@ -747,8 +747,26 @@
             border-radius: 8px;
             background: #0a0a0a;
         }
-
-        /* ===== FOOTER ===== */
+        /* استایل‌های ابزار رنج - بدون کادر آبی و بدون خطوط مرزی */
+        .range-line {
+            display: none !important;
+        }
+        .range-label {
+            fill: #000eff;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+        }
+        .range-label-bg {
+            fill: rgba(0, 0, 0, 0.98);
+        }
+        .range-arrow {
+            fill: #000eff;
+            opacity: 0.8;
+        }
+        .range-box {
+            display: none !important;
+        }
         .global-footer {
             margin-top: 50px;
             padding-top: 24px;
@@ -788,7 +806,6 @@
             flex-shrink: 0;
             fill: currentColor;
         }
-
         .global-footer .footer-copy {
             display: flex;
             flex-wrap: wrap;
@@ -832,7 +849,6 @@
         .global-footer .footer-copy .telegram-link:hover svg {
             fill: #fff;
         }
-
         @media (max-width: 480px) {
             .glass-main {
                 padding: 12px 6px 20px;
@@ -885,7 +901,6 @@
 
     <div class="glass-main">
 
-        <!-- هدر با Amitis -->
         <div class="header">
             <span class="brand">Amitis</span>
         </div>
@@ -897,7 +912,6 @@
         </div>
 
         <div class="item" id="exercise-container">
-            <!-- نمودار سوال -->
             <div class="chart-box">
                 <div class="label">
                     <span class="title">روند رو با ترندلاین مشخص کنید :</span>
@@ -905,6 +919,8 @@
                 </div>
                 <div class="toolbar">
                     <button class="trend-btn" data-target="mainSvg">✏️ ترند لاین</button>
+                    <button class="fibo-btn" data-target="mainSvg" id="fiboBtn">Fibo</button>
+                    <button class="range-btn" data-target="mainSvg" id="rangeBtn">📐</button>
                     <button class="clear-btn" data-target="mainSvg">🗑 پاک کردن</button>
                     <button class="redo-btn" data-target="mainSvg">→</button>
                     <button class="undo-btn" data-target="mainSvg">←</button>
@@ -921,8 +937,8 @@
                     <span class="new-record-badge-inline" id="newRecordBadge">✦ NEW RECORD ✦</span>
                 </div>
                 <div class="svg-wrap">
-                    <svg id="mainSvg" viewBox="0 0 1000 320" width="100%" height="320" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="1000" height="320" fill="#0a0a0a" rx="8" />
+                    <svg id="mainSvg" viewBox="0 0 1000 420" width="100%" height="420" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="1000" height="420" fill="#0a0a0a" rx="8" />
                         <line x1="30" y1="280" x2="980" y2="280" stroke="#151515" stroke-width="0.4" />
                         <line x1="30" y1="240" x2="980" y2="240" stroke="#151515" stroke-width="0.4" />
                         <line x1="30" y1="200" x2="980" y2="200" stroke="#151515" stroke-width="0.4" />
@@ -941,7 +957,6 @@
                 </div>
             </div>
 
-            <!-- نمودار جواب -->
             <div class="chart-box answer-box">
                 <div class="label">
                     <span class="title" style="opacity:0; pointer-events:none;">-</span>
@@ -963,8 +978,8 @@
                 </div>
                 <div class="spoiler-content" id="spoilerContent">
                     <div class="svg-wrap">
-                        <svg id="answerSvg" viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="1000" height="320" fill="#0a0a0a" rx="8" />
+                        <svg id="answerSvg" viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="1000" height="420" fill="#0a0a0a" rx="8" />
                             <line x1="30" y1="280" x2="980" y2="280" stroke="#151515" stroke-width="0.4" />
                             <line x1="30" y1="240" x2="980" y2="240" stroke="#151515" stroke-width="0.4" />
                             <line x1="30" y1="200" x2="980" y2="200" stroke="#151515" stroke-width="0.4" />
@@ -984,7 +999,6 @@
                 </div>
             </div>
 
-            <!-- تایمر -->
             <div class="timer-container" id="timerContainer">
                 <span class="timer-icon">⟁</span>
                 <span class="timer-label">باقی مانده تا ریست شدن لول</span>
@@ -993,7 +1007,6 @@
             </div>
         </div>
 
-        <!-- FOOTER -->
         <div class="global-footer">
             <div class="footer-links">
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer">
@@ -1039,7 +1052,7 @@
 
     <script>
         // ================================================================
-        // Amirkazem Coding - v107 (رفع کامل ستاره‌ها + گرادینت 18% کندتر)
+        // Amirkazem Coding - v139 (اصلاح نهایی Clear برای ابزار رنج)
         // ================================================================
 
         const LEVELS = [
@@ -1231,6 +1244,59 @@
         let currentTrendType = 'up';
         let rangeMin = 0;
         let rangeMax = 0;
+
+        function calculateMACD(candles, fastLen = 12, slowLen = 26, sigLen = 9) {
+            const closes = candles.map(c => c.close);
+            const n = closes.length;
+
+            function ema(data, period) {
+                const result = [];
+                const k = 2 / (period + 1);
+                let emaValue = data[0];
+                for (let i = 0; i < data.length; i++) {
+                    if (i === 0) {
+                        emaValue = data[i];
+                    } else {
+                        emaValue = data[i] * k + emaValue * (1 - k);
+                    }
+                    result.push(emaValue);
+                }
+                return result;
+            }
+
+            const fastEMA = ema(closes, fastLen);
+            const slowEMA = ema(closes, slowLen);
+
+            const macdLine = [];
+            for (let i = 0; i < n; i++) {
+                macdLine.push(fastEMA[i] - slowEMA[i]);
+            }
+
+            const signalLine = ema(macdLine, sigLen);
+
+            const histogram = [];
+            for (let i = 0; i < n; i++) {
+                histogram.push(macdLine[i] - signalLine[i]);
+            }
+
+            return { macdLine, signalLine, histogram };
+        }
+
+        function getMACDColor(histValue, prevHistValue) {
+            if (histValue >= 0 && histValue > prevHistValue) {
+                return '#ffffff';
+            }
+            if (histValue >= 0 && histValue <= prevHistValue) {
+                return '#808080';
+            }
+            if (histValue < 0 && histValue > prevHistValue) {
+                return '#89091380';
+            }
+            if (histValue < 0 && histValue <= prevHistValue) {
+                return '#890913';
+            }
+            return '#ffffff';
+        }
 
         function getWickType() {
             const r = Math.random();
@@ -1651,8 +1717,768 @@
             return allCandles;
         }
 
-        function renderCandles(candles, svgId, showAnswerLine = false) {
+        function clearMACDElements(svg) {
+            const toRemove = [];
+            for (let i = 0; i < svg.children.length; i++) {
+                const child = svg.children[i];
+                const isMACDLine = child.tagName === 'line' &&
+                    (child.getAttribute('stroke') === '#ffffff' ||
+                        child.getAttribute('stroke') === '#808080' ||
+                        child.getAttribute('stroke') === '#89091380' ||
+                        child.getAttribute('stroke') === '#890913');
+                const isMACDRect = child.tagName === 'rect' &&
+                    (child.getAttribute('fill') === '#ffffff' ||
+                        child.getAttribute('fill') === '#808080' ||
+                        child.getAttribute('fill') === '#89091380' ||
+                        child.getAttribute('fill') === '#890913');
+                const isZeroLine = child.tagName === 'line' &&
+                    child.getAttribute('stroke') === '#787b8680' &&
+                    child.getAttribute('stroke-width') === '0.5';
+                if (isMACDLine || isMACDRect || isZeroLine) {
+                    toRemove.push(child);
+                }
+            }
+            toRemove.forEach(el => el.remove());
+        }
+
+        function clearTrendLines(svg) {
+            const toRemove = [];
+            for (let i = 0; i < svg.children.length; i++) {
+                const child = svg.children[i];
+                const isTrendLine = child.tagName === 'line' &&
+                    child.getAttribute('stroke') === '#ff9b00' &&
+                    (child.getAttribute('stroke-width') === '3' || child.getAttribute('stroke-width') === '2.5');
+                if (isTrendLine) {
+                    toRemove.push(child);
+                }
+            }
+            toRemove.forEach(el => el.remove());
+        }
+
+        function clearRangeElements(svg) {
+            const toRemove = [];
+            for (let i = 0; i < svg.children.length; i++) {
+                const child = svg.children[i];
+                const isRangeLine = child.tagName === 'line' && child.getAttribute('class') === 'range-line';
+                const isRangeLabel = child.tagName === 'text' && child.getAttribute('class') === 'range-label';
+                const isRangeLabelBg = child.tagName === 'rect' && child.getAttribute('class') === 'range-label-bg';
+                const isRangeArrow = child.tagName === 'polygon' && child.getAttribute('class') === 'range-arrow';
+                const isRangeTemp = child.classList && child.classList.contains('range-temp');
+                const isRangeGroup = child.tagName === 'g' && child.classList && 
+                                    (child.classList.contains('range-temp') || 
+                                     child.querySelector('.range-line') ||
+                                     child.querySelector('.range-label') ||
+                                     child.querySelector('.range-arrow') ||
+                                     child.querySelector('.range-label-bg'));
+                if (isRangeLine || isRangeLabel || isRangeLabelBg || isRangeArrow || isRangeTemp || isRangeGroup) {
+                    toRemove.push(child);
+                }
+                if (child.tagName === 'rect' && 
+                    (child.getAttribute('class') === 'range-box' || 
+                     (child.getAttribute('fill') && child.getAttribute('fill').includes('rgba(0, 14, 255')))) {
+                    toRemove.push(child);
+                }
+            }
+            toRemove.forEach(el => el.remove());
+        }
+
+        const FIB_LEVELS = [0, 0.236, 0.382, 0.5, 0.618, 0.786, 1, 1.272];
+        const FIB_LABELS = ['0', '0.236', '0.382', '0.5', '0.618', '0.786', '1', '1.272'];
+
+        let fiboHistory = {};
+
+        function getFiboHistory(svgId) {
+            if (!fiboHistory[svgId]) {
+                fiboHistory[svgId] = [];
+            }
+            return fiboHistory[svgId];
+        }
+
+        function getFiboPrice(y1, y2, level) {
+            const diff = y1 - y2;
+            return y2 + (diff * level);
+        }
+
+        function drawFibonacci(svg, x1, y1, x2, y2, isTemp = false) {
+            const ns = 'http://www.w3.org/2000/svg';
+
+            let leftX, leftY, rightX, rightY;
+
+            if (x1 <= x2) {
+                leftX = x1;
+                leftY = y1;
+                rightX = x2;
+                rightY = y2;
+            } else {
+                leftX = x2;
+                leftY = y2;
+                rightX = x1;
+                rightY = y1;
+            }
+
+            const group = document.createElementNS(ns, 'g');
+            if (isTemp) {
+                group.classList.add('fibo-temp');
+            } else {
+                group.classList.add('fibo-group');
+            }
+
+            FIB_LEVELS.forEach((level, index) => {
+                const price = getFiboPrice(y1, y2, level);
+                const yPos = price;
+
+                const line = document.createElementNS(ns, 'line');
+                line.setAttribute('x1', leftX);
+                line.setAttribute('y1', yPos);
+                line.setAttribute('x2', rightX);
+                line.setAttribute('y2', yPos);
+                line.setAttribute('stroke', '#ff9b00');
+                line.setAttribute('stroke-width', '2');
+                line.setAttribute('opacity', '0.7');
+                group.appendChild(line);
+
+                const label = document.createElementNS(ns, 'text');
+                label.setAttribute('x', rightX + 8);
+                label.setAttribute('y', yPos + 5);
+                label.setAttribute('fill', '#ff9b00');
+                label.setAttribute('font-size', '14');
+                label.setAttribute('font-weight', '700');
+                label.setAttribute('font-family', 'monospace');
+                label.textContent = FIB_LABELS[index];
+                group.appendChild(label);
+            });
+
+            svg.appendChild(group);
+
+            if (!isTemp) {
+                const history = getFiboHistory(svg.id);
+                history.push(group);
+                const mainHistory = getHistory(svg.id);
+                mainHistory.undo.push(group);
+                mainHistory.redo = [];
+            }
+
+            return group;
+        }
+
+        function removeTempFibos(svg) {
+            const toRemove = [];
+            for (let i = 0; i < svg.children.length; i++) {
+                const child = svg.children[i];
+                if (child.classList && child.classList.contains('fibo-temp')) {
+                    toRemove.push(child);
+                }
+            }
+            toRemove.forEach(el => el.remove());
+        }
+
+        function clearFibos(svg) {
+            const toRemove = [];
+            for (let i = 0; i < svg.children.length; i++) {
+                const child = svg.children[i];
+                if (child.classList && child.classList.contains('fibo-group')) {
+                    toRemove.push(child);
+                }
+            }
+            toRemove.forEach(el => {
+                const mainHistory = getHistory(svg.id);
+                const index = mainHistory.undo.indexOf(el);
+                if (index !== -1) {
+                    mainHistory.undo.splice(index, 1);
+                }
+                el.remove();
+            });
+            if (fiboHistory[svg.id]) {
+                fiboHistory[svg.id] = [];
+            }
+        }
+
+        const fiboState = {};
+
+        function initFiboForSvg(svg) {
+            const id = svg.id;
+            if (!fiboState[id]) {
+                fiboState[id] = {
+                    active: false,
+                    step: 0,
+                    startX: null,
+                    startY: null
+                };
+            }
+            return fiboState[id];
+        }
+
+        // ================================================================
+        // ===== ابزار Range - نسخه نهایی v136 =====
+        // ================================================================
+
+        const rangeStateObj = {};
+
+        function getRangeState(svg) {
+            const id = svg.id;
+            if (!rangeStateObj[id]) {
+                rangeStateObj[id] = {
+                    active: false,
+                    step: 0,
+                    startX: null,
+                    startY: null
+                };
+            }
+            return rangeStateObj[id];
+        }
+
+        function removeTempRanges(svg) {
+            const toRemove = [];
+            for (let i = 0; i < svg.children.length; i++) {
+                const child = svg.children[i];
+                if (child.classList && child.classList.contains('range-temp')) {
+                    toRemove.push(child);
+                }
+            }
+            toRemove.forEach(el => el.remove());
+        }
+
+        function clearRanges(svg) {
+            const toRemove = [];
+            for (let i = 0; i < svg.children.length; i++) {
+                const child = svg.children[i];
+                // بررسی گروه‌های رنج
+                if (child.tagName === 'g') {
+                    // اگر گروه دارای کلاس range-temp باشد
+                    if (child.classList && child.classList.contains('range-temp')) {
+                        toRemove.push(child);
+                        continue;
+                    }
+                    // اگر گروه دارای فرزند با کلاس‌های رنج باشد
+                    const hasRangeChild = child.querySelector('.range-line') || 
+                                         child.querySelector('.range-label') ||
+                                         child.querySelector('.range-arrow') ||
+                                         child.querySelector('.range-label-bg');
+                    if (hasRangeChild) {
+                        toRemove.push(child);
+                        continue;
+                    }
+                }
+                
+                // بررسی تک تک المان‌ها با کلاس‌های رنج
+                const isRangeLine = child.tagName === 'line' && child.getAttribute('class') === 'range-line';
+                const isRangeLabel = child.tagName === 'text' && child.getAttribute('class') === 'range-label';
+                const isRangeLabelBg = child.tagName === 'rect' && child.getAttribute('class') === 'range-label-bg';
+                const isRangeArrow = child.tagName === 'polygon' && child.getAttribute('class') === 'range-arrow';
+                const isRangeTemp = child.classList && child.classList.contains('range-temp');
+                
+                if (isRangeLine || isRangeLabel || isRangeLabelBg || isRangeArrow || isRangeTemp) {
+                    toRemove.push(child);
+                }
+                
+                // بررسی رکت‌های اضافی
+                if (child.tagName === 'rect' && 
+                    (child.getAttribute('class') === 'range-box' || 
+                     (child.getAttribute('fill') && child.getAttribute('fill').includes('rgba(0, 14, 255')))) {
+                    toRemove.push(child);
+                }
+            }
+            
+            // حذف المان‌ها
+            toRemove.forEach(el => {
+                const mainHistory = getHistory(svg.id);
+                const index = mainHistory.undo.indexOf(el);
+                if (index !== -1) {
+                    mainHistory.undo.splice(index, 1);
+                }
+                el.remove();
+            });
+            
+            // ریست کردن state
+            const state = getRangeState(svg);
+            state.step = 0;
+            state.startX = null;
+            state.startY = null;
+        }
+
+        function getTimeDuration(barCount) {
+            if (barCount <= 0) return '0h';
+            const hours = barCount;
+            const days = Math.floor(hours / 24);
+            const remainingHours = hours % 24;
+            if (days > 0) {
+                return `${days}d ${remainingHours}h`;
+            }
+            return `${remainingHours}h`;
+        }
+
+        /**
+         * رسم ابزار Range با:
+         * - برچسب خط اول: (درصد) عدد قیمت  ← اصلاح: درصد داخل پرانتز با فونت خوانا
+         * - فلش عمودی با بدنه کلفت و نوک < (متصل به بدنه در وسط)
+         * - فلش افقی با بدنه کلفت و نوک > (متصل به بدنه در وسط)
+         * - بدون ۴ خط مرزی و بدون کادر آبی
+         * - شفافیت بک‌گراند ۹۸٪
+         */
+        function drawRange(svg, x1, y1, x2, y2, isTemp = false) {
+            const ns = 'http://www.w3.org/2000/svg';
+
+            const minX = Math.min(x1, x2);
+            const maxX = Math.max(x1, x2);
+            const minY = Math.min(y1, y2);
+            const maxY = Math.max(y1, y2);
+
+            const group = document.createElementNS(ns, 'g');
+            if (isTemp) {
+                group.classList.add('range-temp');
+            }
+
+            // ===== بدون ۴ خط مرزی =====
+
+            // ===== وسط اضلاع =====
+            const centerX = (minX + maxX) / 2;
+            const centerY = (minY + maxY) / 2;
+            const arrowSize = 10;
+            const bodyThickness = 3;
+
+            // ===== فلش عمودی (از پایین به بالا) با نوک < و اتصال به وسط نوک =====
+            // بدنه فلش (از پایین تا وسط نوک)
+            const vBody = document.createElementNS(ns, 'line');
+            vBody.setAttribute('x1', centerX);
+            vBody.setAttribute('y1', maxY);
+            vBody.setAttribute('x2', centerX);
+            vBody.setAttribute('y2', minY + 4);
+            vBody.setAttribute('stroke', isTemp ? 'rgba(0, 14, 255, 0.5)' : '#000eff');
+            vBody.setAttribute('stroke-width', String(bodyThickness));
+            vBody.setAttribute('opacity', '0.7');
+            group.appendChild(vBody);
+            
+            // نوک فلش به شکل < (بزرگ‌تر) - در بالا، بدنه به وسط نوک برخورد می‌کند
+            const arrowUp = document.createElementNS(ns, 'polygon');
+            const tipY = minY;
+            arrowUp.setAttribute('points', 
+                `${centerX - arrowSize},${tipY - 4} ` +
+                `${centerX},${tipY + 4} ` +
+                `${centerX + arrowSize},${tipY - 4}`
+            );
+            arrowUp.setAttribute('class', 'range-arrow');
+            arrowUp.setAttribute('fill', isTemp ? 'rgba(0, 14, 255, 0.5)' : '#000eff');
+            arrowUp.setAttribute('opacity', '0.7');
+            group.appendChild(arrowUp);
+
+            // ===== فلش افقی (از چپ به راست) با نوک > و اتصال به وسط نوک =====
+            // بدنه فلش (از چپ تا وسط نوک)
+            const hBody = document.createElementNS(ns, 'line');
+            hBody.setAttribute('x1', minX);
+            hBody.setAttribute('y1', centerY);
+            hBody.setAttribute('x2', maxX - 4);
+            hBody.setAttribute('y2', centerY);
+            hBody.setAttribute('stroke', isTemp ? 'rgba(0, 14, 255, 0.5)' : '#000eff');
+            hBody.setAttribute('stroke-width', String(bodyThickness));
+            hBody.setAttribute('opacity', '0.7');
+            group.appendChild(hBody);
+            
+            // نوک فلش به شکل > (کوچک‌تر) - در راست، بدنه به وسط نوک برخورد می‌کند
+            const arrowRight = document.createElementNS(ns, 'polygon');
+            const tipX = maxX;
+            arrowRight.setAttribute('points', 
+                `${tipX - 4},${centerY - arrowSize} ` +
+                `${tipX + 4},${centerY} ` +
+                `${tipX - 4},${centerY + arrowSize}`
+            );
+            arrowRight.setAttribute('class', 'range-arrow');
+            arrowRight.setAttribute('fill', isTemp ? 'rgba(0, 14, 255, 0.5)' : '#000eff');
+            arrowRight.setAttribute('opacity', '0.7');
+            group.appendChild(arrowRight);
+
+            // ===== محاسبه اطلاعات =====
+            const priceRange = Math.abs(y1 - y2);
+            const percentChange = (priceRange / Math.min(y1, y2)) * 100;
+            const priceDiff = Math.abs(y1 - y2);
+            
+            const padding = 30;
+            const chartWidth = 950;
+            const candleWidth = currentCandles.length > 0 ? chartWidth / currentCandles.length : 10;
+            const barCount = Math.round((maxX - minX) / candleWidth);
+            const timeDuration = getTimeDuration(barCount);
+
+            // ===== برچسب‌ها =====
+            // خط اول: ( درصد ) , عدد قیمت  ← اصلاح: درصد داخل پرانتز با فونت خوانا
+            const line1 = `( ${percentChange.toFixed(2)}% ) , ${priceDiff.toFixed(3)}`;
+            // خط دوم: زمان, تعداد کندل
+            const line2 = `${timeDuration}, ${barCount} Bars`;
+
+            const labelX = (minX + maxX) / 2;
+            
+            // برچسب خط اول - بالاتر (درصد و عدد قیمت)
+            const labelY1 = minY - 22;
+            const labelBg1 = document.createElementNS(ns, 'rect');
+            labelBg1.setAttribute('x', labelX - 110);
+            labelBg1.setAttribute('y', labelY1 - 14);
+            labelBg1.setAttribute('width', 220);
+            labelBg1.setAttribute('height', 22);
+            labelBg1.setAttribute('class', 'range-label-bg');
+            labelBg1.setAttribute('fill', isTemp ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.98)');
+            labelBg1.setAttribute('rx', '4');
+            group.appendChild(labelBg1);
+
+            const label1 = document.createElementNS(ns, 'text');
+            label1.setAttribute('x', labelX);
+            label1.setAttribute('y', labelY1 + 2);
+            label1.setAttribute('class', 'range-label');
+            label1.setAttribute('fill', isTemp ? 'rgba(0, 14, 255, 0.6)' : '#000eff');
+            label1.setAttribute('font-size', '14');
+            label1.setAttribute('font-family', 'Courier New, monospace');
+            label1.setAttribute('font-weight', '700');
+            label1.setAttribute('text-anchor', 'middle');
+            label1.textContent = line1;
+            group.appendChild(label1);
+
+            // برچسب خط دوم - پایین‌تر (زمان و تعداد کندل)
+            const labelY2 = minY - 2;
+            const labelBg2 = document.createElementNS(ns, 'rect');
+            labelBg2.setAttribute('x', labelX - 110);
+            labelBg2.setAttribute('y', labelY2 - 14);
+            labelBg2.setAttribute('width', 220);
+            labelBg2.setAttribute('height', 22);
+            labelBg2.setAttribute('class', 'range-label-bg');
+            labelBg2.setAttribute('fill', isTemp ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.98)');
+            labelBg2.setAttribute('rx', '4');
+            group.appendChild(labelBg2);
+
+            const label2 = document.createElementNS(ns, 'text');
+            label2.setAttribute('x', labelX);
+            label2.setAttribute('y', labelY2 + 2);
+            label2.setAttribute('class', 'range-label');
+            label2.setAttribute('fill', isTemp ? 'rgba(0, 14, 255, 0.6)' : '#000eff');
+            label2.setAttribute('font-size', '13');
+            label2.setAttribute('font-family', 'Courier New, monospace');
+            label2.setAttribute('font-weight', '600');
+            label2.setAttribute('text-anchor', 'middle');
+            label2.textContent = line2;
+            group.appendChild(label2);
+
+            svg.appendChild(group);
+
+            if (!isTemp) {
+                const mainHistory = getHistory(svg.id);
+                mainHistory.undo.push(group);
+                mainHistory.redo = [];
+            }
+
+            return group;
+        }
+
+        function getCoords(e, svg) {
+            const rect = svg.getBoundingClientRect();
+            const viewBox = svg.viewBox.baseVal;
+            const scaleX = viewBox.width / rect.width;
+            const scaleY = viewBox.height / rect.height;
+            let clientX, clientY;
+            if (e.touches) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+            const x = Math.max(0, Math.min(viewBox.width, (clientX - rect.left) * scaleX));
+            const y = Math.max(0, Math.min(viewBox.height, (clientY - rect.top) * scaleY));
+            return { x, y };
+        }
+
+        document.getElementById('fiboBtn').addEventListener('click', function() {
+            const targetId = this.dataset.target;
+            const svg = document.getElementById(targetId);
+            if (!svg) return;
+
+            document.getElementById('rangeBtn').classList.remove('active');
+            const rangeState = getRangeState(svg);
+            rangeState.active = false;
+            rangeState.step = 0;
+            rangeState.startX = null;
+            rangeState.startY = null;
+            removeTempRanges(svg);
+
+            document.querySelectorAll('.trend-btn').forEach(b => {
+                b.classList.remove('active');
+                const otherSvg = document.getElementById(b.dataset.target);
+                if (otherSvg) {
+                    otherSvg.style.cursor = 'default';
+                    otherSvg.dataset.drawing = 'false';
+                    otherSvg.dataset.step = '0';
+                    otherSvg.dataset.startX = '';
+                    otherSvg.dataset.startY = '';
+                    const tl = otherSvg.querySelector('.temp-line');
+                    if (tl) tl.remove();
+                    const sp = otherSvg.querySelector('.start-point');
+                    if (sp) sp.remove();
+                    const ch = otherSvg.querySelector('.trend-crosshair');
+                    if (ch) ch.style.display = 'none';
+                }
+            });
+
+            const state = initFiboForSvg(svg);
+
+            if (this.classList.contains('active')) {
+                this.classList.remove('active');
+                svg.style.cursor = 'default';
+                state.active = false;
+                state.step = 0;
+                state.startX = null;
+                state.startY = null;
+                removeTempFibos(svg);
+                return;
+            }
+
+            this.classList.add('active');
+            svg.style.cursor = 'crosshair';
+            state.active = true;
+            state.step = 0;
+            state.startX = null;
+            state.startY = null;
+            removeTempFibos(svg);
+        });
+
+        document.getElementById('rangeBtn').addEventListener('click', function() {
+            const targetId = this.dataset.target;
+            const svg = document.getElementById(targetId);
+            if (!svg) return;
+
+            document.getElementById('fiboBtn').classList.remove('active');
+            const fiboStateInst = initFiboForSvg(svg);
+            fiboStateInst.active = false;
+            fiboStateInst.step = 0;
+            fiboStateInst.startX = null;
+            fiboStateInst.startY = null;
+            removeTempFibos(svg);
+
+            document.querySelectorAll('.trend-btn').forEach(b => {
+                b.classList.remove('active');
+                const otherSvg = document.getElementById(b.dataset.target);
+                if (otherSvg) {
+                    otherSvg.style.cursor = 'default';
+                    otherSvg.dataset.drawing = 'false';
+                    otherSvg.dataset.step = '0';
+                    otherSvg.dataset.startX = '';
+                    otherSvg.dataset.startY = '';
+                    const tl = otherSvg.querySelector('.temp-line');
+                    if (tl) tl.remove();
+                    const sp = otherSvg.querySelector('.start-point');
+                    if (sp) sp.remove();
+                    const ch = otherSvg.querySelector('.trend-crosshair');
+                    if (ch) ch.style.display = 'none';
+                }
+            });
+
+            const state = getRangeState(svg);
+
+            if (this.classList.contains('active')) {
+                this.classList.remove('active');
+                svg.style.cursor = 'default';
+                state.active = false;
+                state.step = 0;
+                state.startX = null;
+                state.startY = null;
+                removeTempRanges(svg);
+                return;
+            }
+
+            this.classList.add('active');
+            svg.style.cursor = 'crosshair';
+            state.active = true;
+            state.step = 0;
+            state.startX = null;
+            state.startY = null;
+            removeTempRanges(svg);
+        });
+
+        document.querySelectorAll('.svg-wrap svg').forEach(svg => {
+            // Fibo events
+            svg.addEventListener('mousedown', function(e) {
+                const state = initFiboForSvg(this);
+                if (!state.active) return;
+                if (this.dataset.drawing === 'true') return;
+
+                e.preventDefault();
+                const { x, y } = getCoords(e, this);
+
+                if (state.step === 0) {
+                    state.startX = x;
+                    state.startY = y;
+                    state.step = 1;
+                    removeTempFibos(this);
+                } else if (state.step === 1) {
+                    const sx = state.startX;
+                    const sy = state.startY;
+                    if (sx !== null && sy !== null) {
+                        removeTempFibos(this);
+                        drawFibonacci(this, sx, sy, x, y, false);
+                        state.step = 0;
+                        state.startX = null;
+                        state.startY = null;
+                    }
+                }
+            });
+
+            svg.addEventListener('mousemove', function(e) {
+                const state = initFiboForSvg(this);
+                if (!state.active) return;
+                if (this.dataset.drawing === 'true') return;
+
+                const { x, y } = getCoords(e, this);
+
+                if (state.step === 1) {
+                    const sx = state.startX;
+                    const sy = state.startY;
+                    if (sx !== null && sy !== null) {
+                        removeTempFibos(this);
+                        drawFibonacci(this, sx, sy, x, y, true);
+                    }
+                }
+            });
+
+            svg.addEventListener('touchstart', function(e) {
+                const state = initFiboForSvg(this);
+                if (!state.active) return;
+                if (this.dataset.drawing === 'true') return;
+
+                e.preventDefault();
+                const { x, y } = getCoords(e, this);
+
+                if (state.step === 0) {
+                    state.startX = x;
+                    state.startY = y;
+                    state.step = 1;
+                    removeTempFibos(this);
+                } else if (state.step === 1) {
+                    const sx = state.startX;
+                    const sy = state.startY;
+                    if (sx !== null && sy !== null) {
+                        removeTempFibos(this);
+                        drawFibonacci(this, sx, sy, x, y, false);
+                        state.step = 0;
+                        state.startX = null;
+                        state.startY = null;
+                    }
+                }
+            }, { passive: false });
+
+            svg.addEventListener('touchmove', function(e) {
+                const state = initFiboForSvg(this);
+                if (!state.active) return;
+                if (this.dataset.drawing === 'true') return;
+
+                e.preventDefault();
+                const { x, y } = getCoords(e, this);
+
+                if (state.step === 1) {
+                    const sx = state.startX;
+                    const sy = state.startY;
+                    if (sx !== null && sy !== null) {
+                        removeTempFibos(this);
+                        drawFibonacci(this, sx, sy, x, y, true);
+                    }
+                }
+            }, { passive: false });
+
+            // Range events
+            svg.addEventListener('mousedown', function(e) {
+                const state = getRangeState(this);
+                if (!state.active) return;
+                if (this.dataset.drawing === 'true') return;
+
+                e.preventDefault();
+                const { x, y } = getCoords(e, this);
+
+                if (state.step === 0) {
+                    state.startX = x;
+                    state.startY = y;
+                    state.step = 1;
+                    removeTempRanges(this);
+                } else if (state.step === 1) {
+                    const sx = state.startX;
+                    const sy = state.startY;
+                    if (sx !== null && sy !== null) {
+                        removeTempRanges(this);
+                        drawRange(this, sx, sy, x, y, false);
+                        state.step = 0;
+                        state.startX = null;
+                        state.startY = null;
+                    }
+                }
+            });
+
+            svg.addEventListener('mousemove', function(e) {
+                const state = getRangeState(this);
+                if (!state.active) return;
+                if (this.dataset.drawing === 'true') return;
+
+                const { x, y } = getCoords(e, this);
+
+                if (state.step === 1) {
+                    const sx = state.startX;
+                    const sy = state.startY;
+                    if (sx !== null && sy !== null) {
+                        removeTempRanges(this);
+                        drawRange(this, sx, sy, x, y, true);
+                    }
+                }
+            });
+
+            svg.addEventListener('touchstart', function(e) {
+                const state = getRangeState(this);
+                if (!state.active) return;
+                if (this.dataset.drawing === 'true') return;
+
+                e.preventDefault();
+                const { x, y } = getCoords(e, this);
+
+                if (state.step === 0) {
+                    state.startX = x;
+                    state.startY = y;
+                    state.step = 1;
+                    removeTempRanges(this);
+                } else if (state.step === 1) {
+                    const sx = state.startX;
+                    const sy = state.startY;
+                    if (sx !== null && sy !== null) {
+                        removeTempRanges(this);
+                        drawRange(this, sx, sy, x, y, false);
+                        state.step = 0;
+                        state.startX = null;
+                        state.startY = null;
+                    }
+                }
+            }, { passive: false });
+
+            svg.addEventListener('touchmove', function(e) {
+                const state = getRangeState(this);
+                if (!state.active) return;
+                if (this.dataset.drawing === 'true') return;
+
+                e.preventDefault();
+                const { x, y } = getCoords(e, this);
+
+                if (state.step === 1) {
+                    const sx = state.startX;
+                    const sy = state.startY;
+                    if (sx !== null && sy !== null) {
+                        removeTempRanges(this);
+                        drawRange(this, sx, sy, x, y, true);
+                    }
+                }
+            }, { passive: false });
+        });
+
+        // ================================================================
+        // ===== تابع اصلی رندر با MACD معکوس (آینه‌ای ۱۸۰ درجه) =====
+        // ================================================================
+
+        function renderCandlesWithMACD(candles, svgId, showAnswerLine = false) {
             const svg = document.getElementById(svgId);
+
+            clearMACDElements(svg);
+            if (svgId === 'answerSvg' || svgId === 'mainSvg') {
+                clearTrendLines(svg);
+            }
+            clearRangeElements(svg);
+
             const toRemove = [];
             for (let i = 0; i < svg.children.length; i++) {
                 const child = svg.children[i];
@@ -1661,18 +2487,14 @@
                 const isBg = child.tagName === 'rect' && child.getAttribute('fill') === '#0a0a0a';
                 const isAnswerLine = child.tagName === 'line' && child.getAttribute('stroke') === '#ff9b00' &&
                     (child.getAttribute('stroke-width') === '3' || child.getAttribute('stroke-width') === '2.5');
-                if (!isGrid && !isLabel && !isBg && !isAnswerLine) {
+                const isFibo = child.classList && (child.classList.contains('fibo-group') || child.classList.contains(
+                    'fibo-temp'));
+                const isRange = child.classList && (child.classList.contains('range-box') || child.classList.contains(
+                    'range-line') || child.classList.contains('range-label') || child.classList.contains(
+                    'range-label-bg') || child.classList.contains('range-arrow') || child.classList.contains('range-temp'));
+                if (!isGrid && !isLabel && !isBg && !isAnswerLine && !isFibo && !isRange) {
                     toRemove.push(child);
                 }
-            }
-            if (showAnswerLine) {
-                const oldLines = svg.querySelectorAll('line');
-                oldLines.forEach(line => {
-                    if (line.getAttribute('stroke') === '#ff9b00' &&
-                        (line.getAttribute('stroke-width') === '3' || line.getAttribute('stroke-width') === '2.5')) {
-                        line.remove();
-                    }
-                });
             }
             toRemove.forEach(el => el.remove());
 
@@ -1684,6 +2506,7 @@
             const candleWidth = chartWidth / candles.length;
             const bodyWidth = candleWidth * 0.6;
 
+            // رسم کندل‌ها
             candles.forEach((candle, index) => {
                 const x = padding + (index * candleWidth) + (candleWidth - bodyWidth) / 2;
                 const high = Math.min(GLOBAL_MAX, Math.max(GLOBAL_MIN, candle.high));
@@ -1731,6 +2554,110 @@
                 }
             });
 
+            // محاسبه MACD
+            const macdData = calculateMACD(candles);
+            const macdValues = macdData.macdLine;
+            const signalValues = macdData.signalLine;
+            const histValues = macdData.histogram;
+
+            let minMACD = Infinity;
+            let maxMACD = -Infinity;
+            for (let i = 0; i < macdValues.length; i++) {
+                if (macdValues[i] < minMACD) minMACD = macdValues[i];
+                if (macdValues[i] > maxMACD) maxMACD = macdValues[i];
+                if (signalValues[i] < minMACD) minMACD = signalValues[i];
+                if (signalValues[i] > maxMACD) maxMACD = signalValues[i];
+                if (histValues[i] < minMACD) minMACD = histValues[i];
+                if (histValues[i] > maxMACD) maxMACD = histValues[i];
+            }
+
+            const macdRange = maxMACD - minMACD;
+            const macdPadding = macdRange * 0.1;
+            const macdMin = minMACD - macdPadding;
+            const macdMax = maxMACD + macdPadding;
+            const macdTotalRange = macdMax - macdMin;
+
+            const macdTop = 330;
+            const macdBottom = 410;
+            const macdHeight = macdBottom - macdTop;
+
+            // خط صفر
+            const zeroLineY = macdTop + (0 - macdMin) / macdTotalRange * macdHeight;
+            const zeroLine = document.createElementNS(ns, 'line');
+            zeroLine.setAttribute('x1', padding);
+            zeroLine.setAttribute('y1', zeroLineY);
+            zeroLine.setAttribute('x2', padding + chartWidth);
+            zeroLine.setAttribute('y2', zeroLineY);
+            zeroLine.setAttribute('stroke', '#787b8680');
+            zeroLine.setAttribute('stroke-width', '0.5');
+            zeroLine.setAttribute('opacity', '0.5');
+            svg.appendChild(zeroLine);
+
+            // ===== هیستوگرام معکوس (آینه‌ای) =====
+            for (let i = 0; i < histValues.length; i++) {
+                const x = padding + (i * candleWidth) + candleWidth / 2;
+                const histValue = histValues[i];
+                const prevHistValue = i > 0 ? histValues[i - 1] : histValue;
+
+                // مقدار معکوس: منفی می‌شود مثبت و بالعکس
+                const invertedHist = -histValue;
+
+                const y = macdTop + (0 - macdMin) / macdTotalRange * macdHeight;
+                const histY = macdTop + (invertedHist - macdMin) / macdTotalRange * macdHeight;
+
+                const histColor = getMACDColor(histValue, prevHistValue);
+
+                const rect = document.createElementNS(ns, 'rect');
+                rect.setAttribute('x', x - 1.5);
+                rect.setAttribute('y', Math.min(y, histY));
+                rect.setAttribute('width', 3);
+                rect.setAttribute('height', Math.abs(y - histY));
+                rect.setAttribute('fill', histColor);
+                rect.setAttribute('opacity', '0.9');
+                svg.appendChild(rect);
+            }
+
+            // ===== خط MACD معکوس (آینه‌ای) =====
+            const macdPoints = [];
+            for (let i = 0; i < macdValues.length; i++) {
+                const x = padding + (i * candleWidth) + candleWidth / 2;
+                const invertedMACD = -macdValues[i];
+                const y = macdTop + (invertedMACD - macdMin) / macdTotalRange * macdHeight;
+                macdPoints.push({ x, y });
+            }
+            for (let i = 0; i < macdPoints.length - 1; i++) {
+                const line = document.createElementNS(ns, 'line');
+                line.setAttribute('x1', macdPoints[i].x);
+                line.setAttribute('y1', macdPoints[i].y);
+                line.setAttribute('x2', macdPoints[i + 1].x);
+                line.setAttribute('y2', macdPoints[i + 1].y);
+                line.setAttribute('stroke', '#ffffff');
+                line.setAttribute('stroke-width', '1.5');
+                line.setAttribute('opacity', '0.9');
+                svg.appendChild(line);
+            }
+
+            // ===== خط سیگنال معکوس (آینه‌ای) =====
+            const signalPoints = [];
+            for (let i = 0; i < signalValues.length; i++) {
+                const x = padding + (i * candleWidth) + candleWidth / 2;
+                const invertedSignal = -signalValues[i];
+                const y = macdTop + (invertedSignal - macdMin) / macdTotalRange * macdHeight;
+                signalPoints.push({ x, y });
+            }
+            for (let i = 0; i < signalPoints.length - 1; i++) {
+                const line = document.createElementNS(ns, 'line');
+                line.setAttribute('x1', signalPoints[i].x);
+                line.setAttribute('y1', signalPoints[i].y);
+                line.setAttribute('x2', signalPoints[i + 1].x);
+                line.setAttribute('y2', signalPoints[i + 1].y);
+                line.setAttribute('stroke', '#890913');
+                line.setAttribute('stroke-width', '1.5');
+                line.setAttribute('opacity', '0.9');
+                svg.appendChild(line);
+            }
+
+            // ===== رسم خط روند در صورت نیاز =====
             if (showAnswerLine && candles.length > 0 && currentWaveRanges.length > 0) {
                 const lowPoints = [];
                 const highPoints = [];
@@ -1789,20 +2716,73 @@
         function generateNewExercise(incrementCounter = true) {
             const candles = generateAllCandles();
             currentCandles = candles;
+
             const mainSvg = document.getElementById('mainSvg');
-            const linesToRemove = [];
-            for (let i = 0; i < mainSvg.children.length; i++) {
-                const child = mainSvg.children[i];
-                if (child.tagName === 'line' && child.getAttribute('stroke') === '#ff9b00') {
-                    linesToRemove.push(child);
-                }
+            const answerSvg = document.getElementById('answerSvg');
+
+            clearTrendLines(mainSvg);
+            clearTrendLines(answerSvg);
+            clearFibos(mainSvg);
+            clearFibos(answerSvg);
+            clearRanges(mainSvg);
+            clearRanges(answerSvg);
+            removeTempFibos(mainSvg);
+            removeTempFibos(answerSvg);
+            removeTempRanges(mainSvg);
+            removeTempRanges(answerSvg);
+
+            if (fiboState['mainSvg']) {
+                fiboState['mainSvg'].active = false;
+                fiboState['mainSvg'].step = 0;
+                fiboState['mainSvg'].startX = null;
+                fiboState['mainSvg'].startY = null;
             }
-            linesToRemove.forEach(line => line.remove());
+            if (fiboState['answerSvg']) {
+                fiboState['answerSvg'].active = false;
+                fiboState['answerSvg'].step = 0;
+                fiboState['answerSvg'].startX = null;
+                fiboState['answerSvg'].startY = null;
+            }
+
+            if (rangeStateObj['mainSvg']) {
+                rangeStateObj['mainSvg'].active = false;
+                rangeStateObj['mainSvg'].step = 0;
+                rangeStateObj['mainSvg'].startX = null;
+                rangeStateObj['mainSvg'].startY = null;
+            }
+            if (rangeStateObj['answerSvg']) {
+                rangeStateObj['answerSvg'].active = false;
+                rangeStateObj['answerSvg'].step = 0;
+                rangeStateObj['answerSvg'].startX = null;
+                rangeStateObj['answerSvg'].startY = null;
+            }
+
+            document.getElementById('fiboBtn').classList.remove('active');
+            document.getElementById('rangeBtn').classList.remove('active');
+            mainSvg.style.cursor = 'default';
+
             if (history['mainSvg']) {
                 history['mainSvg'] = { undo: [], redo: [] };
             }
-            renderCandles(candles, 'mainSvg');
-            renderCandles(candles, 'answerSvg', true);
+            if (history['answerSvg']) {
+                history['answerSvg'] = { undo: [], redo: [] };
+            }
+
+            document.querySelectorAll('.trend-btn').forEach(b => {
+                b.classList.remove('active');
+                const otherSvg = document.getElementById(b.dataset.target);
+                if (otherSvg) {
+                    otherSvg.style.cursor = 'default';
+                    otherSvg.dataset.drawing = 'false';
+                    otherSvg.dataset.step = '0';
+                    otherSvg.dataset.startX = '';
+                    otherSvg.dataset.startY = '';
+                }
+            });
+
+            renderCandlesWithMACD(candles, 'mainSvg');
+            renderCandlesWithMACD(candles, 'answerSvg', true);
+
             const questionBadge = document.getElementById('questionBadge');
             questionBadge.style.display = 'none';
             questionBadge.className = 'badge';
@@ -1815,48 +2795,29 @@
             const spoilerContent = document.getElementById('spoilerContent');
             if (spoilerContent.classList.contains('show')) {
                 spoilerContent.classList.remove('show');
-                // فقط متن دکمه رو عوض می‌کنیم، ستاره‌ها intact می‌مونن
                 const btnText = spoilerBtn.querySelector('.btn-text');
                 if (btnText) btnText.textContent = 'نمایش جواب';
                 spoilerBtn.classList.remove('active');
             }
-            const trendBtn = document.querySelector(`.trend-btn[data-target="mainSvg"]`);
-            if (trendBtn) {
-                trendBtn.classList.remove('active');
-                mainSvg.style.cursor = 'default';
-                mainSvg.dataset.drawing = 'false';
-                mainSvg.dataset.step = '0';
-                mainSvg.dataset.startX = '';
-                mainSvg.dataset.startY = '';
-                const tempLine = mainSvg.querySelector('.temp-line');
-                if (tempLine) tempLine.remove();
-                const startPoint = mainSvg.querySelector('.start-point');
-                if (startPoint) startPoint.remove();
-                const crosshair = mainSvg.querySelector('.trend-crosshair');
-                if (crosshair) crosshair.remove();
-            }
+
             if (incrementCounter) {
                 incrementExerciseCounter();
             }
         }
 
-        // ===== تابع toggleSpoiler اصلاح شده =====
         function toggleSpoiler(btn) {
             const content = document.getElementById('spoilerContent');
             const answerBadge = document.getElementById('answerBadge');
             const btnText = btn.querySelector('.btn-text');
 
             if (content.classList.contains('show')) {
-                // بستن جواب
                 content.classList.remove('show');
                 if (btnText) btnText.textContent = 'نمایش جواب';
                 btn.classList.remove('active');
                 answerBadge.style.display = 'none';
                 answerBadge.textContent = '---';
                 answerBadge.className = 'badge green';
-                // ستاره‌ها intact می‌مونن چون در DOM هستن
             } else {
-                // نمایش جواب
                 content.classList.add('show');
                 if (btnText) btnText.textContent = 'بستن جواب';
                 btn.classList.add('active');
@@ -1875,7 +2836,6 @@
                 answerBadge.textContent = badgeText;
                 answerBadge.className = 'badge ' + badgeClass;
                 answerBadge.style.display = 'inline-block';
-                // ستاره‌ها intact می‌مونن
             }
         }
 
@@ -1903,6 +2863,23 @@
                 const targetId = this.dataset.target;
                 const svg = document.getElementById(targetId);
                 if (!svg) return;
+
+                document.getElementById('fiboBtn').classList.remove('active');
+                const fiboStateInst = initFiboForSvg(svg);
+                fiboStateInst.active = false;
+                fiboStateInst.step = 0;
+                fiboStateInst.startX = null;
+                fiboStateInst.startY = null;
+                removeTempFibos(svg);
+
+                document.getElementById('rangeBtn').classList.remove('active');
+                const rangeState = getRangeState(svg);
+                rangeState.active = false;
+                rangeState.step = 0;
+                rangeState.startX = null;
+                rangeState.startY = null;
+                removeTempRanges(svg);
+
                 if (this.classList.contains('active')) {
                     this.classList.remove('active');
                     svg.style.cursor = 'default';
@@ -1918,6 +2895,7 @@
                     if (startPoint) startPoint.remove();
                     return;
                 }
+
                 document.querySelectorAll('.trend-btn').forEach(b => b.classList.remove('active'));
                 document.querySelectorAll('svg').forEach(s => {
                     s.style.cursor = 'default';
@@ -1932,12 +2910,14 @@
                     const sp = s.querySelector('.start-point');
                     if (sp) sp.remove();
                 });
+
                 this.classList.add('active');
                 svg.style.cursor = 'crosshair';
                 svg.dataset.drawing = 'true';
                 svg.dataset.step = '0';
                 svg.dataset.startX = '';
                 svg.dataset.startY = '';
+
                 const ns = 'http://www.w3.org/2000/svg';
                 const crosshair = document.createElementNS(ns, 'g');
                 crosshair.classList.add('trend-crosshair');
@@ -1982,23 +2962,198 @@
             let tempLine = null;
             let startPointCircle = null;
 
-            function getCoords(e) {
-                const rect = svg.getBoundingClientRect();
-                const viewBox = svg.viewBox.baseVal;
-                const scaleX = viewBox.width / rect.width;
-                const scaleY = viewBox.height / rect.height;
-                let clientX, clientY;
-                if (e.touches) {
-                    clientX = e.touches[0].clientX;
-                    clientY = e.touches[0].clientY;
-                } else {
-                    clientX = e.clientX;
-                    clientY = e.clientY;
+            svg.addEventListener('mousedown', function(e) {
+                if (this.dataset.drawing !== 'true') return;
+                e.preventDefault();
+                const { x, y } = getCoords(e, this);
+                const step = parseInt(this.dataset.step) || 0;
+                const mobile = isMobile();
+
+                if (!mobile) {
+                    if (step === 0) {
+                        this.dataset.startX = x;
+                        this.dataset.startY = y;
+                        this.dataset.step = '1';
+                        createStartPoint(x, y);
+                        createTempLine(x, y, x, y);
+                        updateCrosshair(x, y);
+                    } else if (step === 1) {
+                        const sx = parseFloat(this.dataset.startX);
+                        const sy = parseFloat(this.dataset.startY);
+                        if (sx && sy) {
+                            removeTempLine();
+                            removeStartPoint();
+                            hideCrosshair();
+                            const ns = 'http://www.w3.org/2000/svg';
+                            const line = document.createElementNS(ns, 'line');
+                            line.setAttribute('x1', sx);
+                            line.setAttribute('y1', sy);
+                            line.setAttribute('x2', x);
+                            line.setAttribute('y2', y);
+                            line.setAttribute('stroke', '#ff9b00');
+                            line.setAttribute('stroke-width', '3');
+                            line.setAttribute('opacity', '0.9');
+                            svg.appendChild(line);
+                            saveLine(svg.id, line);
+                            this.dataset.step = '0';
+                            this.dataset.startX = '';
+                            this.dataset.startY = '';
+                        }
+                    }
+                    return;
                 }
-                const x = Math.max(0, Math.min(viewBox.width, (clientX - rect.left) * scaleX));
-                const y = Math.max(0, Math.min(viewBox.height, (clientY - rect.top) * scaleY));
-                return { x, y };
-            }
+
+                if (mobile) {
+                    if (step === 0) {
+                        updateCrosshair(x, y);
+                        this.dataset.step = '1';
+                    } else if (step === 1) {
+                        this.dataset.startX = x;
+                        this.dataset.startY = y;
+                        this.dataset.step = '2';
+                        createStartPoint(x, y);
+                        createTempLine(x, y, x, y);
+                        updateCrosshair(x, y);
+                    } else if (step === 2) {
+                        const sx = parseFloat(this.dataset.startX);
+                        const sy = parseFloat(this.dataset.startY);
+                        if (sx && sy) {
+                            removeTempLine();
+                            removeStartPoint();
+                            hideCrosshair();
+                            const ns = 'http://www.w3.org/2000/svg';
+                            const line = document.createElementNS(ns, 'line');
+                            line.setAttribute('x1', sx);
+                            line.setAttribute('y1', sy);
+                            line.setAttribute('x2', x);
+                            line.setAttribute('y2', y);
+                            line.setAttribute('stroke', '#ff9b00');
+                            line.setAttribute('stroke-width', '3');
+                            line.setAttribute('opacity', '0.9');
+                            svg.appendChild(line);
+                            saveLine(svg.id, line);
+                            this.dataset.step = '0';
+                            this.dataset.startX = '';
+                            this.dataset.startY = '';
+                        }
+                    }
+                }
+            });
+
+            svg.addEventListener('mousemove', function(e) {
+                if (this.dataset.drawing !== 'true') return;
+                const { x, y } = getCoords(e, this);
+                const step = parseInt(this.dataset.step) || 0;
+                const mobile = isMobile();
+                updateCrosshair(x, y);
+                if (!mobile && step === 1) {
+                    const sx = parseFloat(this.dataset.startX);
+                    const sy = parseFloat(this.dataset.startY);
+                    if (sx && sy) createTempLine(sx, sy, x, y);
+                }
+                if (mobile && step === 2) {
+                    const sx = parseFloat(this.dataset.startX);
+                    const sy = parseFloat(this.dataset.startY);
+                    if (sx && sy) createTempLine(sx, sy, x, y);
+                }
+            });
+
+            svg.addEventListener('touchstart', function(e) {
+                if (this.dataset.drawing !== 'true') return;
+                e.preventDefault();
+                const { x, y } = getCoords(e, this);
+                const step = parseInt(this.dataset.step) || 0;
+                const mobile = isMobile();
+
+                if (!mobile) {
+                    if (step === 0) {
+                        this.dataset.startX = x;
+                        this.dataset.startY = y;
+                        this.dataset.step = '1';
+                        createStartPoint(x, y);
+                        createTempLine(x, y, x, y);
+                        updateCrosshair(x, y);
+                    } else if (step === 1) {
+                        const sx = parseFloat(this.dataset.startX);
+                        const sy = parseFloat(this.dataset.startY);
+                        if (sx && sy) {
+                            removeTempLine();
+                            removeStartPoint();
+                            hideCrosshair();
+                            const ns = 'http://www.w3.org/2000/svg';
+                            const line = document.createElementNS(ns, 'line');
+                            line.setAttribute('x1', sx);
+                            line.setAttribute('y1', sy);
+                            line.setAttribute('x2', x);
+                            line.setAttribute('y2', y);
+                            line.setAttribute('stroke', '#ff9b00');
+                            line.setAttribute('stroke-width', '3');
+                            line.setAttribute('opacity', '0.9');
+                            svg.appendChild(line);
+                            saveLine(svg.id, line);
+                            this.dataset.step = '0';
+                            this.dataset.startX = '';
+                            this.dataset.startY = '';
+                        }
+                    }
+                    return;
+                }
+
+                if (mobile) {
+                    if (step === 0) {
+                        updateCrosshair(x, y);
+                        this.dataset.step = '1';
+                    } else if (step === 1) {
+                        this.dataset.startX = x;
+                        this.dataset.startY = y;
+                        this.dataset.step = '2';
+                        createStartPoint(x, y);
+                        createTempLine(x, y, x, y);
+                        updateCrosshair(x, y);
+                    } else if (step === 2) {
+                        const sx = parseFloat(this.dataset.startX);
+                        const sy = parseFloat(this.dataset.startY);
+                        if (sx && sy) {
+                            removeTempLine();
+                            removeStartPoint();
+                            hideCrosshair();
+                            const ns = 'http://www.w3.org/2000/svg';
+                            const line = document.createElementNS(ns, 'line');
+                            line.setAttribute('x1', sx);
+                            line.setAttribute('y1', sy);
+                            line.setAttribute('x2', x);
+                            line.setAttribute('y2', y);
+                            line.setAttribute('stroke', '#ff9b00');
+                            line.setAttribute('stroke-width', '3');
+                            line.setAttribute('opacity', '0.9');
+                            svg.appendChild(line);
+                            saveLine(svg.id, line);
+                            this.dataset.step = '0';
+                            this.dataset.startX = '';
+                            this.dataset.startY = '';
+                        }
+                    }
+                }
+            }, { passive: false });
+
+            svg.addEventListener('touchmove', function(e) {
+                if (this.dataset.drawing !== 'true') return;
+                e.preventDefault();
+                const { x, y } = getCoords(e, this);
+                const step = parseInt(this.dataset.step) || 0;
+                const mobile = isMobile();
+                updateCrosshair(x, y);
+                if (!mobile && step === 1) {
+                    const sx = parseFloat(this.dataset.startX);
+                    const sy = parseFloat(this.dataset.startY);
+                    if (sx && sy) createTempLine(sx, sy, x, y);
+                }
+                if (mobile && step === 2) {
+                    const sx = parseFloat(this.dataset.startX);
+                    const sy = parseFloat(this.dataset.startY);
+                    if (sx && sy) createTempLine(sx, sy, x, y);
+                }
+            }, { passive: false });
 
             function updateCrosshair(x, y) {
                 const crosshair = svg.querySelector('.trend-crosshair');
@@ -2069,196 +3224,11 @@
                 if (startPointCircle) { startPointCircle.remove();
                     startPointCircle = null; }
             }
-
-            svg.addEventListener('mousedown', function(e) {
-                if (svg.dataset.drawing !== 'true') return;
-                e.preventDefault();
-                const { x, y } = getCoords(e);
-                const step = parseInt(svg.dataset.step) || 0;
-                const mobile = isMobile();
-                if (!mobile) {
-                    if (step === 0) {
-                        svg.dataset.startX = x;
-                        svg.dataset.startY = y;
-                        svg.dataset.step = '1';
-                        createStartPoint(x, y);
-                        createTempLine(x, y, x, y);
-                        updateCrosshair(x, y);
-                    } else if (step === 1) {
-                        const sx = parseFloat(svg.dataset.startX);
-                        const sy = parseFloat(svg.dataset.startY);
-                        if (sx && sy) {
-                            removeTempLine();
-                            removeStartPoint();
-                            hideCrosshair();
-                            const ns = 'http://www.w3.org/2000/svg';
-                            const line = document.createElementNS(ns, 'line');
-                            line.setAttribute('x1', sx);
-                            line.setAttribute('y1', sy);
-                            line.setAttribute('x2', x);
-                            line.setAttribute('y2', y);
-                            line.setAttribute('stroke', '#ff9b00');
-                            line.setAttribute('stroke-width', '3');
-                            line.setAttribute('opacity', '0.9');
-                            svg.appendChild(line);
-                            saveLine(svg.id, line);
-                            svg.dataset.step = '0';
-                            svg.dataset.startX = '';
-                            svg.dataset.startY = '';
-                        }
-                    }
-                    return;
-                }
-                if (mobile) {
-                    if (step === 0) {
-                        updateCrosshair(x, y);
-                        svg.dataset.step = '1';
-                    } else if (step === 1) {
-                        svg.dataset.startX = x;
-                        svg.dataset.startY = y;
-                        svg.dataset.step = '2';
-                        createStartPoint(x, y);
-                        createTempLine(x, y, x, y);
-                        updateCrosshair(x, y);
-                    } else if (step === 2) {
-                        const sx = parseFloat(svg.dataset.startX);
-                        const sy = parseFloat(svg.dataset.startY);
-                        if (sx && sy) {
-                            removeTempLine();
-                            removeStartPoint();
-                            hideCrosshair();
-                            const ns = 'http://www.w3.org/2000/svg';
-                            const line = document.createElementNS(ns, 'line');
-                            line.setAttribute('x1', sx);
-                            line.setAttribute('y1', sy);
-                            line.setAttribute('x2', x);
-                            line.setAttribute('y2', y);
-                            line.setAttribute('stroke', '#ff9b00');
-                            line.setAttribute('stroke-width', '3');
-                            line.setAttribute('opacity', '0.9');
-                            svg.appendChild(line);
-                            saveLine(svg.id, line);
-                            svg.dataset.step = '0';
-                            svg.dataset.startX = '';
-                            svg.dataset.startY = '';
-                        }
-                    }
-                }
-            });
-
-            svg.addEventListener('mousemove', function(e) {
-                if (svg.dataset.drawing !== 'true') return;
-                const { x, y } = getCoords(e);
-                const step = parseInt(svg.dataset.step) || 0;
-                const mobile = isMobile();
-                updateCrosshair(x, y);
-                if (!mobile && step === 1) {
-                    const sx = parseFloat(svg.dataset.startX);
-                    const sy = parseFloat(svg.dataset.startY);
-                    if (sx && sy) createTempLine(sx, sy, x, y);
-                }
-                if (mobile && step === 2) {
-                    const sx = parseFloat(svg.dataset.startX);
-                    const sy = parseFloat(svg.dataset.startY);
-                    if (sx && sy) createTempLine(sx, sy, x, y);
-                }
-            });
-
-            svg.addEventListener('touchstart', function(e) {
-                if (svg.dataset.drawing !== 'true') return;
-                e.preventDefault();
-                const { x, y } = getCoords(e);
-                const step = parseInt(svg.dataset.step) || 0;
-                const mobile = isMobile();
-                if (!mobile) {
-                    if (step === 0) {
-                        svg.dataset.startX = x;
-                        svg.dataset.startY = y;
-                        svg.dataset.step = '1';
-                        createStartPoint(x, y);
-                        createTempLine(x, y, x, y);
-                        updateCrosshair(x, y);
-                    } else if (step === 1) {
-                        const sx = parseFloat(svg.dataset.startX);
-                        const sy = parseFloat(svg.dataset.startY);
-                        if (sx && sy) {
-                            removeTempLine();
-                            removeStartPoint();
-                            hideCrosshair();
-                            const ns = 'http://www.w3.org/2000/svg';
-                            const line = document.createElementNS(ns, 'line');
-                            line.setAttribute('x1', sx);
-                            line.setAttribute('y1', sy);
-                            line.setAttribute('x2', x);
-                            line.setAttribute('y2', y);
-                            line.setAttribute('stroke', '#ff9b00');
-                            line.setAttribute('stroke-width', '3');
-                            line.setAttribute('opacity', '0.9');
-                            svg.appendChild(line);
-                            saveLine(svg.id, line);
-                            svg.dataset.step = '0';
-                            svg.dataset.startX = '';
-                            svg.dataset.startY = '';
-                        }
-                    }
-                    return;
-                }
-                if (mobile) {
-                    if (step === 0) {
-                        updateCrosshair(x, y);
-                        svg.dataset.step = '1';
-                    } else if (step === 1) {
-                        svg.dataset.startX = x;
-                        svg.dataset.startY = y;
-                        svg.dataset.step = '2';
-                        createStartPoint(x, y);
-                        createTempLine(x, y, x, y);
-                        updateCrosshair(x, y);
-                    } else if (step === 2) {
-                        const sx = parseFloat(svg.dataset.startX);
-                        const sy = parseFloat(svg.dataset.startY);
-                        if (sx && sy) {
-                            removeTempLine();
-                            removeStartPoint();
-                            hideCrosshair();
-                            const ns = 'http://www.w3.org/2000/svg';
-                            const line = document.createElementNS(ns, 'line');
-                            line.setAttribute('x1', sx);
-                            line.setAttribute('y1', sy);
-                            line.setAttribute('x2', x);
-                            line.setAttribute('y2', y);
-                            line.setAttribute('stroke', '#ff9b00');
-                            line.setAttribute('stroke-width', '3');
-                            line.setAttribute('opacity', '0.9');
-                            svg.appendChild(line);
-                            saveLine(svg.id, line);
-                            svg.dataset.step = '0';
-                            svg.dataset.startX = '';
-                            svg.dataset.startY = '';
-                        }
-                    }
-                }
-            }, { passive: false });
-
-            svg.addEventListener('touchmove', function(e) {
-                if (svg.dataset.drawing !== 'true') return;
-                e.preventDefault();
-                const { x, y } = getCoords(e);
-                const step = parseInt(svg.dataset.step) || 0;
-                const mobile = isMobile();
-                updateCrosshair(x, y);
-                if (!mobile && step === 1) {
-                    const sx = parseFloat(svg.dataset.startX);
-                    const sy = parseFloat(svg.dataset.startY);
-                    if (sx && sy) createTempLine(sx, sy, x, y);
-                }
-                if (mobile && step === 2) {
-                    const sx = parseFloat(svg.dataset.startX);
-                    const sy = parseFloat(svg.dataset.startY);
-                    if (sx && sy) createTempLine(sx, sy, x, y);
-                }
-            }, { passive: false });
         });
+
+        // ================================================================
+        // ===== اصلاح نهایی دکمه‌های Undo/Redo و Clear =====
+        // ================================================================
 
         document.querySelectorAll('.undo-btn').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -2267,20 +3237,28 @@
                 if (!svg) return;
                 const h = getHistory(targetId);
                 if (h.undo.length === 0) return;
-                const lastLine = h.undo.pop();
-                const lines = svg.querySelectorAll('line');
-                let found = null;
-                for (const line of lines) {
-                    if (line === lastLine) { found = line; break; }
-                    if (line.getAttribute('x1') === lastLine.getAttribute('x1') &&
-                        line.getAttribute('y1') === lastLine.getAttribute('y1') &&
-                        line.getAttribute('x2') === lastLine.getAttribute('x2') &&
-                        line.getAttribute('y2') === lastLine.getAttribute('y2') &&
-                        line.getAttribute('stroke') === lastLine.getAttribute('stroke')) { found = line; break; }
+                
+                // پیدا کردن آخرین آیتم غیرتخریب‌شده
+                let lastItem = null;
+                while (h.undo.length > 0) {
+                    const item = h.undo.pop();
+                    if (item.parentNode) {
+                        lastItem = item;
+                        break;
+                    }
                 }
-                if (found) { const clone = found.cloneNode(true);
-                    h.redo.push(clone);
-                    found.remove(); }
+                
+                if (!lastItem) return;
+                h.redo.push(lastItem);
+                lastItem.remove();
+
+                // اگر فیبو بود، از history فیبو هم حذف کن
+                if (lastItem.classList && lastItem.classList.contains('fibo-group')) {
+                    const fh = getFiboHistory(targetId);
+                    const idx = fh.indexOf(lastItem);
+                    if (idx !== -1) fh.splice(idx, 1);
+                }
+
                 if (svg.dataset.drawing === 'true') {
                     svg.dataset.step = '0';
                     svg.dataset.startX = '';
@@ -2302,9 +3280,14 @@
                 if (!svg) return;
                 const h = getHistory(targetId);
                 if (h.redo.length === 0) return;
-                const line = h.redo.pop();
-                svg.appendChild(line);
-                h.undo.push(line);
+                const item = h.redo.pop();
+                svg.appendChild(item);
+                h.undo.push(item);
+
+                if (item.classList && item.classList.contains('fibo-group')) {
+                    const fh = getFiboHistory(targetId);
+                    fh.push(item);
+                }
             });
         });
 
@@ -2313,18 +3296,36 @@
                 const targetId = this.dataset.target;
                 const svg = document.getElementById(targetId);
                 if (!svg) return;
+
                 const h = getHistory(targetId);
-                const lines = svg.querySelectorAll('line:not(.temp-line)');
+
+                // پاک کردن ترندلاین‌ها
+                const lines = svg.querySelectorAll('line');
                 const userLines = [];
                 lines.forEach(line => {
-                    if (!line.id && !line.classList.contains('grid-line') && line.getAttribute('stroke') ===
-                        '#ff9b00') {
+                    if (!line.id && 
+                        !line.classList.contains('grid-line') && 
+                        !line.classList.contains('temp-line') &&
+                        line.getAttribute('stroke') === '#ff9b00' &&
+                        line.getAttribute('stroke-width') !== '2' &&
+                        line.getAttribute('stroke-width') !== '1.5') {
                         userLines.push(line);
                     }
                 });
-                userLines.forEach(line => { h.undo.push(line); });
-                userLines.forEach(line => line.remove());
+                userLines.forEach(line => {
+                    h.undo.push(line);
+                    line.remove();
+                });
+
+                // پاک کردن فیبوها
+                clearFibos(svg);
+                if (fiboHistory[targetId]) fiboHistory[targetId] = [];
+
+                // پاک کردن رنج‌ها با تابع اصلاح‌شده
+                clearRanges(svg);
+
                 h.redo = [];
+
                 if (svg.dataset.drawing === 'true') {
                     svg.dataset.step = '0';
                     svg.dataset.startX = '';
@@ -2336,12 +3337,30 @@
                     const ch = svg.querySelector('.trend-crosshair');
                     if (ch) ch.style.display = 'none';
                 }
-                const trendBtn = document.querySelector(`.trend-btn[data-target="${targetId}"]`);
-                if (trendBtn) {
-                    trendBtn.classList.remove('active');
-                    svg.style.cursor = 'default';
-                    svg.dataset.drawing = 'false';
-                }
+
+                document.querySelectorAll('.trend-btn').forEach(b => {
+                    if (b.dataset.target === targetId) {
+                        b.classList.remove('active');
+                        svg.style.cursor = 'default';
+                        svg.dataset.drawing = 'false';
+                    }
+                });
+
+                document.getElementById('fiboBtn').classList.remove('active');
+                const fiboStateInst = initFiboForSvg(svg);
+                fiboStateInst.active = false;
+                fiboStateInst.step = 0;
+                fiboStateInst.startX = null;
+                fiboStateInst.startY = null;
+                svg.style.cursor = 'default';
+
+                document.getElementById('rangeBtn').classList.remove('active');
+                const rangeState = getRangeState(svg);
+                rangeState.active = false;
+                rangeState.step = 0;
+                rangeState.startX = null;
+                rangeState.startY = null;
+                svg.style.cursor = 'default';
             });
         });
 
@@ -2357,11 +3376,11 @@
             generateNewExercise(false);
         });
 
-        console.log('🌟 Amitis v107 - رفع کامل ستاره‌ها + گرادینت 18% کندتر');
-        console.log('✅ ستاره‌ها با سرعت 28s و مسیر صاف');
-        console.log('✅ ستاره‌ها در هر دو حالت دکمه دیده می‌شوند');
-        console.log('✅ حرکت زیگزاگی حذف شد');
-        console.log('✅ گرادینت Amitis 18% کندتر شد (7.6s)');
+        console.log('🌟 Amitis v139 - اصلاح نهایی Clear برای ابزار رنج');
+        console.log('✅ دکمه پاک کردن: رنج‌ها به طور کامل حذف می‌شوند');
+        console.log('✅ تشخیص گروه‌های رنج با فرزندان');
+        console.log('✅ پاک کردن history مرتبط با رنج');
+        console.log('✅ فیبو و ترندلاین بدون تغییر');
     </script>
 
 </body>
