@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Amitis - تمرین تشخیص روند</title>
     <style>
+        /* ===== تمام استایل‌های قبلی شما ===== */
         * {
             margin: 0;
             padding: 0;
@@ -904,7 +905,7 @@
             fill: #fff;
         }
 
-        /* ===== پنل پخش‌کننده موسیقی ===== */
+        /* ===== پنل پخش‌کننده موسیقی با قابلیت درگ ===== */
         .music-panel {
             position: fixed;
             top: 80px;
@@ -921,6 +922,14 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.04);
             animation: slideDown 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             display: none;
+            /* قابلیت درگ */
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
+            transition: none;
+        }
+        .music-panel:active {
+            cursor: grabbing;
         }
         .music-panel.show {
             display: block;
@@ -944,6 +953,11 @@
             padding-bottom: 8px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             direction: ltr;
+            /* برای درگ: ناحیه‌ای که کلیک روی آن درگ را شروع کند */
+            cursor: grab;
+        }
+        .music-panel-header:active {
+            cursor: grabbing;
         }
         .music-panel-brand {
             display: none;
@@ -961,6 +975,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 10;
         }
         .music-panel-close:hover {
             color: #fff;
@@ -1049,7 +1064,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* اکولایزر - فقط خط پیشرفت */
         .music-eq-container {
             width: 100%;
             margin-bottom: 12px;
@@ -1262,6 +1276,25 @@
                 height: 26px;
             }
         }
+
+        /* ===== استایل برای دستگیره درگ ===== */
+        .drag-handle {
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+            color: #444;
+            font-size: 14px;
+            user-select: none;
+            transition: color 0.3s ease;
+        }
+        .drag-handle:hover {
+            color: #888;
+        }
+        .drag-handle:active {
+            cursor: grabbing;
+        }
     </style>
 </head>
 <body>
@@ -1440,7 +1473,9 @@
 
     <!-- ===== پنل پخش‌کننده موسیقی ===== -->
     <div class="music-panel" id="musicPanel">
-        <div class="music-panel-header">
+        <div class="music-panel-header" id="dragHandle">
+            <!-- یک دستگیره کوچک برای درگ -->
+            <span class="drag-handle" style="margin-right:auto;">⠿</span>
             <button class="music-panel-close" onclick="toggleMusicPanel()">✕</button>
         </div>
         <div class="music-track-info">
@@ -1507,6 +1542,124 @@
     </div>
 
     <script>
+        // ================================================================
+        // 0. قابلیت درگ (Drag) برای پنل موسیقی - کاملاً مستقل
+        // ================================================================
+
+        (function initDraggablePanel() {
+            const panel = document.getElementById('musicPanel');
+            const dragHandle = document.getElementById('dragHandle');
+            if (!panel || !dragHandle) return;
+
+            let isDragging = false;
+            let offsetX = 0;
+            let offsetY = 0;
+            let startX = 0;
+            let startY = 0;
+
+            // موقعیت اولیه را ذخیره می‌کنیم
+            let initialLeft = 20;
+            let initialTop = 80;
+
+            function getPanelPosition() {
+                const rect = panel.getBoundingClientRect();
+                return {
+                    left: rect.left,
+                    top: rect.top,
+                    width: rect.width,
+                    height: rect.height
+                };
+            }
+
+            function onDragStart(e) {
+                // فقط اگر پنل نمایش داده شده باشد
+                if (!panel.classList.contains('show')) return;
+
+                // اگر روی دکمه بستن کلیک شده باشد، درگ شروع نشود
+                if (e.target.closest('.music-panel-close')) return;
+
+                // اگر روی دکمه‌های کنترل کلیک شده باشد، درگ شروع نشود
+                if (e.target.closest('.ctrl-btn')) return;
+                if (e.target.closest('.music-eq-container')) return;
+
+                isDragging = true;
+                const touch = e.touches ? e.touches[0] : e;
+                const rect = panel.getBoundingClientRect();
+
+                // موقعیت مکان‌نما نسبت به پنل
+                offsetX = touch.clientX - rect.left;
+                offsetY = touch.clientY - rect.top;
+
+                // موقعیت شروع را ذخیره می‌کنیم
+                startX = rect.left;
+                startY = rect.top;
+
+                panel.style.transition = 'none';
+                panel.style.cursor = 'grabbing';
+
+                // جلوگیری از انتخاب متن در هنگام درگ
+                document.body.style.userSelect = 'none';
+                document.body.style.webkitUserSelect = 'none';
+
+                if (e.cancelable) e.preventDefault();
+            }
+
+            function onDragMove(e) {
+                if (!isDragging) return;
+
+                const touch = e.touches ? e.touches[0] : e;
+                const newX = touch.clientX - offsetX;
+                const newY = touch.clientY - offsetY;
+
+                // محدود کردن به داخل ویوپورت
+                const panelWidth = panel.offsetWidth || 280;
+                const panelHeight = panel.offsetHeight || 200;
+                const maxX = window.innerWidth - panelWidth - 10;
+                const maxY = window.innerHeight - panelHeight - 10;
+
+                const clampedX = Math.max(10, Math.min(maxX, newX));
+                const clampedY = Math.max(10, Math.min(maxY, newY));
+
+                panel.style.left = clampedX + 'px';
+                panel.style.top = clampedY + 'px';
+                panel.style.right = 'auto';
+                panel.style.bottom = 'auto';
+
+                if (e.cancelable) e.preventDefault();
+            }
+
+            function onDragEnd(e) {
+                if (!isDragging) return;
+                isDragging = false;
+                panel.style.cursor = 'grab';
+                document.body.style.userSelect = '';
+                document.body.style.webkitUserSelect = '';
+                panel.style.transition = '';
+            }
+
+            // رویدادهای ماوس
+            dragHandle.addEventListener('mousedown', onDragStart);
+            document.addEventListener('mousemove', onDragMove);
+            document.addEventListener('mouseup', onDragEnd);
+
+            // رویدادهای لمسی
+            dragHandle.addEventListener('touchstart', onDragStart, { passive: false });
+            document.addEventListener('touchmove', onDragMove, { passive: false });
+            document.addEventListener('touchend', onDragEnd);
+
+            // جلوگیری از درگ شدن تصادفی توسط خود پنل
+            panel.addEventListener('mousedown', function(e) {
+                // اگر کلیک روی دکمه بستن یا کنترل‌ها نباشد، درگ فعال می‌شود
+                if (e.target.closest('.music-panel-close')) return;
+                if (e.target.closest('.ctrl-btn')) return;
+                if (e.target.closest('.music-eq-container')) return;
+                // اگر روی هدر نباشد، باز هم درگ فعال می‌شود (همه جای پنل قابل درگ است)
+                // اما برای راحتی، فقط هدر را به عنوان دستگیره نگه می‌داریم
+            });
+
+            console.log('🎵 پنل موسیقی قابلیت درگ دارد!');
+        })();
+
         // ================================================================
         // 1. پخش‌کننده موسیقی - پخش خودکار هنگام باز شدن صفحه
         // ================================================================
@@ -1626,7 +1779,6 @@
 
             audio.ontimeupdate = function() {
                 updateTimeDisplay();
-                // به‌روزرسانی اکولایزر بر اساس پیشرفت آهنگ
                 const progress = audio.duration > 0 ? (audio.currentTime / audio.duration) * 100 : 0;
                 updateEqPathSmooth(progress);
             };
@@ -1799,7 +1951,8 @@
             }
         }
 
-        // ===== اکولایزر با حرکت پیوسته بر اساس درصد پیشرفت =====
+        // ===== اکولایزر =====
+
         function generateSmoothPath(progressPercent) {
             const width = 600;
             const height = 32;
@@ -1874,8 +2027,6 @@
                 eqAmplitude += (targetAmplitude - eqAmplitude) * 0.12;
                 eqAmplitude = Math.max(3.5, Math.min(13, eqAmplitude));
 
-                // فقط دامنه را به‌روز می‌کنیم، مسیر در ontimeupdate آپدیت می‌شود
-                // اما برای زمانی که آهنگ در حال پخش نیست و می‌خواهیم اکولایزر حرکت کند
                 if (!isPlaying || !audio.src || audio.readyState < 2) {
                     const progress = audio.duration > 0 ? (audio.currentTime / audio.duration) * 100 : 0;
                     updateEqPathSmooth(progress);
@@ -1924,12 +2075,10 @@
                 });
             }
 
-            // بارگذاری آهنگ اولیه
             if (playlist.length > 0) {
                 autoPlayStarted = true;
                 loadTrack(0, true);
 
-                // تلاش برای پخش خودکار
                 setTimeout(function() {
                     if (!isPlaying) {
                         audio.play().then(function() {
@@ -1939,14 +2088,12 @@
                             console.log('✅ پخش خودکار آهنگ شروع شد');
                         }).catch(function(e) {
                             console.log('⏳ پخش خودکار توسط مرورگر مسدود شد');
-                            // وقتی کاربر کلیک کرد، پخش می‌شود
                             isFirstInteraction = true;
                         });
                     }
                 }, 500);
             }
 
-            // گوش دادن به رویدادهای تعامل کاربر
             document.addEventListener('click', startAutoPlayOnInteraction);
             document.addEventListener('touchstart', startAutoPlayOnInteraction);
             document.addEventListener('keydown', startAutoPlayOnInteraction);
@@ -4278,7 +4425,7 @@
             generateNewExercise(false);
         });
 
-        console.log('🌟 Amitis v146 - پخش خودکار فعال');
+        console.log('🌟 Amitis v146 - پخش خودکار فعال + پنل درگ‌پذیر');
     </script>
 </body>
 </html>
